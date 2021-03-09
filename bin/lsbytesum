@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+show_usage() {
+   echo "Usage: $(basename $0) [-R|--recurse]... (-R, recurse in dirs)"
+   exit 1
+}
+
+dir="."
+
+if [[ -n $1 ]]; then
+   [[ -n $2 ]] && dir=$2
+   if [[ $1 =~ -(R|-recurse) ]]; then
+      files=$(ls -alR $dir)
+   else
+      files=$(ls -l $1)
+   fi
+else
+   files=$(ls -l $dir)
+fi
+
+total=0
+for bytes in $(echo "$files" | grep "^-" | awk '{ print $5 }')
+do
+   let total=$total+$bytes
+done
+
+# bc is more acurate but isn't always installed by default
+# total_mb=$(echo "scale=2; $total/1024/1024" | bc 2>/dev/null)
+
+let total=$total/1024
+# sfc is a command in my bin/ allows simple decimal
+# calculations meant to emulate bc
+echo -n "$(echo $total/1024 | sfc -p 2) mb"

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+let index=16
+for R in 00 5f 87 af d7 ff; do
+   for G in 00 5f 87 af d7 ff; do
+      for B in 00 5f 87 af d7 ff; do
+         echo -ne "  [48;5;${index}m     [0m "
+
+         if [ $index -gt 99 ]; then
+            echo -n "${index}: "
+         else
+            echo -n " ${index}: "
+         fi
+         echo -ne "$R/$G/$B"
+         [ $(((index-15)%6)) -eq 0 ] && echo
+         echo
+         let index=$index+1
+      done
+   done
+done
+
+grayscales=(08 12 1c 26 30 3a 44 4e 58 62 6c 76)
+grayscales=(${grayscales[*]}  80 8a 94 9e a8 b2)
+grayscales=(${grayscales[*]}  bc c6 d0 da e4 ee)
+
+for R in ${grayscales[@]}; do
+   echo -ne "  [48;5;${index}m     [0m ${index}: $R/$R/$R"
+   [ $(((index-15)%6)) -eq 0 ] && echo
+   echo
+   let index=$index+1
+done

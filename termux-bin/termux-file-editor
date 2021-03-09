@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [[ $@ =~ \.mp.$ ]]; then
+   play-audio "$@"
+   rm ~/downloads/$(basename "$@")
+fi
+
+if [ -n $(which nvim) ]; then
+   default=nvim
+else
+   default=vim
+fi
+
+${EDITOR:-$default} $@

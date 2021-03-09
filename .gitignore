@@ -1,0 +1,9 @@
+*.sw[pon]
+*~
+*info
+.netrwhist
+**/.git/
+crontabs/cron.update
+.vim/session/
+*.sug
+*.spl

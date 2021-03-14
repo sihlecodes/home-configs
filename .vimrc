@@ -13,6 +13,14 @@ endif
 let g:vim_indent_cont = 0
 let g:path_separator = "/"
 
+set runtimepath+=~/home-configs/vim-steampunklights
+
+try
+   colorscheme steampunklights
+catch /E185/
+   colorscheme zelner 
+endtry
+
 " NOTE: section is reserved for vim builtin settings
 " vim settings {{{
 set shell=$SHELL
@@ -150,7 +158,7 @@ function! Tease()
    while v:true
       silent let var = input("> ")
       if empty(var)
-         echo 'Teasing done !'
+         echo 'Done.'
          return
       elseif var =~ '\.c\%[olor] \d*'
          let args = split(var)[1:]
@@ -167,22 +175,6 @@ function! Tease()
       redraw!
       sleep 500m
    endwhile
-endfunction
-" }}}
-" Reformat CSS {{{
-command! ReformatCSS call ReformatCSS()
-function! ReformatCSS()
-   echo "re-formatting..."
-   %s/{/{
-/g
-   %s/;/;
-/g
-   %s/}/
-}
-/g
-   redraw!
-   normal! gg=G
-   echo "done re-formatting!"
 endfunction
 " }}}
 " Tabe Buffers {{{
@@ -217,15 +209,6 @@ function! GotoFile(filename)
 endfunction
 
 nnoremap <silent> gf :call GotoFile(expand("<cfile>"))<cr>
-" }}}
-" CreateFold() {{{
-function! CreateFold()
-   execute "normal! \<esc>`>o".'"'.
-      \ " \<esc>3a}\<esc>`<O".'"'.
-      \ " \<esc>3a{\<esc>bhi "
-endfunction
-
-vnoremap <c-f> :call CreateFold()<cr>
 " }}}
 " }}}
 

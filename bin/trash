@@ -1,113 +1,140 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-export TRASH_DIR=$HOME/.trash
-# export TRASH_INDEX=$TRASH_DIR/.trash.index
-# export TRASH_INDEX_TEMP=${TRASH_INDEX}.tmp
+import argparse
+import os
+import sys
+import re
 
-# TODO: rework and or implement new remove feature
-show_usage() {
-   cat <<USAGE 
-Usage: trash [options] [args]
+from datetime import datetime
 
-Commands
-   (a)dd    FILENAME(S)  add files to \$TRASH_DIR this also adds an
-                         entry to the \$TRASH_INDEX file.
+TRASH_DIR = os.path.expanduser(os.environ.get("TRASH_DIR", "~/.trash"))
+TRASH_INDEX = os.path.join(TRASH_DIR, ".trash.index")
 
-   (em)pty  [ PATTERN ]  delete all files in \$TRASH_DIR, if PATTERN
-                         is not given. Otherwise all files matching
-                         PATTERN (a standard asterisk glob pattern)
-                         are deleted.
+parser = argparse.ArgumentParser()
+sub_parsers = parser.add_subparsers(title="subcommands")
 
-   (l)ist                list files currently under \$TRASH_DIR
+add_parser = sub_parsers.add_parser("add")
+add_parser.add_argument("files", metavar="FILES", nargs="+")
 
-   (en)able              Enable trash. When enabled files will be
-                         moved to \$TRASH_DIR otherwise the files
-                         are deleted.
+restore_parser = sub_parsers.add_parser("restore")
+restore_parser.add_argument("targets", metavar="TARGETS", nargs="+")
 
-   (d)isable             Disable trash.
-   (h)elp                show this message
-USAGE
-# remove [ -d DIR ] FILENAME(S)  remove files from \$TRASH_DIR. If
-                               # DIR is given files are moved to
-                               # DIR. Otherwise the files are
-                               # returned to the directory in which
-                               # they were put into \$TRASH_DIR from.
-}
+list_parser = sub_parsers.add_parser("list")
+list_parser.add_argument("-s", "--short", action="store_true")
 
-usage_on_error() {
-   show_usage
-   exit 1
-}
+empty_parser = sub_parsers.add_parser("empty")
 
-DUMY_TRASH_INDEX=$TRASH_INDEX
+def get_human_readable_size(size, digits=1):
+	readable_sizes = ["B", "KB", "MB", "GB", "TB", "PB"]
+	index = 0
+	fraction_digits = 0
 
-if [[ ! -d $TRASH_DIR ]]; then
-   mkdir -p $TRASH_DIR
-fi
+	while size >= 1024 and index < len(readable_sizes)-1:
+		size, fraction_digits = divmod(size, 1024)
+		index += 1
 
-write_trash_entry() {
-   echo $(realpath $1) >> $DUMY_TRASH_INDEX
-}
+	return round(float("%s.%s" % (size, fraction_digits)), digits), readable_sizes[index]
 
-# strip_trash_entry() {
-   # local IFS="
-# "
-   # cat $TRASH_INDEX | while read entry; do
-      # if [[ $(basename $entry) != $1 ]]; then
-         # DUMY_TRASH_INDEX=$TRASH_INDEX_TEMP
-         # write_trash_entry $entry
-      # fi
-   # done
-   # DUMY_TRASH_INDEX=$TRASH_INDEX
-   # mv $TRASH_INDEX_TEMP $TRASH_INDEX
-# }
+def _add(args):
+	dir = os.path.expanduser(os.path.dirname(TRASH_INDEX))
+	if not os.path.exists(dir):
+		os.makedirs(dir)
 
-add_to_trash() {
-   # for entry in $@; do
-   # write_trash_entry $entry
-   # done
-   if [ -f ~/.trash_disabled ]; then
-      rm $@
-   else
-      mv $@ $TRASH_DIR
-   fi
-}
+	with open(TRASH_INDEX, "a") as index:
+		for entry in args.files:
+			if not os.path.exists(entry):
+				print("'%s' does not exist" % entry)
+				continue
 
-# remove_from_trash() {
-   # mv $TRASH_DIR/$1 $2
-   # strip_trash_entry $1
-# }
+			entry = os.path.realpath(os.path.expanduser(entry))
+			alias = os.path.split(entry)[-1]
+			date = datetime.now()
 
-# remove_from_trash_bulk() {
-# }
+			pattern = re.compile(r"%s(\.\d+)?$" % alias)
 
-case $1 in
-   a | add )
-      if [[ -z $2 ]]; then
-         usage_on_error
-      fi
-      shift 1
-      add_to_trash $@ ;;
+			similarly_named_files = list(filter(lambda x: pattern.match(x), os.listdir(TRASH_DIR)))
 
-   em | empty ) 
-      read -p "You sure you want to empty the trash (Y/n)? " response
-      if [[ $response = "Y" ]] || [[ $response = "y" ]]; then
-         rm -rf $TRASH_DIR
-      fi ;;
-   en | enable )
-      rm ~/.trash_disabled 2>/dev/null
-      ;;
-   d | disable )
-      touch ~/.trash_disabled
-      ;;
-   l | list ) ls $TRASH_DIR ;;
-   # remove )
-      # # DIR=$()
-      # if [[ $2 = "-d" ]] && [[ -n $3 ]]; then
-         # DIR=$3
-      # fi ;;
-   h | help ) show_usage ;;
-esac
+			if len(similarly_named_files) > 0:
+				alias += ".%s" % (len(similarly_named_files)+1)
 
-#strip_trash_entry Packages.1
-#write_trash_entry $1
+			os.rename(entry, os.path.join(TRASH_DIR, alias))
+			index.write("%s:%s:%s\n" % (alias, entry, date.strftime("%d.%m.%y.%H.%M.%S")))
+
+def _list(args):
+	if not os.path.exists(TRASH_INDEX):
+		print("No files in trash directory.")
+		quit()
+
+	if not args.short:
+		print("\033[38;5;220;1mINDEXED TRASH:\033[0m\n")
+
+	with open(TRASH_INDEX, "r") as index:
+		entries = sorted(index.readlines())
+
+		for entry in entries:
+			alias, path, time = entry.strip().split(":")
+
+			time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
+			trash_target_path = os.path.join(TRASH_DIR, alias)
+
+			readable_size = ""
+
+			if not os.path.isdir(trash_target_path):
+				readable_size = get_human_readable_size(os.path.getsize(trash_target_path))
+				readable_size = " ".join(map(str, readable_size))
+			else:
+				alias += "\033[0m/"
+
+			print("\033[38;5;105m%s\033[0m" % alias, end="")
+			print(" (\033[38;5;111m%s\033[0m)" % time.strftime("%d %b %Y %H:%M:%S"), end="")
+
+			if args.short:
+				if not os.path.isdir(trash_target_path):
+					print(" (\033[38;5;95m%s\033[0m)" % readable_size, end="")
+			else:
+				print("\npath:", path)
+
+				if not os.path.isdir(trash_target_path):
+					print("size:", "\033[38;5;95m%s\033[0m" % readable_size)
+			print()
+
+def _restore(args):
+	removed = []
+	entries = []
+
+	with open(TRASH_INDEX, "r") as index:
+		entries = index.readlines()
+
+	for target in args.targets:
+		for entry in entries:
+			alias, path, time = entry.split(":")
+
+			parent_directory = os.path.dirname(path)
+
+			if not os.path.exists(parent_directory):
+				os.makedirs(parent_directory)
+
+			if target == alias:
+				os.rename(os.path.join(TRASH_DIR, alias), path)
+				removed.append(entry)
+
+	with open(TRASH_INDEX, "w") as index:
+		for entry in entries:
+			if entry not in removed:
+				index.write(entry)
+
+def _empty(args):
+	open(TRASH_INDEX, "w").close()
+
+add_parser.set_defaults(func=_add)
+restore_parser.set_defaults(func=_restore)
+
+list_parser.set_defaults(func=_list)
+empty_parser.set_defaults(func=_empty)
+
+if __name__ == "__main__":
+	if len(sys.argv) == 1:
+		parser.print_help()
+
+	args = parser.parse_args()
+	args.func(args)

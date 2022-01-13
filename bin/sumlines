@@ -9,7 +9,12 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument("directory", nargs="*", help="")
-parser.add_argument("-x", "--exclude", help="exclude files according to pattern", type=re.compile)
+
+group = parser.add_mutually_exclusive_group()
+
+group.add_argument("-x", "--exclude", help="exclude files according to pattern", type=re.compile)
+group.add_argument("-i", "--include", help="include files according to pattern", type=re.compile)
+
 parser.add_argument("--skip-blank", action="store_true", help="do not count blank lines")
 
 args = parser.parse_args()
@@ -57,6 +62,9 @@ def recurse_count(parent):
             if os.path.isdir(child):
                 total += recurse_count(child)
             else:
+                if args.include is not None:
+                    if not args.include.search(child):
+                        continue
                 try:
                     with open(child) as f:
                         lines = f.readlines()

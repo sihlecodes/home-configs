@@ -14,7 +14,8 @@ alias echo="echo -e"
 
 alias cp="cp -rv"
 alias dd="dd status=progress"
-alias rm="rm -v"
+alias rm="trash add -v"
+alias rrm="rm -rfv"
 alias mkdir="mkdir -pv"
 
 alias ebrc="$EDITOR ~/.bashrc"

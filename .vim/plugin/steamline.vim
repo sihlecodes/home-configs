@@ -108,17 +108,21 @@ endfunction
 " }}}
 " Mode() {{{
 function! Mode()
-   let modemap = {
+   let mode_map = {
    \  "n": "NORMAL",
    \  "i": "INSERT",
    \  "v": "VISUAL",
    \  "V": "V-LINE",
+   \  "s": "SELECT",
+   \  "S": "S-LINE",
+   \  "\<C-s>": "S-BLOCK",
    \  "\<C-v>": "V-BLOCK",
+   \  "t": "TERMINAL",
    \  "R": "REPLACE",
    \  "c": "COMMAND"
    \}
-   if has_key(modemap, mode())
-      return modemap[mode()]
+   if has_key(mode_map, mode())
+      return mode_map[mode()]
    endif
    return mode()
 endfunction
@@ -134,20 +138,12 @@ function! s:mode_is(list)
 endfunction
 
 function! ModalColor()
-   if s:mode_is(["n"])
-      return '%#SteamLineModalColorNormal#'
-   elseif s:mode_is(["i", "R"])
+   if s:mode_is(["i", "R"])
       return '%#SteamLineModalColorInsert#'
    elseif s:mode_is(["v", "V", "\<C-v>", "s", "S", "\<C-s>"])
       return '%#SteamLineModalColorVisual#' 
    endif
-   return ''
-
-"   if has_key(modemap, mode()) 
-"      return '%#' . modemap[mode()] . '#'
-"   else
-"      return '%#SteamLineModalColorNormal#'
-"   endif
+   return '%#SteamLineModalColorNormal#'
 endfunction
 " }}}
 " Filetype() {{{
@@ -177,7 +173,7 @@ endfunction
 set tabline=%!steamline#tabline()
 
 function! steamline#statusline()
-   return ModalColor() . ' %{Mode()} %#SteamLineSection2# %{empty(Modifiable()) ? "" : Modifiable() . " | "}%{FileName()} %{empty(ModFlag()) ? "":"| ". ModFlag()} %#SteamLineSection3# %{SynName()} %#SteamLineSection4# %= %#SteamLineSection3# %{FileType()} %#SteamLineSection2# %c:%l ' . ModalColor() . ' %{CharCount()} | words %{WordCount()} '
+   return ModalColor() . ' %{Mode()} %#SteamLineSection2# %{empty(Modifiable()) ? "" : Modifiable() . " | "}%.20{FileName()} %{empty(ModFlag()) ? "":"| ". ModFlag()} %#SteamLineSection3# %{SynName()} %#SteamLineSection4# %= %#SteamLineSection3# %{FileType()} %#SteamLineSection2# %c:%l ' . ModalColor() . ' %{CharCount()} | words %{WordCount()} '
 endfunction
 
 set statusline=%!steamline#statusline()

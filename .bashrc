@@ -1,14 +1,17 @@
 # Personal bash configuration file
 
-. /usr/share/bash-completion/bash_completion
+source /etc/bash_completion
 
 if ! [[ $PATH =~ mybin ]]; then
 	export PATH=$HOME/mybin:$HOME/bin:$PATH
 fi
 
+if [[ -d ~/android-sdk ]]; then
+   export PATH=$HOME/android-sdk/platform-tools:$PATH
+fi
+
 export EDITOR=vim
 export PAGER=less
-export HISTCONTROL=ignoredups
 
 export HISTSIZE=1000
 export HISTFILESIZE=2000
@@ -21,7 +24,7 @@ export HISTCONTROL=erasedups:ignoredups
 
 two_part_path() { pwd | awk 'BEGIN{FS="/"; OFS="/"} { print $(NF - 1), $NF }'; }
 
-PS1="\[\e[38;5;97;3m\]\u@\h\[\e[0m\]:(\[\e[38;5;161m\]\$(two_part_path)\[\e[0m\])\$ "
+PS1="\[\e[38;5;99;3;1m\]\u@\h\[\e[0m\]:(\[\e[38;5;214;1m\]\$(two_part_path)\[\e[0m\])\$ "
 
 source_folder_in_path() {
 	IFS_SAVE=$IFS

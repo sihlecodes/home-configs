@@ -13,16 +13,19 @@ TRASH_INDEX = os.path.join(TRASH_DIR, ".trash.index")
 parser = argparse.ArgumentParser()
 sub_parsers = parser.add_subparsers(title="subcommands")
 
-add_parser = sub_parsers.add_parser("add")
+add_parser = sub_parsers.add_parser("add", help="add trash to $TRASH_DIR")
 add_parser.add_argument("files", metavar="FILES", nargs="+")
+add_parser.add_argument("-v", "--verbose", action="store_true")
 
-restore_parser = sub_parsers.add_parser("restore")
+restore_parser = sub_parsers.add_parser("restore", help="restore trash from $TRASH_DIR")
 restore_parser.add_argument("targets", metavar="TARGETS", nargs="+")
+restore_parser.add_argument("-v", "--verbose", action="store_true")
 
 list_parser = sub_parsers.add_parser("list")
 list_parser.add_argument("-s", "--short", action="store_true")
 
 empty_parser = sub_parsers.add_parser("empty")
+empty_parser.add_argument("-f", "--force", action="store_true")
 
 def get_human_readable_size(size, digits=1):
 	readable_sizes = ["B", "KB", "MB", "GB", "TB", "PB"]
@@ -59,6 +62,37 @@ def _add(args):
 
 			os.rename(entry, os.path.join(TRASH_DIR, alias))
 			index.write("%s:%s:%s\n" % (alias, entry, date.strftime("%d.%m.%y.%H.%M.%S")))
+
+			if args.verbose:
+				print("trashed %r" % os.path.split(entry)[-1])
+
+def _restore(args):
+	removed = []
+	entries = []
+
+	with open(TRASH_INDEX, "r") as index:
+		entries = index.readlines()
+
+	for target in args.targets:
+		for entry in entries:
+			alias, path, time = entry.split(":")
+
+			parent_directory = os.path.dirname(path)
+
+			if not os.path.exists(parent_directory):
+				os.makedirs(parent_directory)
+
+			if target == alias:
+				os.rename(os.path.join(TRASH_DIR, alias), path)
+				removed.append(entry)
+
+				if args.verbose:
+					print("restored %r to %r" % (os.path.split(path)[-1], path))
+
+	with open(TRASH_INDEX, "w") as index:
+		for entry in entries:
+			if entry not in removed:
+				index.write(entry)
 
 def _list(args):
 	if not os.path.exists(TRASH_INDEX):
@@ -98,31 +132,6 @@ def _list(args):
 					print("size:", "\033[38;5;95m%s\033[0m" % readable_size)
 			print()
 
-def _restore(args):
-	removed = []
-	entries = []
-
-	with open(TRASH_INDEX, "r") as index:
-		entries = index.readlines()
-
-	for target in args.targets:
-		for entry in entries:
-			alias, path, time = entry.split(":")
-
-			parent_directory = os.path.dirname(path)
-
-			if not os.path.exists(parent_directory):
-				os.makedirs(parent_directory)
-
-			if target == alias:
-				os.rename(os.path.join(TRASH_DIR, alias), path)
-				removed.append(entry)
-
-	with open(TRASH_INDEX, "w") as index:
-		for entry in entries:
-			if entry not in removed:
-				index.write(entry)
-
 def _empty(args):
 	open(TRASH_INDEX, "w").close()
 
@@ -137,4 +146,5 @@ if __name__ == "__main__":
 		parser.print_help()
 
 	args = parser.parse_args()
-	args.func(args)
+	if hasattr(args, "func"):
+		args.func(args)

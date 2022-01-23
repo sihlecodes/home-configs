@@ -1,2 +1,2 @@
 # home-configs
-newer version of my dotfiles repo
+Newer version of my dotfiles repo.

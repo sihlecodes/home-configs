@@ -1,3 +1,5 @@
+return
+
 _apt_complete()
 {
    local commands="autoclean autoremove build-dep changelog clean 

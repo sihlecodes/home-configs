@@ -2,14 +2,17 @@
 
 source /etc/bash_completion
 
-if ! [[ $PATH =~ mybin ]]; then
-	export PATH=$HOME/mybin:$HOME/bin:$PATH
-fi
+ADDITIONAL_PATHS=(
+   $HOME/mybin
+   $HOME/android-sdk/platform-tools
+   $HOME/.dotnet
+)
 
-if [[ -d ~/android-sdk ]]; then
-   export PATH=$HOME/android-sdk/platform-tools:$PATH
-fi
+for add_path in ${ADDITIONAL_PATHS[*]}; do
+   export PATH=$add_path:$PATH
+done
 
+export DOTNET_ROOT=$HOME/.dotnet
 export EDITOR=vim
 export PAGER=less
 
@@ -29,11 +32,11 @@ PS1="\[\e[38;5;99;3;1m\]\u@\h\[\e[0m\]:(\[\e[38;5;214;1m\]\$(two_part_path)\[\e[
 source_folder_in_path() {
 	IFS_SAVE=$IFS
 	IFS=:
-	for path in $PATH; do
-		if [ -d $path/$1 ]; then
+	for source_path in $PATH; do
+		if [ -d $source_path/$1 ]; then
 			IFS=$IFS_SAVE
-			for file in $(ls $path/$1); do
-				COMPLETION_FILE=$path/$1/$file
+			for file in $(ls $source_path/$1); do
+				COMPLETION_FILE=$source_path/$1/$file
 				[ -f $COMPLETION_FILE ] && source $COMPLETION_FILE
 			done
 		fi

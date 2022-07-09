@@ -12,6 +12,7 @@ for add_path in ${ADDITIONAL_PATHS[*]}; do
    export PATH=$add_path:$PATH
 done
 
+export ANDROID_SDK=$HOME/android-sdk
 export DOTNET_ROOT=$HOME/.dotnet
 export EDITOR=vim
 export PAGER=less

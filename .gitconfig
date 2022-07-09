@@ -1,21 +1,21 @@
 [user]
    name     = Siphesihle Mhlongo
-   email    = sphe0619840353@gmail.com
+   email    = sphem4code@gmail.com
 [github]
-   user     = steampunk08
+   user     = ghostrix98
 [alias]
    s        = status
    set      = config --global
    edit     = config --global -e
    rmc      = rm --cached
    l        = log --decorate --graph
+   d        = diff --compact-summary
    ll       = log --decorate --graph -p --stat
    stats    = log --stat
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
 [credential]
-   helper   = store
 
 ; Steampunklights Git theme
 [color "status"]
@@ -44,3 +44,5 @@
    HEAD            = 197 bold
    remoteBranch    = 197 bold
    stash           = 242
+[credential]
+	helper = store

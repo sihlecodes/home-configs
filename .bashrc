@@ -2,9 +2,13 @@
 
 source /etc/bash_completion
 
+export ANDROID_SDK=$HOME/android-sdk
+export ANDROID_SDK_ROOT=$ANDROID_SDK
+
 ADDITIONAL_PATHS=(
    $HOME/mybin
-   $HOME/android-sdk/platform-tools
+   $ANDROID_SDK/platform-tools
+   $ANDROID_SDK/emulator
    $HOME/.dotnet
 )
 
@@ -12,7 +16,6 @@ for add_path in ${ADDITIONAL_PATHS[*]}; do
    export PATH=$add_path:$PATH
 done
 
-export ANDROID_SDK=$HOME/android-sdk
 export DOTNET_ROOT=$HOME/.dotnet
 export EDITOR=vim
 export PAGER=less

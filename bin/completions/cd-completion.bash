@@ -1,1 +1,0 @@
-complete -A directory cd

@@ -37,11 +37,11 @@ source_folder_in_path() {
 	IFS_SAVE=$IFS
 	IFS=:
 	for source_path in $PATH; do
-		if [ -d $source_path/$1 ]; then
+		if [ -d "$source_path/$1" ]; then
 			IFS=$IFS_SAVE
 			for file in $(ls $source_path/$1); do
-				COMPLETION_FILE=$source_path/$1/$file
-				[ -f $COMPLETION_FILE ] && source $COMPLETION_FILE
+				FILE=$source_path/$1/$file
+				[ -f $FILE ] && source $FILE
 			done
 		fi
 	done

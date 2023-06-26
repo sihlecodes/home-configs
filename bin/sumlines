@@ -8,14 +8,18 @@ parser = argparse.ArgumentParser(
     description="Works out line count in files within a directory."
 )
 
-parser.add_argument("directory", nargs="*", help="")
+parser.add_argument("directory", nargs="*", default=".",
+    help="directories to search in (defaults to the current working directory)")
 
 group = parser.add_mutually_exclusive_group()
 
-group.add_argument("-x", "--exclude", help="exclude files according to pattern", type=re.compile)
-group.add_argument("-i", "--include", help="include files according to pattern", type=re.compile)
+group.add_argument("-x", "--exclude", type=re.compile,
+                   help="exclude files according to pattern")
 
-parser.add_argument("--skip-blank", action="store_true", help="do not count blank lines")
+group.add_argument("-i", "--include", type=re.compile,
+                   help="include files according to pattern")
+
+parser.add_argument("-b", "--count-blank", action="store_true", help="count blank lines")
 
 args = parser.parse_args()
 
@@ -69,8 +73,9 @@ def recurse_count(parent):
                     with open(child) as f:
                         lines = f.readlines()
                         
-                        if args.skip_blank:
+                        if not args.count_blank:
                             lines = [ x for x in lines if len(x.strip()) ]
+
                         line_count = len(lines)
 
                         print(f"{CS}{line_count}{CE}\t{child}")
@@ -86,9 +91,6 @@ def recurse_count(parent):
     return total
 
 grand_total = 0
-
-if len(args.directory) == 0:
-    args.directory.append(".")
 
 for directory in args.directory:
     print(f"\nDIRECTORY {directory}\n")

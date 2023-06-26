@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+
+# author: sihlecodes
+# created: 26 June 2023
+
+import argparse
+import os
+import sys
+
+parser = argparse.ArgumentParser(
+    description="A script for quickly editing the active repository's gitignore file.")
+
+parser.add_argument("-c", "--create", action="store_true",
+    help="create a gitignore file, automatically, if one does not exist already.")
+
+parser.add_argument("-e", "--edit", action="store_true", 
+    help="edit the gitignore file using your default editor.")
+
+parser.add_argument("-s", "--show", action="store_true",
+    help="show the contents of the active gitignore file.")
+
+parser.add_argument("patterns", metavar="PATTERNS", nargs="*",
+    help="these are the patterns that will be added to the gitignore file.")
+
+def write_lines(patterns, file_mode, gitignore_path):
+    gitignore_ends_with_newline: bool = False
+    
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, "r") as f:
+            gitignore_ends_with_newline = f.read().endswith("\n")
+
+    with open(gitignore_path, file_mode) as f:
+        if not gitignore_ends_with_newline:
+            f.write("\n")
+
+        f.write("\n".join(patterns))
+
+def exit_with_error(message: str):
+    print(message, file=sys.stderr)
+    exit(1)
+
+def main(args, gitignore_path: str) -> int:
+    write_lines.__defaults__ = ("w", gitignore_path)
+    gitignore_exists: bool = os.path.exists(gitignore_path)
+
+    if args.create and not gitignore_exists:
+        os.mknod(gitignore_path)
+        gitignore_exists = True
+    
+    if args.edit:
+        os.system("$EDITOR %r" % gitignore_path)
+
+    patterns_provided: bool = len(args.patterns) > 0
+
+    if patterns_provided:
+        if gitignore_exists:
+            write_lines(args.patterns, "a")
+        else:
+            exit_with_error('".gitignore" file was not found.')
+
+    if args.show:
+        if not gitignore_exists:
+            exit_with_error('".gitignore" file was not found.')
+            
+        with open(gitignore_path, "r") as f:
+            print(f.read().strip())
+    
+def decode(text: bytes) -> str:
+    return text.strip().decode()
+
+if __name__ == "__main__":
+    import subprocess
+
+    args = parser.parse_args()
+    
+    result = subprocess.run(["git", "rev-parse", "--show-toplevel"],
+                            stderr=subprocess.PIPE,
+                            stdout=subprocess.PIPE)
+
+    try:
+        result.check_returncode()
+
+        git_root: str = decode(result.stdout)
+        gitignore_path: str = os.path.join(git_root, ".gitignore")
+        
+        main(args, gitignore_path)
+
+    except subprocess.CalledProcessError:
+        print(decode(result.stderr))

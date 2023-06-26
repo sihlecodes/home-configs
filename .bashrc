@@ -1,6 +1,10 @@
 # Personal bash configuration file
 
-source /etc/bash_completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	source /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion
+fi
 
 export ANDROID_SDK=$HOME/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_SDK
@@ -16,10 +20,19 @@ for add_path in ${ADDITIONAL_PATHS[*]}; do
    export PATH=$add_path:$PATH
 done
 
+set completion-ignore-case On
+
+shopt -s autocd
+shopt -s direxpand
+shopt -s globasciiranges globstar dotglob
+shopt -s interactive_comments
+shopt -s lithist
+
 export DOTNET_ROOT=$HOME/.dotnet
 export EDITOR=vim
 export PAGER=less
 
+export LESS='-r'
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTCONTROL=erasedups:ignoredups

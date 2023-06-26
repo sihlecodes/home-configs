@@ -1,3 +1,4 @@
+# General
 # enable color support of ls and also add handy aliases
 
 alias ls="ls -a --color=auto"
@@ -20,3 +21,9 @@ alias mkdir="mkdir -pv"
 
 alias ebrc="$EDITOR ~/.bashrc"
 alias sbrc=". ~/.bashrc"
+
+# WSL niceties
+
+if [ -n "$(which adb.exe 2>/dev/null)" ]; then
+    alias adb=adb.exe
+fi

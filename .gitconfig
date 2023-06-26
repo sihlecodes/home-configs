@@ -15,6 +15,7 @@
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
+   diff     = diff --color=always
 [credential]
 
 ; Steampunklights Git theme

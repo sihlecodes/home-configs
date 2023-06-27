@@ -9,15 +9,17 @@ fi
 export ANDROID_SDK=$HOME/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_SDK
 
+export PERSONAL_BIN=$HOME/mybin
+
 ADDITIONAL_PATHS=(
-   $HOME/mybin
-   $ANDROID_SDK/platform-tools
-   $ANDROID_SDK/emulator
-   $HOME/.dotnet
+	$PERSONAL_BIN
+	$ANDROID_SDK/platform-tools
+	$ANDROID_SDK/emulator
+	$HOME/.dotnet
 )
 
 for add_path in ${ADDITIONAL_PATHS[*]}; do
-   export PATH=$add_path:$PATH
+	export PATH=$add_path:$PATH
 done
 
 set completion-ignore-case On

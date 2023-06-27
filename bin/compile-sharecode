@@ -12,34 +12,36 @@ except:
 WARNING_COLOR = "\033[38;5;245m"
 CLEAR = "\033[0m"
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(
+    description="A script that mini-fies vanila html, css and javascript code files."
+)
 
-parser.add_argument("-J", "--javascript", nargs="*",
+parser.add_argument("-j", "--javascript", nargs="*",
     help="""The JavaScript files to compile. 
 If the HTML argument is not given the compiled scripts
 are saved to separate files with the '.min.js' extension.""")
 
-parser.add_argument("-C", "--css", nargs="*",
+parser.add_argument("-c", "--css", nargs="*",
     help="""The CSS files to compile. 
 If the HTML argument is not given the compiled stylesheets
 are saved to separate files with the '.min.css' extension.""")
 
-parser.add_argument("-H", "--html",
+parser.add_argument("-h", "--html",
     help="""The HTML file to compile.
 If this argument is provided the compiled scripts and 
 stylesheets will be embedded into the HTML file so long
 as those scripts and stylesheets are referenced in the HTML document. 
 """)
 
-parser.add_argument("-S", "--save", action="store_true",
+parser.add_argument("-s", "--save", action="store_true",
     help="""Save scripts and stylesheets that did
 not embed into HTML document because they were
 not referenced by the HTML document""")
 
-parser.add_argument("-O", "--overwrite", action="store_true",
+parser.add_argument("-o", "--overwrite", action="store_true",
     help="Forcefully overwrite all files without confirmation.")
 
-parser.add_argument("-N", "--name",
+parser.add_argument("name", nargs="?",
     help="The name of the compiled HTML document.")
 
 def verify_exists(filename):
@@ -266,4 +268,4 @@ if args.html is not None:
 
     save_file(new_name(html) if args.name is None \
         else args.name, html_compiled)
-    print("Saved")    
+    print("Saved")

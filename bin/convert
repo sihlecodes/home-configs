@@ -196,14 +196,21 @@ def print_pretty(hex_str, floats, integers, name="unamed"):
 
 if __name__ == "__main__":
     script_name = argv.pop(0)
+    nargs = len(argv) 
 
-    if len(argv) == 0:
+    if nargs == 0:
         raise SyntaxError("No arguments provided.")
 
-    elif len(argv) == 1:
+    elif nargs < 3:
+        raise SyntaxError("Too few arguments provided.")
+    
+    elif nargs > 8:
+        raise SyntaxError("Too many arguments provided.")
+    
+    elif nargs == 1:
         arg = argv[0]
 
-        if match(r"[0-9a-fA-F]{3,8}", arg):
+        if match(r"#?[0-9a-fA-F]{3,8}", arg):
             h = arg
             if len(arg) in (3, 4):
                 h = "".join([ x + x for x in arg ])
@@ -228,14 +235,14 @@ if __name__ == "__main__":
 
             print_pretty(h, f, i, arg)
 
-    elif len(argv) in (3, 4):
+    elif nargs in (3, 4):
 
         for s in argv:
             if not match(r"(0\.\d+|0|1)", s):
                 complete=False
                 break
         else:
-            if len(argv) == 3:
+            if nargs == 3:
                 argv.append(1)
 
             f = [ float(x) for x in argv ]
@@ -249,7 +256,7 @@ if __name__ == "__main__":
                 if not match(r"\d+", s):
                     break
             else:
-                if len(argv) == 3:
+                if nargs == 3:
                     argv.append(255)
 
                 i = [ int(x) for x in argv ]
@@ -261,7 +268,4 @@ if __name__ == "__main__":
         if not complete:
             raise SyntaxError("Array must consist of all 'float's or all 'int's")
 
-        print_pretty(h, f, i)
-
-    else:
         print_pretty(h, f, i)

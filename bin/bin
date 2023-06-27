@@ -75,7 +75,7 @@ if __name__ == "__main__":
          else:
             script_not_found(partial_path)
       
-      subprocess.run([os.environ.get("EDITOR", "vim"), target_script])
+      os.system("$EDITOR " + target_script)
 
    if any([ option in sys.argv for option in ("-x", "--chmod") ]):
       if len(args.chmod) > 0:

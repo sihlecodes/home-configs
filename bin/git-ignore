@@ -48,7 +48,7 @@ def main(args, gitignore_path: str) -> int:
         gitignore_exists = True
     
     if args.edit:
-        os.system("$EDITOR %r" % gitignore_path)
+        os.system("$EDITOR " + gitignore_path)
 
     patterns_provided: bool = len(args.patterns) > 0
 

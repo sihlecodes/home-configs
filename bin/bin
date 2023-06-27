@@ -1,40 +1,93 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python
 
-if [[ -z $PERSONAL_BIN ]]; then
-   PERSONAL_BIN=$HOME/mybin
-fi
+# author: sihlecodes
+# created: 27 June 2023
 
-case $1 in
-   c|ch|chmod)
-      chmod +x $(find $PERSONAL_BIN/ -type f -maxdepth 1) ;;
+import os
+import os.path as path
+import glob
+import argparse
+import subprocess
+import sys
 
-   e|ed|edit)
-      if [[ -z $2 ]]; then
-         echo "Enter the name of the script you want to edit."
-         exit 1
-      fi
-      $EDITOR $PERSONAL_BIN/$2 ;;
+current_script_directory: str = path.dirname(path.realpath(__file__))
 
-   ls|list)
-      ls $PERSONAL_BIN ;;
+bin_directory: str = os.environ.get("PERSONAL_BIN",
+   current_script_directory)
 
-   rm|remove)
-      if [[ -z $2 ]]; then
-         echo "Enter the name of the script you want to delete."
-         exit 1
-      fi
-      shift 1
+parser = argparse.ArgumentParser(
+   description=f"""A script for managing scripts under a directory.
+      (default directory is currently set to '{bin_directory}')""")
 
-      for s in $@; do
-         if [ -f $PERSONAL_BIN/$s ]; then
-            p="Are you sure you want to delete '$s' script (Y/n)? "
-            read -p "$p" reply
+parser.add_argument("-d", "--directory", default=bin_directory,
+   help=f"sets the directory to manage (defualts to $PERSONAL_BIN or '{current_script_directory}' if $PERSONAL_BIN is not defined).")
 
-            if [[ $reply =~ (Y|y) ]]; then
-               rm $PERSONAL_BIN/$s
-            else
-               echo "Did not delete '$s' script"
-            fi 
-         fi
-      done ;;
-esac
+parser.add_argument("-e", "--edit", metavar="SCRIPT",
+   help="""opens a script located inside the managed directory using your $EDITOR.
+      (the SCRIPT parameter can be relative path: relative to the managed directory""")   
+
+parser.add_argument("-x", "--chmod", metavar="SCRIPTS", nargs="*",
+   help="""add execute permissions to scripts inside the managed directory.
+      (adds execute permissions to all scripts if SCRIPTS is not specified)""")
+
+parser.add_argument("-l", "--list", action="store_true",
+   help="list all the files inside the managed directory.")
+
+parser.add_argument("-c", "--create", action="store_true",
+   help="creates a new script, if one does not exist already (only works with the --edit option)")
+
+parser.usage = "bin [-h] [-d DIRECTORY] [-e SCRIPT [-c]] [-x [SCRIPTS ...]] [-l]"
+
+def paths_match(full_path: str, partial_path: str) -> bool:
+   basenames_match: bool = path.basename(full_path) == path.basename(partial_path)
+   path_endings_match: bool = full_path.endswith(partial_path)
+   return basenames_match and path_endings_match
+
+def script_not_found(script: str):
+   print(f"The '{script}' script was not found.", file=sys.stderr)
+   exit(1)
+
+if __name__ == "__main__":
+   args = parser.parse_args()
+
+   scripts: list[str] = glob.glob("**/*",
+      root_dir=args.directory, recursive=True)
+
+   scripts_with_full_path: list[str] = [ path.join(args.directory, file) for file in scripts ]
+
+   if args.create and not args.edit:
+      parser.print_usage()
+      print(f"{path.basename(sys.argv[0])}: error: option -c/--create: cannot be used without the -e/--edit option", file=sys.stderr)
+      exit(2)
+
+   if args.edit:
+      partial_path: str = args.edit
+      target_script: str
+
+      for script in scripts_with_full_path:
+         if paths_match(script, partial_path):
+            target_script = script
+            break
+      else:
+         if args.create:
+            target_script = path.join(args.directory, args.edit)
+            os.mknod(target_script)
+         else:
+            script_not_found(partial_path)
+      
+      subprocess.run([os.environ.get("EDITOR", "vim"), target_script])
+
+   if any([ option in sys.argv for option in ("-x", "--chmod") ]):
+      if len(args.chmod) > 0:
+         for partial_path in args.chmod:
+            for script in scripts_with_full_path:
+               if paths_match(script, partial_path):
+                  subprocess.run(["chmod", "+x", script])
+                  break
+            else:
+               script_not_found(partial_path)
+      else:
+         subprocess.run(["chmod", "+x", *scripts_with_full_path])
+
+   if args.list:
+      subprocess.run(["ls", "--color=always", args.directory])

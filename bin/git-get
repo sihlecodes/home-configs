@@ -20,5 +20,5 @@ if __name__ == '__main__':
 		print("Creating directory '%s'..." % directory)
 		os.mkdirs(directory)
 
-	for repo in args.repository:
+	for repo in args.repositories:
 		os.system("git clone 'https://github.com/%s' %s" % (repo, directory))

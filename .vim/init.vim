@@ -1,36 +1,43 @@
-source ~/dotfiles/.vimrc
+" source ~/.vimrc
 
-" configs references "gf"
-" $XDG_CONFIG_HOME/nvim/after/plugin/plugin_configs.vim
-" $XDG_CONFIG_HOME/nvim/autoload/lightline/colorscheme/hornet.vim
-" $HOME/vim-steampunklights
-" $HOME/vim-swapitems
-source ~/plugins.vim
-noremap K <nop>
+lua require('plugins')
 
-" Personal Plugins
-set runtimepath+=~/vim-steampunklights
-set runtimepath+=~/vim-swapitems
-set guifont=Monospace\ 9
+" ~/.config/nvim/keymaps.vim
+" ~/.config/nvim/lua/plugins.lua
+" ~/.config/nvim/after/plugin/lsp.lua
+" ~/.config/nvim/after/plugin/cmp.lua
+" ~/.config/nvim/after/plugin/lualine.lua
 
-set runtimepath+=~/tiny-syntax
-" set runtimepath+=~/qt5.vim
-" set runtimepath+=~/asm_arm.vim
+let g:mapleader = "\<space>"
 
-call pathogen#infect("~/vim-infestation/{}")
+let $CONFIG = stdpath("config")
 
-" Desktop settings
-nnoremap <c-z> u
-inoremap <c-z> u
+source $CONFIG/options.vim
+source $CONFIG/keymaps.vim
 
-inoremap <c-left> <c-w>h
-inoremap <c-right> <c-o>b
+function! Tabnr(filename)
+    for tabnr in range(tabpagenr('$'))
+        for winid in tabpagebuflist(tabnr + 1)
+            if bufname(winid) == a:filename
+                return tabnr + 1
+            endif
+        endfor
+    endfor
+    return -1
+endfunction
 
-noremap ga <Plug>(EasyAlign)
+function! OpenTabOrSwitch(file)
+   let fname = expand(a:file)
+   let bufnr = bufnr(fname)
+   let tabnr = Tabnr(fname)
 
-nmap <c-?> =c
+   if tabnr == -1
+      execute 'tabedit ' . a:file
+   else
+      execute tabnr . 'tabnext'
+   endif
+endfunction
 
-augroup JAVA_PREFS
-   autocmd!
-   autocmd Filetype java setlocal iskeyword+=.
-augroup END
+command! -nargs=1 -complete=file Tabedit :call OpenTabOrSwitch(<f-args>)
+command! We w | e
+command! Cd execute 'cd ' . expand('%:h')

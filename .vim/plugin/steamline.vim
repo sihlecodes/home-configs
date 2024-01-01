@@ -1,179 +1,187 @@
-" helper functions {{{
-" SynName() {{{
-function! SynName()
-   let synname = synIDattr(synID(line("."), col("."), 1), "name")
-   return empty(synname) ? "Normal" : synname
+" TODO: decide whether to globalise / internalise default items
+let g:steamline_default_filetype = 'plain'
+let g:steamline_title_ignored_filetypes = ['help', 'nerdtree']
+let g:steamline_padded_tab_titles = v:false
+let g:steamline_tab_separator = '|'
+let g:steamline_empty_filename = '[no name]'
+
+let g:steamline_highlight_names = {
+   \ 'tab_current': 'SteamlineTabCurrent',
+   \ 'tab_normal': 'SteamlineTabNumber',
+   \ 'tab_separator': 'SteamlineTabSeparator',
+   \ 'insert_mode': 'SteamlineModalColourInsert',
+   \ 'visual_mode': 'SteamlineModalColourVisual',
+   \ 'normal_mode': 'SteamlineModalColourNormal',
+   \ 'command_mode': 'StemalineModalColourCommand',
+   \ 'replace_mode': 'StemalineModalColourReplace',
+   \ }
+
+function! s:get_highlight(name)
+   return '%#' . get(g:steamline_highlight_names, a:name, 'Error') . '#'
 endfunction
-" }}}
-" Modifiable() {{{
-function! Modifiable()
-   return !&modifiable || &readonly ? nr2char(57506) : ''
+
+let g:steamline_modal_colours = {
+   \ 'i': s:get_highlight('insert_mode'),
+   \ 'R': s:get_highlight('replace_mode'),
+   \ "v|V|\<c-v>|s|S|\<c-s>": s:get_highlight('visual_mode'),
+   \ 't|c': s:get_highlight('command_mode'),
+   \ }
+
+let g:steamline_mode_map = {
+   \ 'n': 'NORMAL',
+   \ 'i': 'INSERT',
+   \ 'v': 'VISUAL',
+   \ 'V': 'V-LINE',
+   \ 's': 'SELECT',
+   \ 'S': 'S-LINE',
+   \ "\<c-s>": 'S-BLOCK',
+   \ "\<c-v>": 'V-BLOCK',
+   \ 't': 'TERMINAL',
+   \ 'R': 'REPLACE',
+   \ 'c': 'COMMAND'
+   \}
+
+function! steamline#modifiable()
+   return !&modifiable || &readonly ? "\ue0a2" : ''
 endfunction
-" }}}
-" ModFlag() {{{
-function! ModFlag()
-   return &modified ? '*' : ''
+
+function! steamline#modified()
+   return &modified ? "\u25cf" : ''
 endfunction
-" }}}
-" WordCount() {{{
-function! WordCount()
-   return wordcount()[has_key(wordcount(), 'visual_words') ? 'visual_words' : 'words']
+
+function! steamline#word_count()
+   let word_stats = wordcount()
+   let word_count = get(word_stats, 'words')
+
+   return get(word_stats, 'visual_words', word_count)
 endfunction
-" }}}
-" CharCount() {{{
-function! CharCount()
-   return wordcount()['chars']
+
+function! steamline#char_count()
+   return get(wordcount(), 'chars')
 endfunction
-" }}}
-" FileName() {{{
-function! FileName()
-   return empty(expand('%:t')) ? 'no name' : expand('%:t')
+
+function! steamline#filename()
+   let filename = expand('%:t')
+   return empty(filename) ? g:steamline_empty_filename : filename
 endfunction
-" }}}
-" TabName() {{{
-function! s:pad(word, n)
-   let padding = ''
-   for i in range(a:n - len(a:word))
-      let padding .= ' '
+
+function! s:get_tab_title(tabnumber, ignored_filetypes = g:steamline_title_ignored_filetypes)
+   let buffers = tabpagebuflist(a:tabnumber)
+
+   if len(buffers) == 1
+      return fnamemodify(bufname(buffers[0]), ':t')
+   endif
+
+   for buffer in buffers
+      if !s:has_item(a:ignored_filetypes, getbufvar(buffer, '&filetype'))
+         return fnamemodify(bufname(buffer), ':t')
+      endif
    endfor
-   return a:word . padding
 endfunction
 
-function! TabName()
-   let fname = empty(expand('%:t')) ? 'no name' : expand('%:t')
-   let length = len(fname)
+function! s:pad(word, char, width, left=v:true)
+   let padding = repeat(a:char, a:width - len(a:word))
+   return a:left ? padding . a:word : a:word . padding
+endfunction
 
-   for n in range(tabpagenr('$'))
-      for i in tabpagebuflist(n + 1)
-         try
-            let curlen = len(split(bufname(i), g:path_separator)[-1])
-         catch
-            let curlen = 0
-         endtry
-         if curlen > length
-            let length = curlen
+function! steamline#tab_name()
+   let filename = steamline#filename()
+   let max_length = 0
+
+   if g:steamline_padded_tab_titles
+      for tabnumber in range(1, tabpagenr('$'))
+         let length = len(s:get_tab_title(tabnumber))
+
+         if length > max_length
+            let max_length = length
          endif
       endfor
-   endfor
-   return s:pad(fname, length)
-endfunction
-" }}}
-" TabNextName() {{{
-function! s:strip(name)
-   if empty(a:name)
-      return "no name"
    endif
-   return split(a:name, g:path_separator)[-1]
+
+   return s:pad(filename, ' ', max_length, v:false)
 endfunction
 
-function! TabNextName() abort
-   let s:bname = { x -> bufname(tabpagebuflist(x)[0]) }
-   let name_1 = s:bname(tabpagenr() + 1)
-   let name_2 = s:bname(1)
+function! steamline#tab_next_name()
+   let current_tabnumber = tabpagenr()
+   let last_tabnumber = tabpagenr('$')
+   let next_tab_bufname = s:get_tab_title(current_tabnumber + 1)
 
-   if tabpagenr('$') == 1
+   if last_tabnumber == 1
       return ''
    endif
-   if empty(name_1) && tabpagenr() == tabpagenr('$')
-      return s:strip(name_2)
-   elseif empty(name_1) 
-      return 'no name'
-   endif
-   return s:strip(name_1)
-endfunction
-" }}}
-" TabNumbers() {{{
-function! TabNumbers()
-   let s = ''
-   for i in range(tabpagenr('$'))
-      let n = i + 1
 
-      if n == tabpagenr()
-         let s .= '%#SteamLineTabCurrent#'
-      else
-         let s .= '%#SteamLineTabNumber#'
+   if current_tabnumber == last_tabnumber
+      return s:get_tab_title(1)
+
+   elseif empty(next_tab_bufname) 
+      return g:steamline_empty_filename
+   endif
+
+   return next_tab_bufname
+endfunction
+
+function! steamline#tab_numbers()
+   let tab_string = ''
+   let current_tabnumber = tabpagenr()
+   let tab_count = tabpagenr('$')
+   let tab_current = s:get_highlight('tab_current')
+   let tab_normal = s:get_highlight('tab_normal')
+   let tab_separator = s:get_highlight('tab_separator')
+
+   for tabnumber in range(1, tab_count)
+      let tab_string .= (tabnumber == current_tabnumber) ? tab_current : tab_normal
+      let tab_string .= '%' . tabnumber . 'T'
+      let tab_string .= (tabnumber > current_tabnumber + 1) ? tab_separator . '|' . tab_normal . ' ' . tabnumber : ' ' . tabnumber
+
+      if tabnumber != tab_count 
+         let tab_string .= ' '
       endif
-      let s .= '%' . n . 'T'
-      let s .= n > tabpagenr() + 1 ? '%#SteamLineTabSeparator#|%#SteamLineTabNumber#' : ''
-      let s .= ' ' . n
-      if i != tabpagenr('$') - 1 
-         let s .= ' '
-      endif
-      let s .= n < tabpagenr() - 1 ? '%#SteamLineTabSeparator#|' : ''
+
+      let tab_string .= (tabnumber < current_tabnumber - 1) ? tab_separator . '|' : ''
    endfor
-   let s .= '%T'
 
-   return s
+   return tab_string . '%T'
 endfunction
-" }}}
-" Mode() {{{
-function! Mode()
-   let mode_map = {
-   \  "n": "NORMAL",
-   \  "i": "INSERT",
-   \  "v": "VISUAL",
-   \  "V": "V-LINE",
-   \  "s": "SELECT",
-   \  "S": "S-LINE",
-   \  "\<C-s>": "S-BLOCK",
-   \  "\<C-v>": "V-BLOCK",
-   \  "t": "TERMINAL",
-   \  "R": "REPLACE",
-   \  "c": "COMMAND"
-   \}
-   if has_key(mode_map, mode())
-      return mode_map[mode()]
-   endif
-   return mode()
+
+function! steamline#mode()
+   return get(g:steamline_mode_map, mode(), mode())
 endfunction
-" }}}
-" ModalColor() {{{
-function! s:mode_is(list)
-   for i in a:list
-      if i == mode()
-         return v:true
+
+function! s:has_item(list, string)
+   return index(a:list, a:string) >= 0
+endfunction
+
+function! steamline#modal_colour()
+   for [key, value] in items(g:steamline_modal_colours)
+      let current_mode = mode()
+      let mapped_modes = split(key, "|")
+
+      if s:has_item(mapped_modes, current_mode)
+         return value
       endif
    endfor
-   return v:false
+
+   return s:get_highlight('normal_mode')
 endfunction
 
-function! ModalColor()
-   if s:mode_is(["i", "R"])
-      return '%#SteamLineModalColorInsert#'
-   elseif s:mode_is(["v", "V", "\<C-v>", "s", "S", "\<C-s>"])
-      return '%#SteamLineModalColorVisual#' 
-   endif
-   return '%#SteamLineModalColorNormal#'
+function! Steamlinetprogress()
+   let progress = float2nr((line('.') * 100.0) / line('$'))
+   return (progress == 0) ? 'Top' : (progress == 100) ? 'Bot' : progress . '%'
 endfunction
-" }}}
-" Filetype() {{{
-function! FileType()
-   return strlen(&filetype) > 0 ? &filetype : 'text'
+
+function! steamline#filetype()
+   return empty(&filetype) ? g:steamline_default_filetype : &filetype
 endfunction
-" }}}
-" }}}
-
-
-hi! SteamLineModalColorNormal ctermfg=232 ctermbg=226
-hi! SteamLineModalColorInsert ctermfg=232 ctermbg=105
-hi! SteamLineModalColorVisual ctermfg=232 ctermbg=154
-hi! SteamLineSection2 ctermfg=232 ctermbg=226 cterm=reverse
-hi! SteamLineSection3 ctermfg=246 ctermbg=236
-hi! SteamLineSection4 ctermfg=236 ctermbg=234
-
-hi! SteamLineTabCurrent ctermfg=246 ctermbg=234
-hi! SteamLineTabNumber ctermfg=232 ctermbg=240
-hi! link SteamLineTabSeparator SteamLineTabNumber
-
 
 function! steamline#tabline()
-   return "%#SteamLineModalColorNormal# %{TabName()} " . TabNumbers() . (empty(TabNextName()) ? "": " %#SteamLineSection3# ") ."%{TabNextName()} %#SteamLineSection4# %= %#SteamLineSection3#%999X X %#SteamLineModalColorNormal# close "
+   return '%{%steamline#modal_colour()%} %{steamline#tab_name()} %{%steamline#tab_numbers()%}' . (empty(steamline#tab_next_name()) ? '' : ' %#SteamLineSection3# ') . '%{steamline#tab_next_name()} %#SteamLineSection4#'
 endfunction
-
-set tabline=%!steamline#tabline()
 
 function! steamline#statusline()
-   return ModalColor() . ' %{Mode()} %#SteamLineSection2# %{empty(Modifiable()) ? "" : Modifiable() . " | "}%.20{FileName()} %{empty(ModFlag()) ? "":"| ". ModFlag()} %#SteamLineSection3# %{SynName()} %#SteamLineSection4# %= %#SteamLineSection3# %{FileType()} %#SteamLineSection2# %c:%l ' . ModalColor() . ' %{CharCount()} | words %{WordCount()} '
+   redrawtabline
+   return '%{%steamline#modal_colour()%} %{steamline#mode()} %#SteamLineSection2# %.20{steamline#filename()}' . (empty(steamline#modifiable()) && empty(steamline#modified()) ? '' : ' %{steamline#modifiable()}%{steamline#modified()}') . ' %#SteamLineSection4# %= %#SteamLineSection3# %{steamline#filetype()} %#SteamLineSection2# %c:%l ' . steamline#modal_colour() . ' %{steamline#char_count()} | words %{steamline#word_count()} '
 endfunction
 
-set statusline=%!steamline#statusline()
+function! steamline#inactive_statusline()
+   return ' %{steamline#filename()} %{steamline#modifiable()}%{steamline#modified()} %=%{steamline#filetype()} '
+endfunction

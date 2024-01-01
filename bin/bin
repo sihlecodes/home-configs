@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # author: sihlecodes
 # created: 27 June 2023
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
    if args.edit:
       partial_path: str = args.edit
-      target_script: str
+      target_script: str = ""
 
       for script in scripts_with_full_path:
          if paths_match(script, partial_path):

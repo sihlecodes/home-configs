@@ -1,0 +1,67 @@
+snippet pcl
+   public class ${1:`expand("%:t:r")`}
+   {
+      ${0}
+   }
+
+snippet pce
+   public class ${1:`expand("%:t:r")`} extends ${2:Parent}
+   {
+      ${0}
+   }
+
+snippet pci
+   public class ${1:`expand("%:t:r")`} implements ${2:Interface}
+   {
+      ${0}
+   }
+
+snippet pin
+   public interface ${1:`expand("%:t:r")`}
+   {
+      ${0}
+   }
+
+snippet main
+   public static void main(String[] args)
+   {
+      ${0}
+   }
+
+snippet sout
+   System.out.println(${1});
+
+snippet print
+   System.out.print(${1});
+
+snippet pcsvm
+   public class `expand("%:t:r")`
+   {
+      public static void main(String[] args)
+      {
+         ${0}
+      }
+   }
+
+snippet if
+   if (${1})
+      ${2}
+
+snippet for
+   for (${1:${2:int\} ${3:x\} = 0; $3 < ${4:10\}; $3${5:++\}})
+      ${0}
+
+snippet var
+   ${1:public} ${2} ${3:name}${4: = ${0:\}};
+
+snippet me
+   public ${1} ${2:name}(${3})
+   {
+      ${0}
+   }
+
+snippet con
+   public ${1:`expand("%:t:r")`}(${2})
+   {
+      ${0}
+   }

@@ -1,0 +1,16 @@
+snippet setup
+	void setup() {
+		Serial.begin(${1:9600});
+		$0
+	}
+
+snippet loop
+	void loop() {
+		$0
+	}
+
+snippet spl
+	Serial.println($0);
+
+snippet sp
+	Serial.print($0);

@@ -1,0 +1,11 @@
+snippet main
+   int main(${1:int argc, char *argv[]})
+   {
+      ${0};
+      return ${2:0};
+   }
+
+snippet for
+	for(${1:size_t} ${2:i} = ${3:0}; $2 ${4:< 10}; $2++) {
+		$0
+	}

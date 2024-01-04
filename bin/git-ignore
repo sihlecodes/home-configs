@@ -22,7 +22,7 @@ parser.add_argument("-s", "--show", action="store_true",
 parser.add_argument("patterns", metavar="PATTERNS", nargs="*",
     help="these are the patterns that will be added to the gitignore file.")
 
-def write_lines(patterns, file_mode, gitignore_path):
+def write_lines(patterns: list[str], file_mode: str, gitignore_path: str):
     gitignore_ends_with_newline: bool = False
     
     if os.path.exists(gitignore_path):
@@ -35,12 +35,11 @@ def write_lines(patterns, file_mode, gitignore_path):
 
         f.write("\n".join(patterns))
 
-def exit_with_error(message: str):
+def error(message: str):
     print(message, file=sys.stderr)
-    exit(1)
+    return 1
 
 def main(args, gitignore_path: str) -> int:
-    write_lines.__defaults__ = ("w", gitignore_path)
     gitignore_exists: bool = os.path.exists(gitignore_path)
 
     if args.create and not gitignore_exists:
@@ -54,16 +53,18 @@ def main(args, gitignore_path: str) -> int:
 
     if patterns_provided:
         if gitignore_exists:
-            write_lines(args.patterns, "a")
+            write_lines(args.patterns, "a", gitignore_path)
         else:
-            exit_with_error('".gitignore" file was not found.')
+            return error('".gitignore" file was not found.')
 
     if args.show:
         if not gitignore_exists:
-            exit_with_error('".gitignore" file was not found.')
+            return error('".gitignore" file was not found.')
             
         with open(gitignore_path, "r") as f:
             print(f.read().strip())
+
+    return 0
     
 def decode(text: bytes) -> str:
     return text.strip().decode()
@@ -82,8 +83,9 @@ if __name__ == "__main__":
 
         git_root: str = decode(result.stdout)
         gitignore_path: str = os.path.join(git_root, ".gitignore")
-        
-        main(args, gitignore_path)
+
+        exit_status = main(args, gitignore_path)
+        exit(exit_status)
 
     except subprocess.CalledProcessError:
         print(decode(result.stderr))

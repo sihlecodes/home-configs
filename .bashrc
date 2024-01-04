@@ -31,7 +31,7 @@ shopt -s interactive_comments
 shopt -s lithist
 
 export DOTNET_ROOT=$HOME/.dotnet
-export EDITOR=vim
+export EDITOR=nvim
 export PAGER=less
 
 export LESS='-r'
@@ -46,7 +46,7 @@ export HISTCONTROL=erasedups:ignoredups
 
 two_part_path() { pwd | awk 'BEGIN{FS="/"; OFS="/"} { print $(NF - 1), $NF }'; }
 
-PS1="\[\e[38;5;99;3;1m\]\u@\h\[\e[0m\]:(\[\e[38;5;214;1m\]\$(two_part_path)\[\e[0m\])\$ "
+PS1="\[\e[38;5;97;3m\]\u@\h\[\e[0m\]:(\[\e[38;5;220m\]\$(two_part_path)\[\e[0m\])\$ "
 
 source_folder_in_path() {
 	IFS_SAVE=$IFS

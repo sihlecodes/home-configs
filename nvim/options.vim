@@ -7,7 +7,7 @@ set shell=$SHELL
 set showcmd wildmenu mouse=a
 set numberwidth=3 number relativenumber
 set encoding=utf8 backspace=indent,eol,start
-set showtabline=2 laststatus=2 cursorline
+set showtabline=1 laststatus=2 cursorline
 set softtabstop=3 tabstop=3 expandtab shiftwidth=0
 set history=450 undodir=~/.vim/undo
 set incsearch hlsearch

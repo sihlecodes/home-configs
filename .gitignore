@@ -9,4 +9,4 @@ crontabs/cron.update
 *.spl
 bin/arduino-cli
 bin/rg
-*packer_compiled.lua
+nvim/plugin/packer_compiled.lua

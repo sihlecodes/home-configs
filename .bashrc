@@ -19,7 +19,9 @@ ADDITIONAL_PATHS=(
 )
 
 for add_path in ${ADDITIONAL_PATHS[*]}; do
-	export PATH=$add_path:$PATH
+   if [ -d $add_path ]; then
+      export PATH=$add_path:$PATH
+   fi
 done
 
 set completion-ignore-case On

@@ -35,7 +35,6 @@ shopt -s lithist
 export DOTNET_ROOT=$HOME/.dotnet
 export EDITOR=nvim
 export PAGER=less
-
 export LESS='-r'
 export HISTSIZE=1000
 export HISTFILESIZE=2000
@@ -48,7 +47,7 @@ export HISTCONTROL=erasedups:ignoredups
 
 two_part_path() { pwd | awk 'BEGIN{FS="/"; OFS="/"} { print $(NF - 1), $NF }'; }
 
-PS1="\[\e[38;5;97;3m\]\u@\h\[\e[0m\]:(\[\e[38;5;220m\]\$(two_part_path)\[\e[0m\])\$ "
+PS1="\[\e[38;5;105m\]\u@\h\[\e[0m\]:(\[\e[38;5;220m\]\$(two_part_path)\[\e[0m\])\$ "
 
 source_folder_in_path() {
 	IFS_SAVE=$IFS

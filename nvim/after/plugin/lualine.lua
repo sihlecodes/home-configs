@@ -12,6 +12,11 @@ local ignored_filetypes = {'help', 'nerdtree'}
 local function tab_next_name()
    local current_tabnumber = vim.fn.tabpagenr()
    local last_tabnumber = vim.fn.tabpagenr('$')
+
+   if last_tabnumber == 1 then
+      return ''
+   end
+
    local next_tabnumber = current_tabnumber == last_tabnumber and 1 or current_tabnumber + 1
    local buffers = vim.fn.tabpagebuflist(next_tabnumber)
    local filename
@@ -20,11 +25,9 @@ local function tab_next_name()
       local filetype = vim.fn.getbufvar(buffer, '&filetype')
       filename = vim.fn.fnamemodify(vim.fn.bufname(buffer), ':t')
       if not has_item(ignored_filetypes, filetype) then
-         return filename
+         return filename == '' and '[no name]' or filename
       end
    end
-
-   return filename
 end
 
 require("lualine").setup {
@@ -43,7 +46,9 @@ require("lualine").setup {
    },
    tabline = {
       lualine_a = {'filename'},
-      lualine_b = {'tabs', tab_next_name },
-      lualine_c = {},
+      lualine_b = {'tabs'},
+      lualine_c = {tab_next_name},
    },
 }
+
+-- vim.opt.showtabline = 1

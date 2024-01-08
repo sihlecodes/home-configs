@@ -1,5 +1,5 @@
 local cmp = require('cmp')
-local behaviour = {behavior = cmp.SelectBehavior.Insert}
+local behaviour = { behavior = cmp.SelectBehavior.Insert }
 
 cmp.setup.cmdline({'/', '?'}, {
    mapping = cmp.mapping.preset.cmdline(),

@@ -2,6 +2,10 @@
 
 lua require('plugins')
 
+" Disable netrw
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 " ~/.config/nvim/keymaps.vim
 " ~/.config/nvim/lua/plugins.lua
 " ~/.config/nvim/after/plugin/lsp.lua

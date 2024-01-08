@@ -18,11 +18,23 @@ let g:snippets_dir = $CONFIG . "/snippets/"
 
 function! EditSnippets(snippets_dir)
    if !empty(&filetype)
-      execute "Tabedit " . a:snippets_dir . &filetype . ".snippets"
+      execute "Tabedit " . a:snippets_dir . &filetype . ".json"
    endif
 endfunction
 
 nnoremap <silent> <leader>es :call EditSnippets(g:snippets_dir)<cr>
+
+" evaluate expressions
+vnoremap <leader>e s<c-r>=eval(trim(@"))<cr>
+
+augroup filetype_based_mappings
+   autocmd!
+   autocmd Filetype help nnoremap <buffer> <cr> <c-]>
+   autocmd Filetype help nnoremap <buffer> <bs> <c-o>
+   autocmd Filetype arduino nnoremap <buffer> <leader>u <cmd>ArduinoUpload<cr>
+   autocmd FileType vim nnoremap <silent><buffer> <leader>r :source %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd FileType lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+augroup END
 
 " smart indenting paste
 nnoremap p p==

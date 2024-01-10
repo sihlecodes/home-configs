@@ -39,6 +39,9 @@ list_parser.add_argument("-s", "--short", action="store_true",
 list_parser.add_argument("-a", "--alphabetic", action="store_true",
 	help="sort files alphabetically according to their names.")
 
+list_parser.add_argument("pattern", nargs="?",
+	help="filter files using a fuzzy pattern")
+
 empty_parser = sub_parsers.add_parser("empty",
 	help="permanantly delete all files inside the trash directory.")
 
@@ -54,7 +57,39 @@ def get_human_readable_size(size, digits=1):
 		size, fraction_digits = divmod(size, 1024)
 		index += 1
 
-	return round(float("%s.%s" % (size, fraction_digits)), digits), readable_sizes[index]
+	human_readable_size = round(float(f"{size}.{fraction_digits}"), digits)
+	return (human_readable_size, readable_sizes[index])
+
+def fuzzy_find(pattern: str, entries: list[str], break_char:str = ""):
+	pattern = pattern[::-1].lower()
+	matches: set = set()
+
+	for entry in entries:
+		distance: int = 0
+		stretch: int = 0 # sort priority
+		index: int = len(pattern) - 1
+		pattern_character: str = pattern[index]
+
+		for entry_character in entry.lower():
+			if break_char and entry_character == break_char:
+				break
+
+			if entry_character == pattern_character:
+				stretch += distance
+
+				if index == 0:
+					matches.add((entry, stretch))
+					break
+
+				distance = 0
+				index -= 1
+				pattern_character = pattern[index]
+
+			distance += 1
+	
+	by_best_match = sorted(matches, key=lambda x: x[1])
+
+	return list(map(lambda x: x[0], by_best_match))
 
 def _add(args):
 	dir = os.path.expanduser(os.path.dirname(TRASH_INDEX))
@@ -62,27 +97,39 @@ def _add(args):
 		os.makedirs(dir)
 
 	with open(TRASH_INDEX, "a") as index:
-		for entry in args.files:
-			if not os.path.exists(entry):
-				print("'%s' does not exist" % entry)
+		for file in args.files:
+			if not os.path.exists(file):
+				print("%r does not exist" % file)
 				continue
 
-			entry = os.path.realpath(os.path.expanduser(entry))
-			alias = os.path.split(entry)[-1]
-			date = datetime.now()
+			file = os.path.realpath(os.path.expanduser(file))
+			alias = os.path.basename(file)
+			timestamp = datetime.now().strftime("%d.%m.%y.%H.%M.%S")
 
 			pattern = re.compile(r"%s(\.\d+)?$" % alias)
-
 			similarly_named_files = list(filter(lambda x: pattern.match(x), os.listdir(TRASH_DIR)))
 
 			if len(similarly_named_files) > 0:
 				alias += ".%s" % (len(similarly_named_files)+1)
 
-			os.rename(entry, os.path.join(TRASH_DIR, alias))
-			index.write("%s:%s:%s\n" % (alias, entry, date.strftime("%d.%m.%y.%H.%M.%S")))
+			try:
+				os.rename(file, os.path.join(TRASH_DIR, alias))
+				index.write(f"{alias}:{file}:{timestamp}\n")
 
-			if args.verbose:
-				print("trashed %r" % os.path.split(entry)[-1])
+				if args.verbose:
+					print(f"trashed '{alias}'")
+
+			except OSError:
+				response: str = input(f"Unable to trash '{alias}', would you like to delete it instead? (Y/n) " )
+
+				if re.match(r"y|ye|yes", response.lower()):
+					os.remove(file)
+
+					if args.verbose:
+						print(f"deleted '{alias}'")
+
+				elif args.verbose:
+					print(f"Operation aborted")
 
 def _restore(args):
 	removed = []
@@ -91,10 +138,10 @@ def _restore(args):
 	with open(TRASH_INDEX, "r") as index:
 		entries = index.readlines()
 
+	# TODO: prompt user if there are multiple restorable files
 	for target in args.targets:
 		for entry in entries:
 			alias, path, time = entry.split(":")
-
 			parent_directory = os.path.dirname(path)
 
 			if not os.path.exists(parent_directory):
@@ -105,7 +152,7 @@ def _restore(args):
 				removed.append(entry)
 
 				if args.verbose:
-					print("restored %r to %r" % (os.path.split(path)[-1], path))
+					print(f"restored '{alias}' to '{path}'")
 
 	with open(TRASH_INDEX, "w") as index:
 		for entry in entries:
@@ -122,6 +169,9 @@ def _list(args):
 
 	with open(TRASH_INDEX, "r") as index:
 		entries = index.readlines()
+
+		if args.pattern:
+			entries = fuzzy_find(args.pattern, entries, ":")
 
 		for entry in entries:
 			alias, path, time = entry.strip().split(":")
@@ -155,7 +205,7 @@ def _list(args):
 					print("size:", "\033[38;5;95m%s\033[0m" % readable_size)
 			print()
 
-def _empty(args):
+def _empty(_):
 	open(TRASH_INDEX, "w").close()
 
 add_parser.set_defaults(func=_add)
@@ -171,3 +221,5 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	if hasattr(args, "func"):
 		args.func(args)
+
+# vim: noexpandtab

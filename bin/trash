@@ -140,24 +140,55 @@ def _restore(args):
 
 	# TODO: prompt user if there are multiple restorable files
 	for target in args.targets:
-		for entry in entries:
-			alias, path, time = entry.split(":")
-			parent_directory = os.path.dirname(path)
+		_entries = fuzzy_find(target, entries, ":")
 
-			if not os.path.exists(parent_directory):
-				os.makedirs(parent_directory)
+		for i, entry in enumerate(_entries):
+			alias, path, time = entry.strip().split(":")
+			time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
 
-			if target == alias:
-				os.rename(os.path.join(TRASH_DIR, alias), path)
-				removed.append(entry)
+			print(f"{i+1:02}.",
+				style(time.strftime("%d %b %Y %H:%M:%S"), colour="time"),
+				style(alias, colour="alias"), f"({style(path, colour='size')}):")
 
-				if args.verbose:
-					print(f"restored '{alias}' to '{path}'")
+		# for entry in entries:
+		# 	alias, path, time = entry.split(":")
+		# 	parent_directory = os.path.dirname(path)
+		#
+		# 	if not os.path.exists(parent_directory):
+		# 		os.makedirs(parent_directory)
+		#
+		# 	if target == alias:
+		# 		os.rename(os.path.join(TRASH_DIR, alias), path)
+		# 		removed.append(entry)
+		#
+		# 		if args.verbose:
+		# 			print(f"restored '{alias}' to '{path}'")
 
 	with open(TRASH_INDEX, "w") as index:
 		for entry in entries:
 			if entry not in removed:
 				index.write(entry)
+
+colour_map = {
+	"alias": 105,
+	"time": 111,
+	"size": 95,
+	"header": 220,
+}
+
+def style(input: str, **attributes) -> str:
+	options: list = ["\033["]
+
+	if attributes.get("bold", False):
+		options.append("1")
+
+	colour: str = attributes.get("colour", "") 
+	
+	if colour:
+		colour_code: int = colour_map.get(colour, 160)
+		options.append(f"38;5;{colour_code}")
+
+	return ";".join(options) + "m" + input + "\033[0m"
 
 def _list(args):
 	if not os.path.exists(TRASH_INDEX):
@@ -165,7 +196,7 @@ def _list(args):
 		quit()
 
 	if not args.short:
-		print("\033[38;5;220;1mINDEXED TRASH:\033[0m\n")
+		print(f"{style('INDEXED TRASH:', colour='header', bold=True)}\n")
 
 	with open(TRASH_INDEX, "r") as index:
 		entries = index.readlines()
@@ -192,17 +223,19 @@ def _list(args):
 			else:
 				alias += "\033[0m/"
 
-			print("\033[38;5;105m%s\033[0m" % alias, end="")
-			print(" (\033[38;5;111m%s\033[0m)" % time.strftime("%d %b %Y %H:%M:%S"), end="")
+			formatted_time = time.strftime('%d %b %Y %H:%M:%S')
+
+			print(style(alias, colour="alias"), end=" ")
+			print("(", style(formatted_time, colour="time"), sep="", end=")")
 
 			if args.short:
 				if not os.path.isdir(trash_target_path):
-					print(" (\033[38;5;95m%s\033[0m)" % readable_size, end="")
+					print(" (", style(readable_size, colour="size"), sep="", end=")")
 			else:
 				print("\npath:", path)
 
 				if not os.path.isdir(trash_target_path):
-					print("size:", "\033[38;5;95m%s\033[0m" % readable_size)
+					print("size:", style(readable_size, colour="size"))
 			print()
 
 def _empty(_):

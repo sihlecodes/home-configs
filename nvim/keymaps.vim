@@ -1,11 +1,12 @@
 " author: Sihle Mhlongo
 "
 " created: 25/12/2023
-" updated: 25/12/2023
+" updated: 08/01/2024
 
 nnoremap <esc><esc> :nohlsearch<cr>
 
 nnoremap <silent> <leader>y :let @+ = @"<cr>
+nnoremap <silent> y<leader> :let @" = @+<cr>
 
 nnoremap <leader><leader> "zyy:<c-r>z<cr>
 vnoremap <leader><leader> "zyq:i<c-r>z
@@ -18,7 +19,7 @@ let g:snippets_dir = $CONFIG . "/snippets/"
 
 function! EditSnippets(snippets_dir)
    if !empty(&filetype)
-      execute "Tabedit " . a:snippets_dir . &filetype . ".json"
+      execute "Tabedit " . a:snippets_dir . &filetype . ".snippets"
    endif
 endfunction
 

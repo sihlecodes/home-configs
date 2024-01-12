@@ -16,230 +16,251 @@ sub_parsers = parser.add_subparsers(title="subcommands")
 add_parser = sub_parsers.add_parser("add", help="add trash to $TRASH_DIR")
 
 add_parser.add_argument("files", metavar="FILES", nargs="+",
-	help="the names of the files to be added to the trash directory.")
+    help="the names of the files to be added to the trash directory.")
 
 add_parser.add_argument("-v", "--verbose", action="store_true",
-	help="print out additional information")
+    help="print out additional information")
 
 restore_parser = sub_parsers.add_parser("restore",
-	help="restore trash from $TRASH_DIR")
+    help="restore trash from $TRASH_DIR")
 
 restore_parser.add_argument("targets", metavar="TARGETS", nargs="+",
-	help="the names of the files to be restored.")
+    help="the names of the files to be restored.")
 
 restore_parser.add_argument("-v", "--verbose", action="store_true",
-	help="print out additional information")
+    help="print out additional information")
 
 list_parser = sub_parsers.add_parser("list",
-	help="list files inside the trash directory.")
+    help="list files inside the trash directory.")
 
 list_parser.add_argument("-s", "--short", action="store_true",
-	help="list files using short format.")
+    help="list files using short format.")
 
 list_parser.add_argument("-a", "--alphabetic", action="store_true",
-	help="sort files alphabetically according to their names.")
+    help="sort files alphabetically according to their names.")
 
 list_parser.add_argument("pattern", nargs="?",
-	help="filter files using a fuzzy pattern")
+    help="filter files using a fuzzy pattern")
 
 empty_parser = sub_parsers.add_parser("empty",
-	help="permanantly delete all files inside the trash directory.")
+    help="permanantly delete all files inside the trash directory.")
 
 empty_parser.add_argument("-f", "--force", action="store_true",
-	help="empty out trash directory without confirmation.")
+    help="empty out trash directory without confirmation.")
 
 def get_human_readable_size(size, digits=1):
-	readable_sizes = ["B", "KB", "MB", "GB", "TB", "PB"]
-	index = 0
-	fraction_digits = 0
+    readable_sizes = ["B", "KB", "MB", "GB", "TB", "PB"]
+    index = 0
+    fraction_digits = 0
 
-	while size >= 1024 and index < len(readable_sizes)-1:
-		size, fraction_digits = divmod(size, 1024)
-		index += 1
+    while size >= 1024 and index < len(readable_sizes) - 1:
+        size, fraction_digits = divmod(size, 1024)
+        index += 1
 
-	human_readable_size = round(float(f"{size}.{fraction_digits}"), digits)
-	return (human_readable_size, readable_sizes[index])
+    human_readable_size = round(float(f"{size}.{fraction_digits}"), digits)
+    return (human_readable_size, readable_sizes[index])
 
-def fuzzy_find(pattern: str, entries: list[str], break_char:str = ""):
-	pattern = pattern[::-1].lower()
-	matches: set = set()
+def fuzzy_find(pattern: str, entries: list[str], break_char: str = ""):
+    pattern = pattern[::-1].lower()
+    matches: set = set()
 
-	for entry in entries:
-		distance: int = 0
-		stretch: int = 0 # sort priority
-		index: int = len(pattern) - 1
-		pattern_character: str = pattern[index]
+    for entry in entries:
+        distance: int = 0
+        stretch: int = 0  # sort priority
+        index: int = len(pattern) - 1
+        pattern_char: str = pattern[index]
 
-		for entry_character in entry.lower():
-			if break_char and entry_character == break_char:
-				break
+        for entry_char in entry.lower():
+            if break_char and entry_char == break_char:
+                break
 
-			if entry_character == pattern_character:
-				stretch += distance
+            if entry_char == pattern_char:
+                stretch += distance
 
-				if index == 0:
-					matches.add((entry, stretch))
-					break
+                if index == 0:
+                    matches.add((entry, stretch))
+                    break
 
-				distance = 0
-				index -= 1
-				pattern_character = pattern[index]
+                distance = 0
+                index -= 1
+                pattern_char = pattern[index]
 
-			distance += 1
-	
-	by_best_match = sorted(matches, key=lambda x: x[1])
+            distance += 1
 
-	return list(map(lambda x: x[0], by_best_match))
+    by_best_match = sorted(matches, key=lambda x: x[1])
+    return list(map(lambda x: x[0], by_best_match))
 
 def _add(args):
-	dir = os.path.expanduser(os.path.dirname(TRASH_INDEX))
-	if not os.path.exists(dir):
-		os.makedirs(dir)
+    dir = os.path.expanduser(os.path.dirname(TRASH_INDEX))
+    if not os.path.exists(dir):
+        os.makedirs(dir)
 
-	with open(TRASH_INDEX, "a") as index:
-		for file in args.files:
-			if not os.path.exists(file):
-				print("%r does not exist" % file)
-				continue
+    with open(TRASH_INDEX, "a") as index:
+        for file in args.files:
+            if not os.path.exists(file):
+                print("%r does not exist" % file)
+                continue
 
-			file = os.path.realpath(os.path.expanduser(file))
-			alias = os.path.basename(file)
-			timestamp = datetime.now().strftime("%d.%m.%y.%H.%M.%S")
+            file = os.path.realpath(os.path.expanduser(file))
+            alias = os.path.basename(file)
+            timestamp = datetime.now().strftime("%d.%m.%y.%H.%M.%S")
 
-			pattern = re.compile(r"%s(\.\d+)?$" % alias)
-			similarly_named_files = list(filter(lambda x: pattern.match(x), os.listdir(TRASH_DIR)))
+            pattern = re.compile(fr"{alias}(\.\d+)?$")
+            similarly_named_files = list(filter(lambda x: pattern.match(x), os.listdir(TRASH_DIR)))
 
-			if len(similarly_named_files) > 0:
-				alias += ".%s" % (len(similarly_named_files)+1)
+            if len(similarly_named_files) > 0:
+                alias += ".%s" % (len(similarly_named_files) + 1)
 
-			try:
-				os.rename(file, os.path.join(TRASH_DIR, alias))
-				index.write(f"{alias}:{file}:{timestamp}\n")
+            try:
+                os.rename(file, os.path.join(TRASH_DIR, alias))
+                index.write(f"{alias}:{file}:{timestamp}\n")
 
-				if args.verbose:
-					print(f"trashed '{alias}'")
+                if args.verbose:
+                    print(f"trashed '{alias}'")
 
-			except OSError:
-				response: str = input(f"Unable to trash '{alias}', would you like to delete it instead? (Y/n) " )
+            except OSError:
+                prompt = f"Unable to trash '{alias}', would you like to delete it instead? (Y/n) "
+                response: str = input(prompt)
 
-				if re.match(r"y|ye|yes", response.lower()):
-					os.remove(file)
+                if re.match(r"y|ye|yes", response.lower()):
+                    os.remove(file)
 
-					if args.verbose:
-						print(f"deleted '{alias}'")
+                    if args.verbose:
+                        print(f"deleted '{alias}'")
 
-				elif args.verbose:
-					print(f"Operation aborted")
+                elif args.verbose:
+                    print("Operation aborted")
+
+def get_entries():
+    entries = []
+    with open(TRASH_INDEX, "r") as index:
+        entries = index.readlines()
+
+    return entries
+
+def restore_entry() -> bool:
+    return True
 
 def _restore(args):
-	removed = []
-	entries = []
+    removed = []
 
-	with open(TRASH_INDEX, "r") as index:
-		entries = index.readlines()
+    # TODO: prompt user if there are multiple restorable files
+    for target in args.targets:
+        entries = get_entries()
+        _entries = fuzzy_find(target, entries, ":")
+        match_count = len(_entries)
 
-	# TODO: prompt user if there are multiple restorable files
-	for target in args.targets:
-		_entries = fuzzy_find(target, entries, ":")
+        if match_count > 1:
+            print(f"There are multiple entries that match the pattern '{target}'")
 
-		for i, entry in enumerate(_entries):
-			alias, path, time = entry.strip().split(":")
-			time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
+            for i, entry in enumerate(_entries):
+                alias, path, time = entry.strip().split(":")
+                time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
 
-			print(f"{i+1:02}.",
-				style(time.strftime("%d %b %Y %H:%M:%S"), colour="time"),
-				style(alias, colour="alias"), f"({style(path, colour='size')}):")
+                print(f"{i+1: 2}.",
+                    style(time.strftime("%d %b %Y %H:%M:%S"), colour="time"),
+                    style(alias, colour="alias"), f"{style(path, colour='')}")
 
-		# for entry in entries:
-		# 	alias, path, time = entry.split(":")
-		# 	parent_directory = os.path.dirname(path)
-		#
-		# 	if not os.path.exists(parent_directory):
-		# 		os.makedirs(parent_directory)
-		#
-		# 	if target == alias:
-		# 		os.rename(os.path.join(TRASH_DIR, alias), path)
-		# 		removed.append(entry)
-		#
-		# 		if args.verbose:
-		# 			print(f"restored '{alias}' to '{path}'")
+            try:
+                selection = int(input("\nSelect an option: ")) - 1
 
-	with open(TRASH_INDEX, "w") as index:
-		for entry in entries:
-			if entry not in removed:
-				index.write(entry)
+                if selection < 0 or selection >= match_count:
+                    print("Invalid selection")
+                    continue
+
+            except ValueError:
+                print("Incorrect input format. A number was expected.")
+
+        # for entry in entries:
+        #   alias, path, time = entry.split(":")
+        #   parent_directory = os.path.dirname(path)
+        #
+        #   if not os.path.exists(parent_directory):
+        #       os.makedirs(parent_directory)
+        #
+        #   if target == alias:
+        #       os.rename(os.path.join(TRASH_DIR, alias), path)
+        #       removed.append(entry)
+        #
+        #       if args.verbose:
+        #           print(f"restored '{alias}' to '{path}'")
+
+    with open(TRASH_INDEX, "w") as index:
+        for entry in get_entries():
+            if entry not in removed:
+                index.write(entry)
 
 colour_map = {
-	"alias": 105,
-	"time": 111,
-	"size": 95,
-	"header": 220,
+    "alias": 105,
+    "time": 111,
+    "size": 95,
+    "header": 220,
 }
 
 def style(input: str, **attributes) -> str:
-	options: list = ["\033["]
+    options: list = ["\033["]
 
-	if attributes.get("bold", False):
-		options.append("1")
+    if attributes.get("bold", False):
+        options.append("1")
 
-	colour: str = attributes.get("colour", "") 
-	
-	if colour:
-		colour_code: int = colour_map.get(colour, 160)
-		options.append(f"38;5;{colour_code}")
+    colour: str = attributes.get("colour", "")
 
-	return ";".join(options) + "m" + input + "\033[0m"
+    if colour:
+        colour_code: int = colour_map.get(colour, 160)
+        options.append(f"38;5;{colour_code}")
+
+    return ";".join(options) + "m" + input + "\033[0m"
 
 def _list(args):
-	if not os.path.exists(TRASH_INDEX):
-		print("No files in trash directory.")
-		quit()
+    if not os.path.exists(TRASH_INDEX):
+        print("No files in trash directory.")
+        quit()
 
-	if not args.short:
-		print(f"{style('INDEXED TRASH:', colour='header', bold=True)}\n")
+    if not args.short:
+        print(f"{style('INDEXED TRASH:', colour='header', bold=True)}\n")
 
-	with open(TRASH_INDEX, "r") as index:
-		entries = index.readlines()
+    with open(TRASH_INDEX, "r") as index:
+        entries = index.readlines()
 
-		if args.pattern:
-			entries = fuzzy_find(args.pattern, entries, ":")
+        if args.pattern:
+            entries = fuzzy_find(args.pattern, entries, ":")
 
-		for entry in entries:
-			alias, path, time = entry.strip().split(":")
+        for entry in entries:
+            alias, path, time = entry.strip().split(":")
 
-			time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
-			trash_target_path = os.path.join(TRASH_DIR, alias)
+            time = datetime.strptime(time, "%d.%m.%y.%H.%M.%S")
+            trash_target_path = os.path.join(TRASH_DIR, alias)
 
-			readable_size = ""
+            readable_size = ""
 
-			if not os.path.isdir(trash_target_path):
-				try:
-					size = os.path.getsize(trash_target_path)
-				except:
-					size = 0
+            if not os.path.isdir(trash_target_path):
+                try:
+                    size = os.path.getsize(trash_target_path)
+                except OSError:
+                    size = 0
 
-				readable_size = get_human_readable_size(size)
-				readable_size = " ".join(map(str, readable_size))
-			else:
-				alias += "\033[0m/"
+                readable_size = get_human_readable_size(size)
+                readable_size = " ".join(map(str, readable_size))
+            else:
+                alias += "\033[0m/"
 
-			formatted_time = time.strftime('%d %b %Y %H:%M:%S')
+            formatted_time = time.strftime('%d %b %Y %H:%M:%S')
 
-			print(style(alias, colour="alias"), end=" ")
-			print("(", style(formatted_time, colour="time"), sep="", end=")")
+            print(style(alias, colour="alias"), end=" ")
+            print("(", style(formatted_time, colour="time"), sep="", end=")")
 
-			if args.short:
-				if not os.path.isdir(trash_target_path):
-					print(" (", style(readable_size, colour="size"), sep="", end=")")
-			else:
-				print("\npath:", path)
+            if args.short:
+                if not os.path.isdir(trash_target_path):
+                    print(" (", style(readable_size, colour="size"), sep="", end=")")
+            else:
+                print("\npath:", path)
 
-				if not os.path.isdir(trash_target_path):
-					print("size:", style(readable_size, colour="size"))
-			print()
+                if not os.path.isdir(trash_target_path):
+                    print("size:", style(readable_size, colour="size"))
+            print()
 
 def _empty(_):
-	open(TRASH_INDEX, "w").close()
+    open(TRASH_INDEX, "w").close()
 
 add_parser.set_defaults(func=_add)
 restore_parser.set_defaults(func=_restore)
@@ -248,11 +269,9 @@ list_parser.set_defaults(func=_list)
 empty_parser.set_defaults(func=_empty)
 
 if __name__ == "__main__":
-	if len(sys.argv) == 1:
-		parser.print_help()
+    if len(sys.argv) == 1:
+        parser.print_help()
 
-	args = parser.parse_args()
-	if hasattr(args, "func"):
-		args.func(args)
-
-# vim: noexpandtab
+    args = parser.parse_args()
+    if hasattr(args, "func"):
+        args.func(args)

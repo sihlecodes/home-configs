@@ -1,47 +1,53 @@
-vim.cmd [[packadd packer.nvim]]
-
--- ~/.local/share/nvim/site/pack/packer/start/
+-- ~/.local/share/nvim/lazy/
 -- ~/.config/nvim/after/plugin/
-return require('packer').startup(function(use)
-   use 'wbthomason/packer.nvim'
-   use 'stevearc/dressing.nvim'
-   use 'stevearc/vim-arduino'
-   use 'folke/tokyonight.nvim'
-   use 'nvim-lualine/lualine.nvim'
+require('lazy').setup {
+   -- Appearance plugins
+   'folke/tokyonight.nvim',
+   'nvim-lualine/lualine.nvim',
+   'kosayoda/nvim-lightbulb',
 
-   use 'nvim-tree/nvim-tree.lua'
-   use 'nvim-treesitter/playground'
-   use 'nvim-treesitter/nvim-treesitter-textobjects'
-   use 'kshenoy/vim-signature'
+   'nvim-tree/nvim-tree.lua',
+   'stevearc/vim-arduino',
+   'kshenoy/vim-signature',
+   'nvim-treesitter/playground',
+   'houtsnip/vim-emacscommandline',
+   'vimwiki/vimwiki',
 
-   use {
-      'numToStr/Comment.nvim',
+   'nvim-treesitter/nvim-treesitter',
+   'nvim-treesitter/nvim-treesitter-textobjects',
+
+   { 'numToStr/Comment.nvim',
       config = function()
          require('Comment').setup()
       end
+   },
+
+   'stevearc/dressing.nvim',
+   {
+      'nvim-telescope/telescope.nvim', tag = '0.1.5',
+      dependencies = {'nvim-lua/plenary.nvim' }
+   },
+
+   {
+      -- LSP plugins
+      'neovim/nvim-lspconfig',
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Linter plugins
+      "mfussenegger/nvim-lint",
+      "rshkarin/mason-nvim-lint",
+   },
+
+   {
+      'L3MON4D3/LuaSnip',
+
+      -- Completion plugins
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/nvim-cmp',
    }
-
-   use 'houtsnip/vim-emacscommandline'
-   use 'vimwiki/vimwiki'
-
-   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-   use({ 'nvim-telescope/telescope.nvim', tag = '0.1.5',
-      requires = {'nvim-lua/plenary.nvim' }})
-
-   -- LSP plugins
-   use 'neovim/nvim-lspconfig'
-   use 'williamboman/mason.nvim'
-   use 'williamboman/mason-lspconfig.nvim'
-
-   use {
-      'L3MON4D3/LuaSnip', tag = "v2.*",
-      run = "make install_jsregexp"
-   }
-   -- Completion plugins
-   use 'hrsh7th/cmp-nvim-lsp'
-   use 'hrsh7th/cmp-buffer'
-   use 'hrsh7th/cmp-path'
-   use 'hrsh7th/cmp-cmdline'
-   use 'saadparwaiz1/cmp_luasnip'
-   use 'hrsh7th/nvim-cmp'
-end)
+}

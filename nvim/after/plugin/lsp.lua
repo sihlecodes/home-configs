@@ -1,4 +1,9 @@
+local lspconfig = require('lspconfig')
+
 require('mason').setup()
+require('mason-nvim-lint').setup({
+   automatic_installation = false,
+})
 
 local function on_attach(_, buffer)
    local options = { buffer = buffer, remap = false }
@@ -17,7 +22,6 @@ local function on_attach(_, buffer)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local default_options = {
    on_attach = on_attach,
    capabilities = capabilities,
@@ -27,15 +31,21 @@ local function using_options(additional_options)
    return vim.tbl_extend('force', default_options, additional_options)
 end
 
-local lspconfig = require('lspconfig')
+local lsp_server_ignore_list = {}
 
 require('mason-lspconfig').setup { handlers = {
    function (server_name)
+      for _, ignored_server in ipairs(lsp_server_ignore_list) do
+         if server_name == ignored_server then
+            return
+         end
+      end
+
       lspconfig[server_name].setup(using_options {})
    end,
 
-   ['lua_ls'] = function()
-      lspconfig.lua_ls.setup(using_options {
+   ['lua_ls'] = function(name)
+      lspconfig[name].setup(using_options {
          settings = {
             Lua = {
                workspace = {
@@ -52,8 +62,8 @@ require('mason-lspconfig').setup { handlers = {
       })
    end,
 
-   ['arduino_language_server'] = function()
-      lspconfig.arduino_language_server.setup(using_options {
+   ['arduino_language_server'] = function(name)
+      lspconfig[name].setup(using_options {
          cmd = {
             'arduino-language-server',
             '-fqbn', 'esp32:esp32:esp32cam',

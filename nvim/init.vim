@@ -1,7 +1,3 @@
-" source ~/.vimrc
-
-lua require('plugins')
-
 " Disable netrw
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
@@ -15,6 +11,9 @@ let g:loaded_netrwPlugin = 1
 let g:mapleader = "\<space>"
 
 let $CONFIG = stdpath("config")
+
+lua require('init')
+lua require('plugins')
 
 source $CONFIG/options.vim
 source $CONFIG/keymaps.vim

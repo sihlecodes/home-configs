@@ -12,6 +12,7 @@ nnoremap <leader><leader> "zyy:<c-r>z<cr>
 vnoremap <leader><leader> "zyq:i<c-r>z
 nnoremap <leader>ek :Tabedit $CONFIG/keymaps.vim<cr>
 nnoremap <leader>ep :Tabedit $CONFIG/lua/plugins.lua<cr>
+nnoremap <leader>el :Tabedit $CONFIG/after/plugin/lsp.lua<cr>
 nnoremap <leader>ev :Tabedit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 

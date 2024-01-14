@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+import serial
+from serial.serialutil import SerialException
+import argparse
+
+parser = argparse.ArgumentParser("sermon") 
+parser.add_argument("-p", "--port", default="/dev/ttyUSB0")
+parser.add_argument("-b", "--baud", default=9600)
+parser.add_argument("-r", "--retry", action="store_true")
+
+ERR_SERIAL_EXCEPTION = 1
+ERR_NONE = 0
+
+def listen_to_serial(port: str, baud_rate: int) -> int:
+    ser = None
+
+    try: 
+        ser = serial.Serial(port, baud_rate)
+        print(f"Listening on {port} at {baud_rate} baud rate...")
+
+        while ser.is_open:
+            data = ser.read_all()
+            data = data.decode('utf-8', 'replace') if data is not None else ''
+
+            print(data, end='', flush=True)
+
+    except (SerialException, OSError):
+        return ERR_SERIAL_EXCEPTION
+
+    except KeyboardInterrupt:
+        print() # newline for neatness
+        return ERR_NONE
+
+    finally:
+        if ser and ser.is_open:
+            ser.close()
+
+    return ERR_NONE
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    
+    return_code = listen_to_serial(args.port, args.baud)
+
+    while args.retry and return_code == ERR_SERIAL_EXCEPTION:
+        return_code = listen_to_serial(args.port, args.baud)

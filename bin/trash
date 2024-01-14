@@ -2,6 +2,7 @@
 
 import argparse
 import os
+from os.path import isdir
 import sys
 import re
 
@@ -123,8 +124,12 @@ def get_entries() -> list:
     return entries
 
 def parse_entry(entry: str):
-    alias, path, time = entry.strip().split(":")
-    return alias, path, time
+    m = re.match(r"(?P<alias>.+):(?P<path>/.+):(?P<timestamp>(\d\d\.){5}\d\d)", entry)
+
+    if m is None:
+        raise ValueError(f"ERROR parsing entry: {entry}")
+
+    return m.group("alias"), m.group("path"), m.group("timestamp")
 
 def make_entry(*args):
     return ":".join(args)
@@ -133,6 +138,12 @@ def restore_entry(entry: str) -> bool:
     alias, path, _ = parse_entry(entry)
 
     try:
+        permissions = 511
+        ignore_exceptions = True
+
+        os.makedirs(os.path.dirname(path),
+                    permissions, ignore_exceptions)
+
         os.rename(os.path.join(TRASH_DIR, alias), path)
 
         if args.verbose:

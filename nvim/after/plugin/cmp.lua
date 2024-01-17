@@ -1,6 +1,16 @@
 local cmp = require('cmp')
 local behaviour = { behavior = cmp.SelectBehavior.Insert }
 
+local function when_visible(callback)
+   return function(fallback)
+      if cmp.visible() then
+         callback()
+      else
+         fallback()
+      end
+   end
+end
+
 cmp.setup.cmdline({'/', '?'}, {
    mapping = cmp.mapping.preset.cmdline(),
    sources = cmp.config.sources({
@@ -10,32 +20,15 @@ cmp.setup.cmdline({'/', '?'}, {
 
 cmp.setup.cmdline(':', {
    mapping = {
-      ['<Tab>'] = {
-         c = function()
-            if cmp.visible() then
-               cmp.select_next_item()
-            else
-               cmp.complete()
-            end
-         end,
-      },
-      ['<S-Tab>'] = {
-         c = function()
-            if cmp.visible() then
-               cmp.select_prev_item()
-            else
-               cmp.complete()
-            end
-         end,
-      },
+      ['<Tab>']   = { c = when_visible(cmp.select_next_item) },
+      ['<S-Tab>'] = { c = when_visible(cmp.select_prev_item) },
    },
    sources = cmp.config.sources({
-      { name = 'path' }
-   },
-      {{
-         name = 'cmdline',
+      { name = 'path' },
+      { name = 'cmdline',
          option = {ignore_cmds = { 'Man', '!' }}
-      }})
+      }
+   })
 })
 
 cmp.setup({

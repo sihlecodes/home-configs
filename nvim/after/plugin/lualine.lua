@@ -7,7 +7,7 @@ local function has_item(list, target)
    return false
 end
 
-local ignored_filetypes = {'help', 'nerdtree'}
+local ignored_filetypes = {'help', 'nerdtree', 'NvimTree', '', 'qf'}
 
 local function tab_next_name()
    local current_tabnumber = vim.fn.tabpagenr()
@@ -30,9 +30,9 @@ local function tab_next_name()
    end
 end
 
-require("lualine").setup {
+require('lualine').setup {
    options = {
-      icons_enabled = false,
+      icons_enabled = true,
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       symbols = {
@@ -41,14 +41,38 @@ require("lualine").setup {
       },
    },
    sections = {
-      lualine_b = {'branch', 'diff'},
-      lualine_x = {'filetype'},
+      lualine_b = {
+         { 'branch', icons_enabled = false, },
+      },
+      lualine_c = {
+         { 'diff', colored = true, padding = { left = 1, right = 0 }},
+         { 'filename',
+            symbols = {
+               modified = '\u{25cf}', -- ●
+               readonly = '\u{e0a2}', -- 
+               unnamed = '[no name]',
+               newfile = '[new]',
+            },
+         },
+      },
+      lualine_x = {
+         { 'filetype',
+            colored = false,
+            icon = { align = 'right' }
+         }
+      },
    },
    tabline = {
-      lualine_a = {'filename'},
+      lualine_a = {
+         { 'filename',
+            file_status = false,
+            symbols = {
+               unnamed = '[no name]',
+               newfile = '[new]',
+            }
+         }
+      },
       lualine_b = {'tabs'},
       lualine_c = {tab_next_name},
    },
 }
-
--- vim.opt.showtabline = 1

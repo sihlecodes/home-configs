@@ -1,9 +1,6 @@
 local lspconfig = require('lspconfig')
 
 require('mason').setup()
-require('mason-nvim-lint').setup({
-   automatic_installation = false,
-})
 
 local function on_attach(_, buffer)
    local options = { buffer = buffer, remap = false }

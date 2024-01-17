@@ -2,7 +2,7 @@
 
 import argparse
 import os
-from os.path import isdir
+import shutil
 import sys
 import re
 
@@ -197,7 +197,13 @@ def _add(args):
             destination_alias += f".{len(duplicates) + 1}"
 
         try:
-            os.rename(file, os.path.join(TRASH_DIR, destination_alias))
+            destination_path = os.path.join(TRASH_DIR, destination_alias)
+            if os.path.isfile(file):
+                os.rename(file, destination_path)
+
+            elif os.path.isdir(file):
+                shutil.move(file, destination_path) 
+
             add_entry(make_entry(destination_alias, file, timestamp))
 
             if args.verbose:
@@ -208,7 +214,10 @@ def _add(args):
             response: str = input(prompt)
 
             if re.match(r"y|ye|yes", response.lower()):
-                os.remove(file)
+                if os.path.isfile(file):
+                    os.remove(file)
+                elif os.path.isdir(file):
+                    shutil.rmtree(file, True)
 
                 if args.verbose:
                     print(f"deleted '{alias}'")

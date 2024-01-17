@@ -10,17 +10,17 @@ nnoremap <silent> y<leader> :let @" = @+<cr>
 
 nnoremap <leader><leader> "zyy:<c-r>z<cr>
 vnoremap <leader><leader> "zyq:i<c-r>z
-nnoremap <leader>ek :Tabedit $CONFIG/keymaps.vim<cr>
-nnoremap <leader>ep :Tabedit $CONFIG/lua/plugins.lua<cr>
-nnoremap <leader>el :Tabedit $CONFIG/after/plugin/lsp.lua<cr>
-nnoremap <leader>ev :Tabedit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ek <cmd>tab :drop $CONFIG/keymaps.vim<cr>
+nnoremap <leader>ep <cmd>tab :drop $CONFIG/lua/plugins.lua<cr>
+nnoremap <leader>el <cmd>tab :drop $CONFIG/after/plugin/lsp.lua<cr>
+nnoremap <leader>ev <cmd>tab :drop $MYVIMRC<cr>
+nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 
 let g:snippets_dir = $CONFIG . "/snippets/"
 
 function! EditSnippets(snippets_dir)
    if !empty(&filetype)
-      execute "Tabedit " . a:snippets_dir . &filetype . ".snippets"
+      execute "tab :drop " . a:snippets_dir . &filetype . ".snippets"
    endif
 endfunction
 
@@ -34,8 +34,9 @@ augroup filetype_based_mappings
    autocmd Filetype help nnoremap <buffer> <cr> <c-]>
    autocmd Filetype help nnoremap <buffer> <bs> <c-o>
    autocmd Filetype arduino nnoremap <buffer> <leader>u <cmd>ArduinoUpload<cr>
-   autocmd FileType vim nnoremap <silent><buffer> <leader>r :source %<cr>:echo 'sourced "'.expand('%').'"'<cr>
-   autocmd FileType lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd Filetype vim nnoremap <silent><buffer> <leader>r :source %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd Filetype lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd Filetype qf nnoremap <silent><buffer> :q<cr>
 augroup END
 
 " smart indenting paste

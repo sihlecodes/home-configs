@@ -12,35 +12,11 @@ let g:mapleader = "\<space>"
 
 let $CONFIG = stdpath("config")
 
-lua require('init')
-lua require('plugins')
-
 source $CONFIG/options.vim
 source $CONFIG/keymaps.vim
 
-function! Tabnr(filename)
-    for tabnr in range(tabpagenr('$'))
-        for winid in tabpagebuflist(tabnr + 1)
-            if bufname(winid) == a:filename
-                return tabnr + 1
-            endif
-        endfor
-    endfor
-    return -1
-endfunction
+lua require('init')
+lua require('plugins')
 
-function! OpenTabOrSwitch(file)
-   let fname = expand(a:file)
-   let bufnr = bufnr(fname)
-   let tabnr = Tabnr(fname)
-
-   if tabnr == -1
-      execute 'tabedit ' . a:file
-   else
-      execute tabnr . 'tabnext'
-   endif
-endfunction
-
-command! -nargs=1 -complete=file Tabedit :call OpenTabOrSwitch(<f-args>)
 command! We w | e
-command! Cd execute 'cd ' . expand('%:h')
+command! Cd cd %:h

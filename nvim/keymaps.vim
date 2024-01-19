@@ -15,6 +15,7 @@ nnoremap <leader>ep <cmd>tab :drop $CONFIG/lua/plugins.lua<cr>
 nnoremap <leader>el <cmd>tab :drop $CONFIG/after/plugin/lsp.lua<cr>
 nnoremap <leader>ev <cmd>tab :drop $MYVIMRC<cr>
 nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
+nnoremap <leader>= m0gg=G`0m0
 
 let g:snippets_dir = $CONFIG . "/snippets/"
 

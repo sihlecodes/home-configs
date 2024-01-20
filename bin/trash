@@ -19,7 +19,7 @@ add_parser = sub_parsers.add_parser("add", help="add trash to $TRASH_DIR")
 add_parser.add_argument("files", metavar="FILES", nargs="+",
     help="the names of the files to be added to the trash directory.")
 
-add_parser.add_argument("-v", "--verbose", action="store_true",
+add_parser.add_argument("-V", "--no-verbose", action="store_true",
     help="print out additional information")
 
 restore_parser = sub_parsers.add_parser("restore",
@@ -28,7 +28,7 @@ restore_parser = sub_parsers.add_parser("restore",
 restore_parser.add_argument("targets", metavar="TARGETS", nargs="+",
     help="the names of the files to be restored.")
 
-restore_parser.add_argument("-v", "--verbose", action="store_true",
+restore_parser.add_argument("-V", "--no-verbose", action="store_true",
     help="print out additional information")
 
 list_parser = sub_parsers.add_parser("list",
@@ -146,7 +146,7 @@ def restore_entry(entry: str) -> bool:
 
         os.rename(os.path.join(TRASH_DIR, alias), path)
 
-        if args.verbose:
+        if not args.no_verbose:
             print(f"restored '{alias}' to '{path}'")
 
     except OSError as e:
@@ -197,16 +197,16 @@ def _add(args):
             destination_alias += f".{len(duplicates) + 1}"
 
         try:
-            destination_path = os.path.join(TRASH_DIR, destination_alias)
             if os.path.isfile(file):
+                destination_path = os.path.join(TRASH_DIR, destination_alias)
                 os.rename(file, destination_path)
 
             elif os.path.isdir(file):
-                shutil.move(file, destination_path) 
+                shutil.move(file, TRASH_DIR) 
 
             add_entry(make_entry(destination_alias, file, timestamp))
 
-            if args.verbose:
+            if not args.no_verbose:
                 print(f"trashed '{alias}'")
 
         except OSError:
@@ -219,10 +219,10 @@ def _add(args):
                 elif os.path.isdir(file):
                     shutil.rmtree(file, True)
 
-                if args.verbose:
+                if not args.no_verbose:
                     print(f"deleted '{alias}'")
 
-            elif args.verbose:
+            elif not args.no_verbose:
                 print("Operation aborted")
 
 # TODO: handle ghost entries (indexed none existant files)
@@ -338,5 +338,6 @@ if __name__ == "__main__":
         parser.print_help()
 
     args = parser.parse_args()
+
     if hasattr(args, "func"):
         args.func(args)

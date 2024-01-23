@@ -4,6 +4,8 @@ return {
    dependencies = {
       'neovim/nvim-lspconfig',
       'williamboman/mason-lspconfig.nvim',
+
+      'nvim-telescope/telescope.nvim',
    },
 
    config = function()
@@ -13,24 +15,40 @@ return {
 
       local function on_attach(_, buffer)
          local options = { buffer = buffer, remap = false }
+         local map = vim.keymap.set
 
-         vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, options)
-         vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, options)
-         vim.keymap.set('n', 'gk', function() vim.lsp.buf.code_action() end, options)
-         vim.keymap.set('n', 'gs', function() vim.lsp.buf.workspace_symbol() end, options)
-         vim.keymap.set('n', 'gK', function() vim.diagnostic.open_float() end, options)
-         vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, options)
-         vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, options)
-         vim.keymap.set('n', 'gD', function() vim.lsp.buf.references() end, options)
-         vim.keymap.set('n', 'gr', function() vim.lsp.buf.rename() end, options)
+         local builtin = require('telescope.builtin')
+
+         local function wrap(fn, opts)
+            return function() fn(opts) end
+         end
+
+         map('n', 'gs', builtin.lsp_document_symbols, options)
+         map('n', 'gS', builtin.lsp_dynamic_workspace_symbols, options)
+         map('n', 'gD', wrap(builtin.lsp_references, {fname_width = 20}), options)
+
+         map('n', 'gd', vim.lsp.buf.definition, options)
+         map('n', 'K', vim.lsp.buf.hover, options)
+         map('n', 'gk', vim.lsp.buf.code_action, options)
+         map('n', 'gK', vim.diagnostic.open_float, options)
+         map('n', ']d', vim.diagnostic.goto_next, options)
+         map('n', '[d', vim.diagnostic.goto_prev, options)
+         map('n', 'gr', vim.lsp.buf.rename, options)
          -- vim.keymap.set('n', '<leader>gr', '<cmd>LspRestart<cr>', options)
-         vim.keymap.set('i', '<c-k>', function() vim.lsp.buf.signature_help() end, options)
+         -- map('i', '<c-k>', vim.lsp.buf.signature_help, options)
       end
 
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local default_options = {
          on_attach = on_attach,
-         capabilities = capabilities,
+         capabilities = {
+            textDocument = {
+               completion = {
+                  completionItem = {
+                     snippetSupport = false
+                  }
+               }
+            }
+         }
       }
 
       local function using_options(additional_options)

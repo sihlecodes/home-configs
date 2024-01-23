@@ -32,16 +32,9 @@ return {
                resize_window = true,
             }
          },
-         -- actions = {
-         --    open_file = {
-         --       quit_on_open = true,
-         --       eject = true,
-         --       resize_window = false,
-         --       window_picker = {
-         --          enable = false,
-         --       },
-         --    },
-         -- },
+         notify = {
+            threshold = vim.log.levels.WARN
+         },
          git = {
             enable = true,
             show_on_dirs = false,

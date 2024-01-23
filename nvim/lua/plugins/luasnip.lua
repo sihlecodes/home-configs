@@ -2,9 +2,12 @@ return {
    'L3MON4D3/LuaSnip',
 
    config = function()
-      local ls = require("luasnip")
+      local ls = require('luasnip')
 
-      ls.setup({store_selection_keys = "<Tab>"})
+      ls.setup({
+         store_selection_keys = "<Tab>"
+      })
+
       ls.filetype_extend("all", {"_"})
 
       require("luasnip.loaders.from_snipmate").lazy_load()

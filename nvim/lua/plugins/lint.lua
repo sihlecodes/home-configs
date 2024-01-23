@@ -6,15 +6,16 @@ return {
    },
    config = function()
       require('lint').linters_by_ft = {
-         cpp = {'cpplint'}
+         cpp = {'codespell'},
+         python = {'codespell'},
       }
 
-      -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      --    callback = function()
-      --       require("lint").try_lint()
-      --    end,
-      -- })
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+         callback = function()
+            require("lint").try_lint()
+         end,
+      })
 
-      vim.g.linter_flake8_args = '--ignore=W302,W301'
+      -- vim.g.linter_flake8_args = '--ignore=W302,W301'
    end
 }

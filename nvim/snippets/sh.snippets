@@ -1,14 +1,20 @@
 snippet if
    if [${1}]; then
-      ${0}
+      ${2:$TM_SELECTED_TEXT}
    fi
 
 snippet for
    for ((${1:x}=${2:0}; $1 < ${3:10}; $1++)); do
-      ${0}
+      ${4:$TM_SELECTED_TEXT}
    done
 
 snippet fore
    for ${1:var} in ${2:$@}; do
+      ${3:$TM_SELECTED_TEXT}
+   done
+
+priority 2000
+autosnippet dance
+	for ${1:var} in ${2:$@}; do
       ${0}
    done

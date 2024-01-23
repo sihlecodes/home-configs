@@ -1,17 +1,35 @@
+snippet imain
+	#include <iostream>
+
+	int main(int argc, char* argv[]) {
+		${1:std::cout << "Hello, world!\n";}
+		return 0;
+	}
+
 snippet main
-   int main(int argc, char *argv[])
-   {
+   int main(int argc, char* argv[]) {
       $1
       return 0;
-   }$0
+   }
 
 snippet for
 	for(${1:int} ${2:i} = ${3:0}; $2 < ${4:10}; $2++) {
-		$5
-	}$0
+		${5:$TM_SELECTED_TEXT}
+	}
 
 snippet guard
 	#ifndef ${1:GUARD}
 	#define $1
-	$0
+
+	${2:$TM_SELECTED_TEXT}
+
 	#endif // $1
+
+snippet catch
+	try {
+		${1:$TM_SELECTED_TEXT}
+	}
+	catch(${2:std::exception} e) {
+		$4;
+	}
+

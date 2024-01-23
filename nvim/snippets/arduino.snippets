@@ -1,16 +1,16 @@
 snippet setup
 	void setup() {
 		Serial.begin(${1:9600});
-		$0
+		$2
 	}
 
 snippet loop
 	void loop() {
-		$0
+		$1
 	}
 
 snippet spl
-	Serial.println($0);
+	Serial.println($1);
 
 snippet sp
-	Serial.print($0);
+	Serial.print($1);

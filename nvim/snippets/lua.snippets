@@ -1,4 +1,18 @@
-snippet new
-	function new()
-		${1:$TM_SELECTED_TEXT}
+snippet function
+	function $1($2)
+		${3:$TM_SELECTED_TEXT}
 	end
+
+snippet new_config
+	return {
+		config = function()
+			${1:$TM_SELECTED_TEXT}
+		end
+	}
+
+snippet lsconf
+	['${1:lsp}'] = function(name)
+		lspconfig[name].setup(using_options {
+			$2
+		})
+	end,

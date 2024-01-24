@@ -12,7 +12,7 @@ nnoremap <leader><leader> "zyy:<c-r>z<cr>
 vnoremap <leader><leader> "zyq:i<c-r>z
 nnoremap <leader>ek <cmd>tab :drop $CONFIG/keymaps.vim<cr>
 nnoremap <leader>ep <cmd>tab :drop $CONFIG/lua/plugins.lua<cr>
-nnoremap <leader>el <cmd>tab :drop $CONFIG/after/plugin/lsp.lua<cr>
+nnoremap <leader>el <cmd>tab :drop $CONFIG/lua/plugins/lsp.lua<cr>
 nnoremap <leader>ev <cmd>tab :drop $MYVIMRC<cr>
 nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 nnoremap <leader>= m0gg=G`0m0

@@ -197,25 +197,27 @@ def _add(args):
             destination_alias += f".{len(duplicates) + 1}"
 
         try:
-            if os.path.isfile(file):
-                destination_path = os.path.join(TRASH_DIR, destination_alias)
-                os.rename(file, destination_path)
+            destination_path = os.path.join(TRASH_DIR, destination_alias)
+            os.rename(file, destination_path)
 
-            elif os.path.isdir(file):
-                shutil.move(file, TRASH_DIR) 
+            # elif os.path.isdir(file):
+            #     shutil.move(file, TRASH_DIR) 
 
             add_entry(make_entry(destination_alias, file, timestamp))
 
             if not args.no_verbose:
                 print(f"trashed '{alias}'")
 
-        except OSError:
+        except OSError as e:
+            print(e)
+
             prompt = f"Unable to trash '{alias}', would you like to delete it instead? (Y/n) "
             response: str = input(prompt)
 
             if re.match(r"y|ye|yes", response.lower()):
                 if os.path.isfile(file):
                     os.remove(file)
+
                 elif os.path.isdir(file):
                     shutil.rmtree(file, True)
 

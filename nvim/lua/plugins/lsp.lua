@@ -4,7 +4,6 @@ return {
    dependencies = {
       'neovim/nvim-lspconfig',
       'williamboman/mason-lspconfig.nvim',
-
       'nvim-telescope/telescope.nvim',
    },
 
@@ -25,7 +24,10 @@ return {
 
          map('n', 'gs', builtin.lsp_document_symbols, options)
          map('n', 'gS', builtin.lsp_dynamic_workspace_symbols, options)
-         map('n', 'gD', wrap(builtin.lsp_references, {fname_width = 20}), options)
+         map('n', 'gD', wrap(builtin.lsp_references, {
+            fname_width = 20,
+            include_declaration = false,
+         }), options)
 
          map('n', 'gd', vim.lsp.buf.definition, options)
          map('n', 'K', vim.lsp.buf.hover, options)
@@ -35,7 +37,7 @@ return {
          map('n', '[d', vim.diagnostic.goto_prev, options)
          map('n', 'gr', vim.lsp.buf.rename, options)
          -- vim.keymap.set('n', '<leader>gr', '<cmd>LspRestart<cr>', options)
-         -- map('i', '<c-k>', vim.lsp.buf.signature_help, options)
+         map('i', '<c-k>', vim.lsp.buf.signature_help, options)
       end
 
       local default_options = {

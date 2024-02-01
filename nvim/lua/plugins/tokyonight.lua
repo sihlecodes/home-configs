@@ -21,10 +21,11 @@ return {
          dim_inactive = false,
          lualine_bold = false,
 
-         on_colors = function(colors)
+         on_colors = function(_)
          end,
 
-         on_highlights = function(highlights, colors)
+         on_highlights = function(hl, _)
+            hl.Folded.link = "Comment"
          end,
       }
 

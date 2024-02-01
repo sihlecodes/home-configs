@@ -3,11 +3,13 @@ return {
 
    dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/playground',
    },
    config = function()
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       vim.opt.foldenable = false
+      vim.opt.foldlevelstart = 99
 
       require('nvim-treesitter.configs').setup({
          modules = {},
@@ -28,14 +30,8 @@ return {
                   ["af"] = "@function.outer",
                   ["if"] = "@function.inner",
 
-                  ["ac"] = "@conditional.outer",
-                  ["ic"] = "@conditional.inner",
-
                   ["aa"] = "@parameter.outer",
                   ["ia"] = "@parameter.inner",
-
-                  ["av"] = "@variable.outer",
-                  ["iv"] = "@variable.inner",
                },
             },
          },

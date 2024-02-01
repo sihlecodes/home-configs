@@ -2,7 +2,7 @@
 
 export ANDROID_SDK=$HOME/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_SDK
-export DOTNET_ROOT=$HOME/.dotnet
+export DOTNET_ROOT=/snap/dotnet-sdk/current
 
 export PERSONAL_BIN=$HOME/mybin
 

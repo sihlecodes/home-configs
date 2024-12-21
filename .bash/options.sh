@@ -4,6 +4,7 @@ export ANDROID_SDK=$HOME/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_SDK
 export DOTNET_ROOT=/snap/dotnet-sdk/current
 
+export TEXLIVE_PATH=/usr/local/texlive/2024/bin/x86_64-linux
 export PERSONAL_BIN=$HOME/mybin
 
 ADDITIONAL_PATHS=(
@@ -11,6 +12,7 @@ ADDITIONAL_PATHS=(
 	$ANDROID_SDK/platform-tools
 	$ANDROID_SDK/emulator
    $DOTNET_ROOT
+   $TEXLIVE_PATH
 )
 
 for extra in ${ADDITIONAL_PATHS[*]}; do

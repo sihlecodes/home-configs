@@ -1,4 +1,5 @@
 return {
+   "nvim-neotest/nvim-nio",
    "mfussenegger/nvim-dap",
 
    dependencies = {

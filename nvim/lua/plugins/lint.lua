@@ -8,6 +8,7 @@ return {
       require('lint').linters_by_ft = {
          cpp = {'codespell'},
          python = {'codespell'},
+         gdscript = {'gdlint'},
       }
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {

@@ -2,7 +2,20 @@
    name     = Siphesihle Mhlongo
    email    = sihlecodes@gmail.com
 [github]
-   user     = ghostrix98
+   user     = sihlecodes
+[credential]
+	helper = store
+[pull]
+	rebase = false
+[core]
+	filemode = false
+	autocrlf = input
+[http]
+   postBuffer = 1048576000
+	lowSpeedTime = 99999
+   version = HTTP/1.1
+   sslVerify = false
+
 [alias]
    s        = status
    set      = config --global
@@ -16,7 +29,6 @@
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
    diff     = diff --color=always
-[credential]
 
 ; Steampunklights Git theme
 [color "status"]
@@ -45,5 +57,3 @@
    HEAD            = 197 bold
    remoteBranch    = 197 bold
    stash           = 242
-[credential]
-	helper = store

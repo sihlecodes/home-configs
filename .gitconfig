@@ -17,18 +17,16 @@
    sslVerify = false
 
 [alias]
-   s        = status
+   s        = status --show-stash
+   ss       = status --short --branch
    set      = config --global
    edit     = config --global -e
    rmc      = rm --cached
-   l        = log --decorate --graph
-   d        = diff --compact-summary
-   ll       = log --decorate --graph -p --stat
-   stats    = log --stat
+   l        = log --graph
+   ll       = log --graph -p --stat
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
-   diff     = diff --color=always
 
 ; Steampunklights Git theme
 [color "status"]

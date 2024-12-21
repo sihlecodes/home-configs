@@ -12,25 +12,56 @@
 	autocrlf = input
 [http]
    postBuffer = 1048576000
-	lowSpeedTime = 99999
+   lowSpeedTime = 99999
    version = HTTP/1.1
    sslVerify = false
 
 [alias]
-   s        = status
+   s        = status --show-stash
+   ss       = status --short --branch
    set      = config --global
    edit     = config --global -e
    rmc      = rm --cached
-   l        = log --decorate --graph
-   d        = diff --compact-summary
-   ll       = log --decorate --graph -p --stat
-   stats    = log --stat
+   l        = log --graph
+   ll       = log --graph -p --stat
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
-   diff     = diff --color=always
 
 ; Steampunklights Git theme
+[color "advice"]
+   hint = 242
+[color "branch"]
+   local           = 95
+   current         = 105
+   remote          = 197 bold
+   plain           = 242
+   upstream = 197 bold
+[color "diff"]
+   frag            = 105
+   old             = 197
+   oldMoved        = 197
+   oldMovedAlternative = 197
+   new             = 154
+   newMoved        = 220
+   newMovedAlternative = 220
+   context         = 242
+   whitespace      = black 161
+   meta            = 37
+[color "decorate"]
+   branch          = 105
+   tag             = 111
+   separator       = 220
+   HEAD            = 197 bold
+   remoteBranch    = 197 bold
+   stash           = 220
+[color "interactive"]
+   prompt = 105
+   header = 95
+   error = black 161
+   help = 220
+[color "push"]
+   error = 197 bold
 [color "status"]
    updated         = 197
    changed         = 197
@@ -38,22 +69,8 @@
    untracked       = 105
    branch          = 105 bold
    header          = 242
-[color "diff"]
-   frag            = 105
-   new             = 154
-   old             = 197
-   context         = 242
-   whitespace      = white red
-   meta            = 37
-[color "branch"]
-   local           = 154 bold
-   current         = 105 bold
-   remote          = 197 bold
-   plain           = 242
-[color "decorate"]
-   branch          = 105 bold
-   tag             = 226
-   separator       = 215
-   HEAD            = 197 bold
-   remoteBranch    = 197 bold
-   stash           = 242
+   localBranch     = 105 bold
+   remoteBranch     = 197 bold
+   nobranch = 197 italic
+[color "transport"]
+   rejected = black 105

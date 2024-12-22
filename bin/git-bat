@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import argparse
+import shutil
+
+if shutil.which("batcat") is None:
+    print("This script requires 'batcat' to be installed.")
+    exit(1)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("obj", metavar="object")
+
+if __name__ == "__main__":
+    import os
+
+    args = parser.parse_args()
+
+    if ':' not in args.obj:
+        args.obj = ':' + args.obj
+
+    os.system(f"git show {args.obj} | batcat --file-name {args.obj}")

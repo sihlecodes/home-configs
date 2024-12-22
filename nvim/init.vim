@@ -16,3 +16,6 @@ lua require('init')
 
 command! We w | e
 command! Cd cd %:h
+
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline

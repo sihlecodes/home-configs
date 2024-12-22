@@ -33,7 +33,7 @@ alias rrm='\rm -rfv'
 alias rm='trash add'
 alias mkdir='mkdir -pv'
 
-alias ebrc="$EDITOR ~/.bashrc"
+alias ebrc="${EDITOR:-nvim} ~/.bashrc"
 alias sbrc='. ~/.bashrc'
 
 # WSL niceties

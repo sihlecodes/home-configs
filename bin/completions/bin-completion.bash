@@ -8,24 +8,15 @@ _binmgr_complete()
    action=${COMP_WORDS[1]}
 
    if [ $COMP_CWORD -eq 1 ]; then
-      actions="list chmod edit remove"
-      COMPREPLY=($(compgen -W "$actions" "$cword"))
+      actions='--create --chmod --list --edit --help --directory'
+      COMPREPLY=($(compgen -W "$actions" -- "$cword"))
       return
-   fi
 
-   if [[ chmod =~ $action ]]; then
-      return
-   elif [[ edit =~ $action ]] || [[ remove =~ $action ]] || [[ $action = rm ]]; then
-      files=$(ls -A $PERSONAL_BIN)
+   elif [[ $cword =~ '-' ]]; then
+      COMPREPLY=--create
 
-      if [[ $cword =~ completions ]]; then
-         files=$(echo $files | sed /completions/d)
-         other=($(ls -A $PERSONAL_BIN/completions/))
-         for i in ${other[@]}; do
-            files+=" completions/$i"
-         done
-      fi
-      COMPREPLY=($(compgen -W "$files" "$cword"))
+   elif [[ '-e|--edit|-x|--chmod' =~ $action ]]; then
+      COMPREPLY=($(compgen -o filenames -f $PERSONAL_BIN/"$cword" | xargs -n 1 basename))
    fi
 }
 

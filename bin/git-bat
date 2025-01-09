@@ -18,4 +18,4 @@ if __name__ == "__main__":
     if ':' not in args.obj:
         args.obj = ':' + args.obj
 
-    os.system(f"git show {args.obj} | batcat --file-name {args.obj}")
+    os.system(f"git show {args.obj} | batcat --plain --number --file-name {args.obj}")

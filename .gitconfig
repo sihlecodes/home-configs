@@ -22,8 +22,9 @@
    set      = config --global
    edit     = config --global -e
    rmc      = rm --cached
-   l        = log --graph
-   ll       = log --graph -p --stat
+   ci       = !git add -i && git commit -v
+   l        = log --all --graph
+   ll       = log --all --graph --oneline
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend

@@ -72,7 +72,7 @@ def recurse_count(parent):
                 try:
                     with open(child) as f:
                         lines = f.readlines()
-                        
+
                         if not args.count_blank:
                             lines = [ x for x in lines if len(x.strip()) ]
 
@@ -80,10 +80,13 @@ def recurse_count(parent):
 
                         print(f"{CS}{line_count}{CE}\t{child}")
                         total += line_count
+
                 except UnicodeDecodeError:
                     error(child, "file contains non-UTF8 characters")
+
                 except PermissionError:
                     error(parent, "permission to read denied")
+
         except KeyboardInterrupt:
             breaking = True
             return total

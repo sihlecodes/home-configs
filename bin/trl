@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import argparse
+
+parser = argparse.ArgumentParser(
+    description="Translates windows paths to wsl compatible paths.")
+
+parser.add_argument('path', help='Path in windows path format.')
+
+
+def translate(path: str):
+    path = path.replace('C:', '/mnt/c')
+    path = path.replace('c:', '/mnt/c')
+    path = path.replace('\\', '/')
+
+    return path
+
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    print(translate(args.path))

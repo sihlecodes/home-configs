@@ -21,7 +21,7 @@ EOF
 cd $HOME
 
 if [[ -z $BACKUP_FOLDER ]]; then
-   BACKUP_FOLDER=$TERMUX/backups
+   BACKUP_FOLDER=$HOME/backups
 fi
 
 if [ ! -d $BACKUP_FOLDER ]; then
@@ -34,7 +34,7 @@ while getopts "asfh" argv; do
          BACKUP_NAME="large-$BACKUP_NAME" ;;
       s ) EXPORT_BACKUP=true ;;
       f ) FOREGROUND=true ;;
-      h ) show_usage ;;
+      h ) show_usage && exit 0;;
       * ) show_usage && exit 1 ;;
    esac
 done

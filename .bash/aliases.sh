@@ -36,6 +36,9 @@ alias mkdir='mkdir -pv'
 alias ebrc="${EDITOR:-nvim} ~/.bashrc"
 alias sbrc='. ~/.bashrc'
 
+alias ebp="${EDITOR:-nvim} ~/.bash_profile"
+alias sbp='. ~/.bash_profile'
+
 # WSL niceties
 
 if [ -n "$(which adb.exe 2>/dev/null)" ]; then

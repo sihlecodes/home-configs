@@ -20,9 +20,10 @@ parser = argparse.ArgumentParser(
       (default directory is currently set to '{bin_directory}')""")
 
 parser.add_argument("-d", "--directory", default=bin_directory,
-   help=f"sets the directory to manage (defualts to $PERSONAL_BIN or '{current_script_directory}' if $PERSONAL_BIN is not defined).")
+   help=f"sets the directory to manage (defaults to $PERSONAL_BIN or '{current_script_directory}' if $PERSONAL_BIN is not defined).")
 
-parser.add_argument("-e", "--edit", metavar="SCRIPT",
+group = parser.add_argument_group()
+group.add_argument("-e", "--edit", metavar="SCRIPT",
    help="""opens a script located inside the managed directory using your $EDITOR.
       (the SCRIPT parameter can be relative path: relative to the managed directory""")   
 
@@ -33,7 +34,7 @@ parser.add_argument("-x", "--chmod", metavar="SCRIPTS", nargs="*",
 parser.add_argument("-l", "--list", action="store_true",
    help="list all the files inside the managed directory.")
 
-parser.add_argument("-c", "--create", action="store_true",
+group.add_argument("-c", "--create", action="store_true",
    help="creates a new script, if one does not exist already (only works with the --edit option)")
 
 parser.usage = "bin [-h] [-d DIRECTORY] [-e SCRIPT [-c]] [-x [SCRIPTS ...]] [-l]"

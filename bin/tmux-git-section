@@ -1,0 +1,26 @@
+#!/usr/bin/env bash 
+
+[ -d "$1" ] && cd $1
+
+_GIT_HEAD=$(git rev-parse --abbrev-ref @ 2> /dev/null);
+_GIT_HASH=$(git log -1 --pretty=%h 2> /dev/null);
+_GIT_ROOT=$(git rev-parse --show-toplevel 2> /dev/null);
+_GIT_DIR="$_GIT_ROOT/.git"
+
+if [ -d "$_GIT_DIR/rebase-apply" ] || [ -d "$_GIT_DIR/rebase-merge" ]; then
+   echo -n " REBASE "
+fi
+
+[[ -d "$_GIT_DIR/MERGE_HEAD" ]] && echo -n " MERGE "
+[[ -f "$_GIT_DIR/BISECT_LOG" ]] && echo -n "󱈆 BISECT "
+
+echo -n " ";
+
+[ $_GIT_ACTION ] && echo -n " $_GIT_ACTION "
+
+if [ "$_GIT_HEAD" = HEAD ]; then
+   echo -n " 󰁥 $_GIT_HASH";
+
+elif [ $_GIT_HEAD ]; then
+   echo -n " $_GIT_HEAD";
+fi

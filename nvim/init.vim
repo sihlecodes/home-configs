@@ -17,5 +17,13 @@ lua require('init')
 command! We w | e
 command! Cd cd %:h
 
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+augroup qol_hacks
+   autocmd!
+   autocmd WinEnter * setlocal cursorline
+   autocmd WinLeave * setlocal nocursorline
+   autocmd WinResized * setlocal scroll=8
+
+   " reload files from disk
+   autocmd WinEnter * checktime
+   autocmd CursorHold * checktime
+augroup END

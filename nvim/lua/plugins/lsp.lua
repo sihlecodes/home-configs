@@ -29,13 +29,14 @@ return {
             include_declaration = false,
          }), options)
 
-         map('n', 'gd', vim.lsp.buf.definition, options)
+         map('n', 'gd', builtin.lsp_definitions, options)
          map('n', 'K', vim.lsp.buf.hover, options)
          map('n', 'gk', vim.lsp.buf.code_action, options)
          map('n', 'gK', vim.diagnostic.open_float, options)
          map('n', ']d', vim.diagnostic.goto_next, options)
          map('n', '[d', vim.diagnostic.goto_prev, options)
          map('n', 'gr', vim.lsp.buf.rename, options)
+         map('n', '<f2>', vim.lsp.buf.rename, options)
          -- vim.keymap.set('n', '<leader>gr', '<cmd>LspRestart<cr>', options)
          map('i', '<c-k>', vim.lsp.buf.signature_help, options)
       end

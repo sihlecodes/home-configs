@@ -3,6 +3,7 @@
 " created: 25/12/2023
 " updated: 25/12/2023
 
+set nowrap scroll=8
 set shell=$SHELL
 set showcmd wildmenu mouse=a
 set numberwidth=3 number relativenumber
@@ -13,6 +14,6 @@ set history=450 undodir=~/.vim/undo
 set incsearch hlsearch
 set smartcase smarttab smartindent autoread
 set t_Co=256 
-set signcolumn=auto foldcolumn=0
+set signcolumn=yes foldcolumn=0
 set splitright fillchars+=fold:-
 set completeopt=menu,menuone,popup

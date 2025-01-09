@@ -5,11 +5,14 @@
 
 nnoremap <esc><esc> :nohlsearch<cr>
 
-nnoremap <silent> <leader>y :let @+ = @"<cr>
-nnoremap <silent> y<leader> :let @" = @+<cr>
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
-nnoremap <leader><leader> "zyy:<c-r>z<cr>
-vnoremap <leader><leader> "zyq:i<c-r>z
+nnoremap <leader>- <cmd>sp<cr>
+nnoremap <leader>\ <cmd>vsp<cr>
+
+noremap <leader><leader> z.
+
 nnoremap <leader>ek <cmd>tab :drop $CONFIG/keymaps.vim<cr>
 nnoremap <leader>ep <cmd>tab :drop $CONFIG/lua/plugins.lua<cr>
 nnoremap <leader>el <cmd>tab :drop $CONFIG/lua/plugins/lsp.lua<cr>
@@ -36,7 +39,9 @@ augroup filetype_based_mappings
    autocmd Filetype help nnoremap <buffer> <bs> <c-o>
    autocmd Filetype arduino nnoremap <buffer> <leader>u <cmd>ArduinoUpload<cr>
    autocmd Filetype vim nnoremap <silent><buffer> <leader>r :source %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd Filetype vim noremap <leader><leader> "zyy:<c-r>z<cr>
    autocmd Filetype lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
+   autocmd Filetype lua nnoremap <silent><buffer> <leader><leader> "zyy:lua <c-r>z<cr>
    autocmd Filetype qf nnoremap <silent><buffer> :q<cr>
 augroup END
 
@@ -51,8 +56,8 @@ nnoremap G G$
 " line wrap compatible movements
 nnoremap <silent> k gk
 nnoremap <silent> j gj
-nnoremap <silent> 0 g0
-nnoremap <silent> $ g$
+" nnoremap <silent> 0 g0
+" nnoremap <silent> $ g$
 
 " easy window navigation
 nnoremap <c-h> <c-w>h

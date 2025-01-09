@@ -4,12 +4,21 @@ return {
    dependencies = {'nvim-lua/plenary.nvim' },
    tag = '0.1.5',
    config = function()
+      local actions = require('telescope.actions')
+
       require('telescope').setup({
          defaults = {
+            preview = {
+               filesize_hook = function(filepath, bufnr, opts)
+                  local max_bytes = 10000
+                  local cmd = {"head", "-c", max_bytes, filepath}
+                  require('telescope.previewers.utils').job_maker(cmd, bufnr, opts)
+               end
+            },
             color_devicons = false,
             mappings = {
                i = {
-                  ["<esc>"] = require('telescope.actions').close,
+                  ["<esc>"] = actions.close,
                },
             }
          },

@@ -20,6 +20,7 @@ return {
       end
    },
    'tpope/vim-fugitive',
+   'tpope/vim-sleuth',
    {
       "ray-x/lsp_signature.nvim",
       event = "VeryLazy",
@@ -44,7 +45,7 @@ return {
    },
 
    'kshenoy/vim-signature',
-   'houtsnip/vim-emacscommandline',
+   -- 'houtsnip/vim-emacscommandline',
    'vimwiki/vimwiki',
    'lervag/vimtex',
 }

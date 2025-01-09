@@ -24,8 +24,18 @@ return {
          on_colors = function(_)
          end,
 
-         on_highlights = function(hl, _)
+         on_highlights = function(hl, c)
             hl.Folded.link = "Comment"
+            hl.CursorLine = {
+               bg = c.bg_dark,
+            }
+            hl.Cursor = {
+               bg = c.bg_dark,
+               fg = c.bg_dark,
+            }
+            hl.NvimTreeNormal = {
+               bg = 'none',
+            }
          end,
       }
 

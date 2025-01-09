@@ -1,11 +1,11 @@
 return {
-   'sihlecodes/nvim-tree.lua',
+   'nvim-tree/nvim-tree.lua',
 
    dependencies = {'nvim-tree/nvim-web-devicons'},
    version = "*",
    lazy = false,
    config = function()
-      vim.keymap.set('n', '<leader>t', '<cmd>NvimTreeOpen<cr>', {silent = true})
+      vim.keymap.set('n', '<leader>t', '<cmd>NvimTreeToggle<cr>', {silent = true})
 
       local function _on_attach(bufnr)
          local api = require "nvim-tree.api"
@@ -93,12 +93,15 @@ return {
                   file = {
                      color = false,
                   },
-                  folder = {
-                     enable = false,
-                  },
                },
             }
          },
+         tab = {
+            sync = {
+               close = true,
+            }
+         },
+
          diagnostics = {
             enable = false,
          },

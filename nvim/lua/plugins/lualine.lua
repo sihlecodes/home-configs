@@ -32,21 +32,32 @@ return {
                return filename == '' and '[no name]' or filename
             end
          end
+         return ''
       end
 
       require('lualine').setup {
+         extensions = {'mason', 'nvim-tree', 'fugitive', 'quickfix', 'lazy'},
          options = {
             icons_enabled = true,
-            component_separators = { left = '', right = '' },
-            section_separators = { left = '', right = '' },
+            component_separators = { left = '', right = ''},
+            section_separators = { left = '', right = '' },
+
             symbols = {
                readonly = '\u{e0a2}', -- 
                modified = '\u{25cf}', -- ●
             },
          },
          sections = {
+            lualine_a = {
+               { 'mode',
+                  icon = ' '
+               },
+            },
             lualine_b = {
-               { 'branch', icons_enabled = false, },
+               { 'branch',
+                  icons_enabled = true,
+                  icon = ''
+               },
             },
             lualine_c = {
                { 'diff', colored = true, padding = { left = 1, right = 0 }},
@@ -68,16 +79,32 @@ return {
          },
          tabline = {
             lualine_a = {
+               { 'filetype',
+                  icon_only = true,
+                  colored = false,
+                  -- separator = { right='' },
+                  padding = { left = 1, right = 0 },
+               },
                { 'filename',
                   file_status = false,
                   symbols = {
                      unnamed = '[no name]',
                      newfile = '[new]',
-                  }
-               }
+                  },
+                  separator = { right='' },
+               },
             },
-            lualine_b = {'tabs'},
-            lualine_c = {tab_next_name},
+            lualine_b = {
+               { 'tabs',
+                  symbols = {
+                     modified = ' \u{25cf}',
+                  },
+                  separator= { right='' },
+                  section_separators = { left = '', right='' },
+               },
+            },
+            lualine_c = { tab_next_name },
+            lualine_x = { 'mason', 'nvim-tree', 'quickfix', 'fugitive', 'lazy'}
          },
       }
    end

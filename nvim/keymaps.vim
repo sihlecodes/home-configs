@@ -9,7 +9,9 @@ nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 
 nnoremap <leader>- <cmd>sp<cr>
-nnoremap <leader>\ <cmd>vsp<cr>
+nnoremap <leader>\| <cmd>vsp<cr>
+nnoremap <leader>H 20<c-w><
+nnoremap <leader>L 20<c-w>>
 
 noremap <leader><leader> z.
 
@@ -19,6 +21,12 @@ nnoremap <leader>el <cmd>tab :drop $CONFIG/lua/plugins/lsp.lua<cr>
 nnoremap <leader>ev <cmd>tab :drop $MYVIMRC<cr>
 nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 nnoremap <leader>= m0gg=G`0m0
+
+vnoremap <leader>" mz<esc>`>a"<esc>`<i"<esc>`zmzl
+vnoremap <leader>' mz<esc>`>a'<esc>`<i'<esc>`zmzl
+
+" evaluate expressions
+vnoremap <leader>e s<c-r>=eval(trim(@"))<cr>
 
 let g:snippets_dir = $CONFIG . "/snippets/"
 
@@ -30,19 +38,16 @@ endfunction
 
 nnoremap <silent> <leader>es :call EditSnippets(g:snippets_dir)<cr>
 
-" evaluate expressions
-vnoremap <leader>e s<c-r>=eval(trim(@"))<cr>
 
 augroup filetype_based_mappings
    autocmd!
    autocmd Filetype help nnoremap <buffer> <cr> <c-]>
    autocmd Filetype help nnoremap <buffer> <bs> <c-o>
-   autocmd Filetype arduino nnoremap <buffer> <leader>u <cmd>ArduinoUpload<cr>
+   autocmd Filetype arduino nnoremap <silent><buffer> <leader>u <cmd>ArduinoUpload<cr>
    autocmd Filetype vim nnoremap <silent><buffer> <leader>r :source %<cr>:echo 'sourced "'.expand('%').'"'<cr>
-   autocmd Filetype vim noremap <leader><leader> "zyy:<c-r>z<cr>
+   autocmd Filetype vim noremap <silent><buffer> <leader><leader> "zyy:<c-r>z<cr>:echo 'sourced line'<cr>
    autocmd Filetype lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
-   autocmd Filetype lua nnoremap <silent><buffer> <leader><leader> "zyy:lua <c-r>z<cr>
-   autocmd Filetype qf nnoremap <silent><buffer> :q<cr>
+   autocmd Filetype lua nnoremap <silent><buffer> <leader><leader> "zyy:lua <c-r>z<cr>:echo 'sourced line'<cr>
 augroup END
 
 " smart indenting paste

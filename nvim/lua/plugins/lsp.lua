@@ -10,6 +10,8 @@ return {
    config = function()
       local lspconfig = require('lspconfig')
 
+      vim.keymap.set('n', '<leader>s', '<cmd>LspStart | LspRestart<cr>')
+
       require('mason').setup()
 
       local function on_attach(_, buffer)
@@ -37,21 +39,15 @@ return {
          map('n', '[d', vim.diagnostic.goto_prev, options)
          map('n', 'gr', vim.lsp.buf.rename, options)
          map('n', '<f2>', vim.lsp.buf.rename, options)
-         -- vim.keymap.set('n', '<leader>gr', '<cmd>LspRestart<cr>', options)
          map('i', '<c-k>', vim.lsp.buf.signature_help, options)
       end
 
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true;
+
       local default_options = {
          on_attach = on_attach,
-         capabilities = {
-            textDocument = {
-               completion = {
-                  completionItem = {
-                     snippetSupport = false
-                  }
-               }
-            }
-         }
+         capabilities = capabilities,
       }
 
       local function using_options(additional_options)
@@ -85,6 +81,28 @@ return {
                         globals = {'vim'}
                      }
                   }
+               }
+            })
+         end,
+
+         ['clangd'] = function(name)
+            lspconfig[name].setup(using_options {
+               settings = {
+                  clangd = {
+                     arguments = {'-I"build/external/raylib-master/src"', '-I"../build/external/raylib-master/src"'},
+                  }
+               }
+            })
+         end,
+
+         ['cssls'] = function(name)
+            lspconfig[name].setup(using_options {
+               settings = {
+                  css = {
+                     format = {
+                        spaceAroundSelectorSeparator = true,
+                     }
+                  },
                }
             })
          end,

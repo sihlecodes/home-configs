@@ -1,6 +1,18 @@
 return {
    'nvim-treesitter/nvim-treesitter',
 
+   opts = function(_, opts)
+      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+      parser_config.ejs = {
+         install_info = {
+            url = 'https://github.com/tree-sitter/tree-sitter-embedded-template',
+            files = { 'src/parser.c' },
+            branch = 'main',
+         },
+         filetype = 'ejs',
+      }
+   end,
+
    dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/playground',

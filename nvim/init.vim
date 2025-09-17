@@ -24,6 +24,11 @@ augroup qol_hacks
    autocmd WinResized * setlocal scroll=8
 
    " reload files from disk
-   autocmd WinEnter * checktime
-   autocmd CursorHold * checktime
+   autocmd WinEnter * silent! checktime
+   autocmd CursorHold * silent! checktime
+augroup END
+
+augroup additional
+   autocmd!
+   autocmd BufRead,BufNewFile *.ejs set filetype=ejs
 augroup END

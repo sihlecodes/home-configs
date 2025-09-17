@@ -1,15 +1,20 @@
 [user]
    name     = Siphesihle Mhlongo
    email    = sihlecodes@gmail.com
+
 [github]
    user     = sihlecodes
+
 [credential]
-	helper = store
+   helper = store
+
 [pull]
-	rebase = false
+   rebase = false
+
 [core]
-	filemode = false
-	autocrlf = input
+   fileMode = false
+   autocrlf = input
+
 [http]
    postBuffer = 1048576000
    lowSpeedTime = 99999
@@ -32,12 +37,14 @@
 ; Steampunklights Git theme
 [color "advice"]
    hint = 242
+
 [color "branch"]
    local           = 95
    current         = 105
    remote          = 197 bold
    plain           = 242
    upstream = 197 bold
+
 [color "diff"]
    frag            = 105
    old             = 197
@@ -49,6 +56,7 @@
    context         = 242
    whitespace      = black 161
    meta            = 37
+
 [color "decorate"]
    branch          = 105
    tag             = 111
@@ -56,13 +64,16 @@
    HEAD            = 197 bold
    remoteBranch    = 197 bold
    stash           = 220
+
 [color "interactive"]
    prompt = 105
    header = 95
    error = black 161
    help = 220
+
 [color "push"]
    error = 197 bold
+
 [color "status"]
    updated         = 197
    changed         = 197
@@ -73,5 +84,6 @@
    localBranch     = 105 bold
    remoteBranch     = 197 bold
    nobranch = 197 italic
+
 [color "transport"]
    rejected = black 105

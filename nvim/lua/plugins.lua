@@ -7,36 +7,37 @@ return {
          require('fidget').setup {
             progress = {
                display = {
-                  done_icon = "",
+                  done_icon = '',
                }
             },
             notification = {
                window = {
                   winblend = 0, -- note: not winblend!
-                  relative = "editor"
+                  relative = 'editor'
                }
             }
          }
       end
    },
+   'terryma/vim-multiple-cursors',
    'tpope/vim-fugitive',
    'tpope/vim-sleuth',
    {
-      "ray-x/lsp_signature.nvim",
-      event = "VeryLazy",
+      'ray-x/lsp_signature.nvim',
+      event = 'VeryLazy',
       opts = {},
       config = function()
-         require "lsp_signature".setup({
+         require 'lsp_signature'.setup({
             bind = true, -- This is mandatory, otherwise border config won't get registered.
             handler_opts = {
-               border = "rounded"
+               border = 'rounded'
             }
          })
       end
    },
 
-   { "folke/todo-comments.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
+   { 'folke/todo-comments.nvim',
+      dependencies = { 'nvim-lua/plenary.nvim' },
       opts = {}
    },
 

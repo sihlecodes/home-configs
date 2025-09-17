@@ -33,8 +33,13 @@ source_folder_in_path completions
 source_folder_in_path plugins
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export EMSDK_QUIET=1
-source "/home/sihlecodes/emsdk/emsdk_env.sh"
+[ -x "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -x "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+export EMSDK_DIR="$HOME/emsdk"
+
+if [ -x "$EMSDK_DIR/emsdk_env.sh" ]; then
+	export EMSDK_QUIET=1
+	\. "$EMSDK_DIR/emsdk_env.sh"
+fi

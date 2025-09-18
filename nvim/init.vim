@@ -2,6 +2,7 @@
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
+" ~/.config/nvim/options.vim
 " ~/.config/nvim/keymaps.vim
 " ~/.config/nvim/lua/plugins.lua
 
@@ -16,6 +17,7 @@ lua require('init')
 
 command! We w | e
 command! Cd cd %:h
+command! Path echo expand('%:p')
 
 augroup qol_hacks
    autocmd!

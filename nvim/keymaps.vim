@@ -1,7 +1,7 @@
 " author: Sihle Mhlongo
 "
 " created: 25/12/2023
-" updated: 08/01/2024
+" updated: 09/09/2025
 
 nnoremap <esc><esc> :nohlsearch<cr>
 
@@ -48,6 +48,14 @@ augroup filetype_based_mappings
    autocmd Filetype vim noremap <silent><buffer> <leader><leader> "zyy:<c-r>z<cr>:echo 'sourced line'<cr>
    autocmd Filetype lua nnoremap <silent><buffer> <leader>r :luafile %<cr>:echo 'sourced "'.expand('%').'"'<cr>
    autocmd Filetype lua nnoremap <silent><buffer> <leader><leader> "zyy:lua <c-r>z<cr>:echo 'sourced line'<cr>
+   autocmd Filetype qf nnoremap <silent><buffer> :q<cr>
+
+   autocmd Filetype yaml vnoremap <silent><buffer> <leader>$ <esc>magvs$$<esc>P`alma
+   autocmd Filetype yaml nmap <silent><buffer> <leader>$ v<leader>$
+   autocmd Filetype yaml vmap <silent><buffer> $ <leader>$
+   autocmd Filetype yaml vnoremap <silent><buffer> * <esc>magvs**<esc>P`amal
+   autocmd Filetype yaml vnoremap <silent><buffer> _ <esc>magvs__<esc>P`amal
+   autocmd Filetype yaml inoremap <silent><buffer> $ $$<left>
 augroup END
 
 " smart indenting paste

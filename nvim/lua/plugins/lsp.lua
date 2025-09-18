@@ -8,11 +8,15 @@ return {
    },
 
    config = function()
-      local lspconfig = require('lspconfig')
-
-      vim.keymap.set('n', '<leader>s', '<cmd>LspStart | LspRestart<cr>')
-
       require('mason').setup()
+
+      require('mason-lspconfig').setup({
+         ensure_installed = {
+            'lua_ls',
+            'ts_ls',
+         },
+         automatic_enable = true,
+      })
 
       local function on_attach(_, buffer)
          local options = { buffer = buffer, remap = false }
@@ -42,80 +46,51 @@ return {
          map('i', '<c-k>', vim.lsp.buf.signature_help, options)
       end
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true;
+      vim.api.nvim_create_autocmd('LspAttach', {
+         desc = 'LSP actions',
+         callback = on_attach,
+      })
 
-      local default_options = {
+      local excludes_snippets = vim.lsp.protocol.make_client_capabilities();
+      excludes_snippets.textDocument.completion.completionItem.snippetSupport = false
+
+      local includes_snippets = vim.lsp.protocol.make_client_capabilities();
+      includes_snippets.textDocument.completion.completionItem.snippetSupport = true
+
+      vim.lsp.config('*', {
          on_attach = on_attach,
-         capabilities = capabilities,
-      }
+         capabilities = includes_snippets,
+      })
 
-      local function using_options(additional_options)
-         return vim.tbl_extend('force', default_options, additional_options)
-      end
+      vim.lsp.config('cspell', {
+         languageSettings = {
+            locale = 'en-ZA',
+         }
+      })
 
-      local lsp_server_ignore_list = {}
-
-      require('mason-lspconfig').setup { handlers = {
-         function (server_name)
-            for _, ignored_server in ipairs(lsp_server_ignore_list) do
-               if server_name == ignored_server then
-                  return
-               end
-            end
-
-            lspconfig[server_name].setup(using_options {})
-         end,
-
-         ['lua_ls'] = function(name)
-            lspconfig[name].setup(using_options {
-               settings = {
-                  Lua = {
-                     workspace = {
-                        library = {
-                           vim.fn.expand('$VIMRUNTIME/lua'),
-                           vim.fn.stdpath('config') .. '/lua',
-                        }
-                     },
-                     diagnostics = {
-                        globals = {'vim'}
-                     }
+      vim.lsp.config('lua_ls', {
+         settings = {
+            Lua = {
+               workspace = {
+                  preloadFileSize = 1024 * 5,
+                  library = {
+                     vim.fn.expand('$VIMRUNTIME/lua'),
+                     vim.fn.stdpath('config') .. '/lua',
                   }
+               },
+               diagnostics = {
+                  globals = {'vim'},
                }
-            })
-         end,
+            }
+         }
+      })
 
-         ['clangd'] = function(name)
-            lspconfig[name].setup(using_options {
-               settings = {
-                  clangd = {
-                     arguments = {'-I"build/external/raylib-master/src"', '-I"../build/external/raylib-master/src"'},
-                  }
-               }
-            })
-         end,
-
-         ['cssls'] = function(name)
-            lspconfig[name].setup(using_options {
-               settings = {
-                  css = {
-                     format = {
-                        spaceAroundSelectorSeparator = true,
-                     }
-                  },
-               }
-            })
-         end,
-
-         ['arduino_language_server'] = function(name)
-            lspconfig[name].setup(using_options {
-               cmd = {
-                  'arduino-language-server',
-                  '-fqbn', 'esp32:esp32:esp32cam',
-                  -- '-fqbn', 'arduino:avr:uno',
-               }
-            })
-         end,
-      }}
+      vim.lsp.config('arduino_language_server', {
+         cmd = {
+            'arduino-language-server',
+            '-fqbn', 'esp32:esp32:esp32cam',
+            -- '-fqbn', 'arduino:avr:uno',
+         }
+      })
    end
 }

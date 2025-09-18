@@ -17,3 +17,8 @@ set t_Co=256
 set signcolumn=yes foldcolumn=0
 set splitright fillchars+=fold:-
 set completeopt=menu,menuone,popup
+
+augroup conditional_options
+   autocmd!
+   autocmd Filetype yaml setlocal wrap
+augroup END

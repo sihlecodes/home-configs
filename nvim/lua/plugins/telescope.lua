@@ -24,9 +24,16 @@ return {
                end)
             end,
 
+            file_ignore_patterns = {
+               'node_modules',
+               '%.png',
+               '%.jpg',
+               '%.pdf',
+            },
             preview = {
                filesize_hook = function(filepath, bufnr, opts)
-                  local cmd = {"head", "-c", max_size, filepath}
+                  local max_bytes = 10000
+                  local cmd = {'head', '-c', max_bytes, filepath}
                   require('telescope.previewers.utils').job_maker(cmd, bufnr, opts)
                end
             },
@@ -34,7 +41,7 @@ return {
             color_devicons = false,
             mappings = {
                i = {
-                  ["<esc>"] = actions.close,
+                  ['<esc>'] = actions.close,
                },
             }
          },

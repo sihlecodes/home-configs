@@ -12,3 +12,5 @@ bin/rg
 nvim/plugin/packer_compiled.lua
 lazy-lock.json
 .tmux/plugins/
+nvim/lazy/
+nvim/mason/

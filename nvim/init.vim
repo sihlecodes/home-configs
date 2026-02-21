@@ -30,7 +30,16 @@ augroup qol_hacks
    autocmd CursorHold * silent! checktime
 augroup END
 
+function MarkdownStrikeLine()
+   if getline('.') =~ '\~\~'
+      s/\~\~//g
+   else
+      s/^\|$/\~\~/g
+   endif
+endfunction
+
 augroup additional
    autocmd!
-   autocmd BufRead,BufNewFile *.ejs set filetype=ejs
+   autocmd BufRead,BufNewFile *.ejs set filetype=embedded_template
+   autocmd FileType markdown nnoremap <buffer> <leader>ss :call MarkdownStrikeLine()<CR>
 augroup END

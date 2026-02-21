@@ -1,11 +1,11 @@
 return {
-   "nvim-neotest/nvim-nio",
-   "mfussenegger/nvim-dap",
+   'mfussenegger/nvim-dap',
 
    dependencies = {
-      "jay-babu/mason-nvim-dap.nvim",
-      "rcarriga/nvim-dap-ui",
-      "folke/neodev.nvim",
+      'nvim-neotest/nvim-nio',
+      'jay-babu/mason-nvim-dap.nvim',
+      'rcarriga/nvim-dap-ui',
+      'folke/neodev.nvim',
    },
 
    config = function()
@@ -25,7 +25,7 @@ return {
       dapui.setup()
 
       neodev.setup({
-         library = { plugins = { "nvim-dap-ui" }, types = true },
+         library = { plugins = { 'nvim-dap-ui' }, types = true },
       })
 
       local map = vim.keymap.set
@@ -37,6 +37,37 @@ return {
       map('n', 'do', dap.step_out)
       map('n', 'db', dap.toggle_breakpoint)
 
+      print('Hello from DAP Python configuration')
+
+      dap.adapters.js = {
+         type = 'executable',
+         command = 'node',
+         args = { os.getenv('HOME') .. '/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js' },
+      }
+
+      dap.configurations.javascript = {
+         {
+            type = 'js';
+            request = 'launch';
+            name = 'Launch file';
+            program = '${file}';
+            cwd = vim.fn.getcwd();
+            -- sourceMaps = true;
+            -- protocol = 'inspector';
+            -- console = 'integratedTerminal';
+         },
+         {
+            type = 'js';
+            request = 'attach';
+            name = 'Attach to process';
+            processId = require('dap.utils').pick_process;
+            cwd = vim.fn.getcwd();
+            sourceMaps = true;
+            protocol = 'inspector';
+            console = 'integratedTerminal';
+         },
+      }
+
       dap.adapters.python = {
          type = 'executable';
          command = '/usr/bin/python3';
@@ -47,8 +78,8 @@ return {
          {
             type = 'python';
             request = 'launch';
-            name = "Launch file";
-            program = "${file}";
+            name = 'Launch file';
+            program = '${file}';
             pythonPath = function()
                return '/usr/bin/python3'
             end;

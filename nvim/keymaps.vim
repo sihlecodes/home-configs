@@ -55,8 +55,10 @@ augroup filetype_based_mappings
    autocmd Filetype yaml vmap <silent><buffer> $ <leader>$
    autocmd Filetype yaml vnoremap <silent><buffer> * <esc>magvs**<esc>P`amal
    autocmd Filetype yaml vnoremap <silent><buffer> _ <esc>magvs__<esc>P`amal
-   autocmd Filetype yaml inoremap <silent><buffer> $ $$<left>
+   " autocmd Filetype yaml inoremap <silent><buffer> $ $$<left>
 augroup END
+
+vnoremap <c-c> "+y
 
 " smart indenting paste
 nnoremap p p==

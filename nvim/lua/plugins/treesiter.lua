@@ -1,18 +1,6 @@
 return {
    'nvim-treesitter/nvim-treesitter',
 
-   opts = function(_, opts)
-      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-      parser_config.ejs = {
-         install_info = {
-            url = 'https://github.com/tree-sitter/tree-sitter-embedded-template',
-            files = { 'src/parser.c' },
-            branch = 'main',
-         },
-         filetype = 'ejs',
-      }
-   end,
-
    dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/playground',
@@ -36,7 +24,7 @@ return {
          highlight = {
             enable = true,
 
-            disable = function(lang, bufnr)
+            disable = function(_, bufnr)
                local file_path = vim.api.nvim_buf_get_name(bufnr)
                local file_size = vim.fn.getfsize(file_path)
 

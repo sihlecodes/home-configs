@@ -21,7 +21,7 @@ parser.add_argument("-c", "--css", nargs="*",
 If the HTML argument is not given the compiled stylesheets
 are saved to separate files with the '.min.css' extension.""")
 
-parser.add_argument("-h", "--html",
+parser.add_argument("-H", "--html",
     help="""The HTML file to compile.
 If this argument is provided the compiled scripts and 
 stylesheets will be embedded into the HTML file so long
@@ -256,8 +256,8 @@ if args.html is not None:
         warn_non_compile(script)
         exit(0)
 
-    scripts = dict(scripts_other.items() + scripts_compiled.items())
-    stylesheets = dict(stylesheets_other.items() + stylesheets_compiled.items())
+    scripts = { **scripts_other, **scripts_compiled }
+    stylesheets = { **stylesheets_other, **stylesheets_compiled }
 
     html_compiled = compile_html_file(html, stylesheets, scripts)
 

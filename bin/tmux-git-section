@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 
-[ -d "$1" ] && cd $1
+[ -d "$@" ] && cd "$@"
 
 _GIT_HEAD=$(git rev-parse --abbrev-ref @ 2> /dev/null);
 _GIT_HASH=$(git log -1 --pretty=%h 2> /dev/null);

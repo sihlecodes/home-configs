@@ -22,10 +22,10 @@ files:
 directories:
 	@$(foreach directory, ${DIRECTORIES}, [ -h "${INSTALL_DIR}/${directory}" ] || ln -s ${PWD}/${directory} ${INSTALL_DIR};)
 
-
 special:
-	@[ -h "${INSTALL_DIR}/.config/nvim" ] || ln -s ${PWD}/nvim ${INSTALL_DIR}/.config
-	@[ -h "${INSTALL_DIR}/mybin" ] || ln -s ${PWD}/bin ${INSTALL_DIR}/mybin
+	@[ -d "${INSTALL_DIR}/.config" ] || mkdir -p "${INSTALL_DIR}/.config"
+	@[ -h "${INSTALL_DIR}/.config/nvim" ] || ln -s "${PWD}/nvim" "${INSTALL_DIR}/.config/nvim"
+	@[ -h "${INSTALL_DIR}/mybin" ] || ln -s "${PWD}/bin" "${INSTALL_DIR}/mybin"
 
 update:
 	@sudo apt update && sudo apt upgrade

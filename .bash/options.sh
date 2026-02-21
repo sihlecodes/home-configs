@@ -8,11 +8,12 @@ export TEXLIVE_PATH=/usr/local/texlive/2024/bin/x86_64-linux
 export PERSONAL_BIN=$HOME/mybin
 
 ADDITIONAL_PATHS=(
-	$PERSONAL_BIN
-	$ANDROID_SDK/platform-tools
-	$ANDROID_SDK/emulator
+   $PERSONAL_BIN
+   $ANDROID_SDK/platform-tools
+   $ANDROID_SDK/emulator
    $DOTNET_ROOT
    $TEXLIVE_PATH
+   $(ruby -r rubygems -e 'puts Gem.user_dir' 2>/dev/null)/bin
 )
 
 for extra in ${ADDITIONAL_PATHS[*]}; do

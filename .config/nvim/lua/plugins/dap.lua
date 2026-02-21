@@ -37,8 +37,6 @@ return {
       map('n', 'do', dap.step_out)
       map('n', 'db', dap.toggle_breakpoint)
 
-      print('Hello from DAP Python configuration')
-
       dap.adapters.js = {
          type = 'executable',
          command = 'node',

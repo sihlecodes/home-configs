@@ -25,8 +25,13 @@ return {
       })
 
       local function on_attach(_, buffer)
-         vim.lsp.inline_completion.enable(true, { bufnr = buffer });
-         vim.lsp.inlay_hint.enable(true, { bufnr = buffer });
+         if vim.lsp.inline_completion then
+            vim.lsp.inline_completion.enable(true, { bufnr = buffer });
+         end
+         
+         if vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(true, { bufnr = buffer });
+         end
 
          local options = { buffer = buffer, remap = false }
 

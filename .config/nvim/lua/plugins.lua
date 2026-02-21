@@ -1,5 +1,5 @@
 -- ~/.local/share/nvim/lazy/
--- ~/.config/nvim/lua/plugins
+-- ~/.config/nvim/lua/plugins/
 
 return {
    {'j-hui/fidget.nvim',
@@ -19,6 +19,7 @@ return {
          }
       end
    },
+   'mbbill/undotree',
    'terryma/vim-multiple-cursors',
    'tpope/vim-fugitive',
    'tpope/vim-sleuth',

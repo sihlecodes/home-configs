@@ -1,0 +1,16 @@
+background = 101018
+background-opacity = 0.92
+window-padding-x = 10
+window-padding-y = 5
+font-size = 10.5
+
+mouse-scroll-multiplier = 0.95
+async-backend = epoll
+confirm-close-surface = false
+command = bash --login
+initial-command = bash --login -c "tmux attach 2> /dev/null || tmux new"
+
+keybind = ctrl+up=goto_split:up
+keybind = ctrl+down=goto_split:down
+# keybind = ctrl+left=goto_split:left
+# keybind = ctrl+right=goto_split:right

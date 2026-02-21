@@ -5,8 +5,8 @@
 
 nnoremap <esc><esc> :nohlsearch<cr>
 
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
+nnoremap y "+y
+nnoremap p "+p
 
 nnoremap <leader>- <cmd>sp<cr>
 nnoremap <leader>\| <cmd>vsp<cr>
@@ -14,6 +14,9 @@ nnoremap <leader>H 20<c-w><
 nnoremap <leader>L 20<c-w>>
 
 noremap <leader><leader> z.
+
+nnoremap <leader>eh <cmd>tab :drop $XDG_CONFIG_HOME/hypr/hyprland.conf<cr>
+nnoremap <leader>eb <cmd>tab :drop $HOME/.bashrc<cr>
 
 nnoremap <leader>ek <cmd>tab :drop $CONFIG/keymaps.vim<cr>
 nnoremap <leader>ep <cmd>tab :drop $CONFIG/lua/plugins.lua<cr>
@@ -37,7 +40,6 @@ function! EditSnippets(snippets_dir)
 endfunction
 
 nnoremap <silent> <leader>es :call EditSnippets(g:snippets_dir)<cr>
-
 
 augroup filetype_based_mappings
    autocmd!

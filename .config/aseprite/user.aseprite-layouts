@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layouts>
+    <layout id="_default_" name="_default_">
+        <colorbar side="left" width="139"/>
+        <statusbar side="bottom"/>
+        <dock>
+            <contextbar side="top"/>
+            <toolbar side="right"/>
+            <dock>
+                <timeline side="bottom" width="75" height="74"/>
+                <workspace/>
+            </dock>
+        </dock>
+    </layout>
+    <layout id="_mirrored_default_" name="_mirrored_default_">
+        <statusbar side="bottom"/>
+        <dock>
+            <contextbar side="top"/>
+            <toolbar side="left"/>
+            <dock>
+                <workspace/>
+                <timeline side="bottom" width="116" height="99"/>
+            </dock>
+        </dock>
+        <colorbar side="left" width="112" height="54"/>
+    </layout>
+</layouts>

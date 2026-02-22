@@ -9,7 +9,7 @@
         "density": "default",
         "enableClipPreview": true,
         "enableClipboardChips": true,
-        "enableClipboardHistory": true,
+        "enableClipboardHistory": false,
         "enableClipboardSmartIcons": true,
         "enableSessionSearch": false,
         "enableSettingsSearch": true,
@@ -198,6 +198,9 @@
                     "icon": "noctalia",
                     "id": "ControlCenter",
                     "useDistroLogo": false
+                },
+                {
+                    "id": "plugin:screen-toolkit"
                 }
             ]
         }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<keys
+   name="User Shortcuts">
+  <bind
+     gaction="win.canvas-rotate-reset"
+     keys="&lt;Primary&gt;space" />
+  <bind
+     gaction="win.canvas-rotate-lock"
+     keys="&lt;Primary&gt;&lt;Shift&gt;space" />
+</keys>

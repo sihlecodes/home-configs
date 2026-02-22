@@ -24,6 +24,7 @@ augroup qol_hacks
    autocmd WinEnter * setlocal cursorline
    autocmd WinLeave * setlocal nocursorline
    autocmd WinResized * setlocal scroll=8
+   autocmd BufWritePre * mark ` | %s/\s\+$//e | normal! ``
 
    " reload files from disk
    autocmd WinEnter * silent! checktime

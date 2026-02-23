@@ -6,6 +6,9 @@ import shutil
 import sys
 import re
 
+from typing_extensions import Any
+
+from utils import fuzzy_find
 from datetime import datetime
 
 TRASH_DIR = os.path.expanduser(os.environ.get("TRASH_DIR", "~/.trash"))
@@ -20,7 +23,7 @@ add_parser.add_argument("files", metavar="FILES", nargs="+",
     help="the names of the files to be added to the trash directory.")
 
 add_parser.add_argument("-V", "--no-verbose", action="store_true",
-    help="print out additional information")
+    help="do not print out additional information")
 
 restore_parser = sub_parsers.add_parser("restore",
     help="restore trash from $TRASH_DIR")
@@ -29,7 +32,12 @@ restore_parser.add_argument("targets", metavar="TARGETS", nargs="+",
     help="the names of the files to be restored.")
 
 restore_parser.add_argument("-V", "--no-verbose", action="store_true",
-    help="print out additional information")
+    help="do not print out additional information")
+
+restore_parser.add_argument("-d", "--destination", nargs="?", const=os.curdir, default="",
+    help="""restore files to the specified directory. if
+    --destination is not specified the files are restored to
+    the directory they originated from.""")
 
 list_parser = sub_parsers.add_parser("list",
     help="list files inside the trash directory.")
@@ -56,13 +64,13 @@ colour_map = {
     "header": 220,
 }
 
-def style(input: str, **attributes) -> str:
-    options: list = ["\033["]
+def style(input: str, **attributes: str|bool) -> str:
+    options: list[str] = ["\033["]
 
     if attributes.get("bold", False):
         options.append("1")
 
-    colour: str = attributes.get("colour", "")
+    colour: str = str(attributes.get("colour", ""))
 
     if colour:
         colour_code: int = colour_map.get(colour, 160)
@@ -70,7 +78,7 @@ def style(input: str, **attributes) -> str:
 
     return ";".join(options) + "m" + input + "\033[0m"
 
-def get_human_readable_size(size, digits=1):
+def get_human_readable_size(size: float, digits: int = 1):
     readable_sizes = ["B", "KB", "MB", "GB", "TB", "PB"]
     index = 0
     fraction_digits = 0
@@ -82,42 +90,12 @@ def get_human_readable_size(size, digits=1):
     human_readable_size = round(float(f"{size}.{fraction_digits}"), digits)
     return (human_readable_size, readable_sizes[index])
 
-def fuzzy_find(pattern: str, entries: list[str], break_char: str = "") -> list[str]:
-    pattern = pattern[::-1].lower()
-    matches: set = set()
-
-    for entry in entries:
-        distance: int = 0
-        stretch: int = 0  # sort priority
-        index: int = len(pattern) - 1
-        pattern_char: str = pattern[index]
-
-        for entry_char in entry.lower():
-            if break_char and entry_char == break_char:
-                break
-
-            if entry_char == pattern_char:
-                stretch += distance
-
-                if index == 0:
-                    matches.add((entry, stretch))
-                    break
-
-                distance = 0
-                index -= 1
-                pattern_char = pattern[index]
-
-            distance += 1
-
-    by_best_match = sorted(matches, key=lambda x: x[1])
-    return list(map(lambda x: x[0], by_best_match))
-
 def add_entry(entry: str):
     with open(TRASH_INDEX, "a") as index:
         index.write(entry + "\n")
 
-def get_entries() -> list:
-    entries: list
+def get_entries() -> list[str]:
+    entries: list[str]
     with open(TRASH_INDEX, "r") as index:
         entries = index.readlines()
 
@@ -131,11 +109,16 @@ def parse_entry(entry: str):
 
     return m.group("alias"), m.group("path"), m.group("timestamp")
 
-def make_entry(*args):
+def make_entry(*args: str) -> str:
     return ":".join(args)
 
-def restore_entry(entry: str) -> bool:
+def restore_entry(entry: str, destination: str) -> bool:
     alias, path, _ = parse_entry(entry)
+
+    if len(destination) > 0:
+        path = os.path.join(destination, os.path.basename(path))
+        print(path)
+        exit()
 
     try:
         permissions = 511
@@ -144,7 +127,7 @@ def restore_entry(entry: str) -> bool:
         os.makedirs(os.path.dirname(path),
                     permissions, ignore_exceptions)
 
-        os.rename(os.path.join(TRASH_DIR, alias), path)
+        shutil.move(os.path.join(TRASH_DIR, alias), path)
 
         if not args.no_verbose:
             print(f"restored '{alias}' to '{path}'")
@@ -155,7 +138,7 @@ def restore_entry(entry: str) -> bool:
 
     return True
 
-def register_removed_entries(removed: list):
+def register_removed_entries(removed: list[str]):
     entries = get_entries()
 
     with open(TRASH_INDEX, "w") as index:
@@ -197,12 +180,7 @@ def _add(args):
             destination_alias += f".{len(duplicates) + 1}"
 
         try:
-            destination_path = os.path.join(TRASH_DIR, destination_alias)
-            os.rename(file, destination_path)
-
-            # elif os.path.isdir(file):
-            #     shutil.move(file, TRASH_DIR) 
-
+            shutil.move(file, TRASH_DIR)
             add_entry(make_entry(destination_alias, file, timestamp))
 
             if not args.no_verbose:
@@ -227,17 +205,17 @@ def _add(args):
             elif not args.no_verbose:
                 print("Operation aborted")
 
-# TODO: handle ghost entries (indexed none existant files)
-def _restore(args):
+# TODO: handle orphaned entries (indexed none existant files)
+def _restore(args: argparse.Namespace):
     removed = []
 
     for pattern in args.targets:
-        matched_entries: list = fuzzy_find(pattern, get_entries(), ":")
+        matched_entries: list[str] = fuzzy_find(pattern, get_entries(), ":")
         match_count: int = len(matched_entries)
 
         if match_count == 1:
-            matched = matched_entries[0]
-            if restore_entry(matched):
+            matched: str = matched_entries[0]
+            if restore_entry(matched, args.destination):
                 removed.append(matched)
 
         elif match_count == 0:
@@ -245,11 +223,18 @@ def _restore(args):
 
             if os.path.exists(target_path):
                 print(f"'{pattern}' is unindexed however it exists in the $TRASH_DIR")
-                response = input(f"Would you like to restore it to the current directory? (Y/n) ")
 
-                if re.match(r"y|ye|yes", response.lower()):
-                    destination_path = os.path.join(os.curdir, pattern)
-                    restore_entry(make_entry(pattern, destination_path, ""))
+                destination_path = args.destination
+
+                if len(args.destination) == 0:
+                    response = input("Would you like to restore it to the current directory? (Y/n) ")
+
+                    if re.match(r"y|ye|yes", response.lower()):
+                        destination_path = os.path.join(os.curdir, pattern)
+                    else:
+                        continue
+
+                restore_entry(make_entry(pattern, destination_path, ""), destination_path)
             else:
                 print(f"'{pattern}' was not found.")
 
@@ -269,11 +254,12 @@ def _restore(args):
                 selection = int(input("\nSelect an option: ")) - 1
 
                 if selection < 0 or selection >= match_count:
-                    print("Invalid selection")
+                    print("Invalid selection: Out of range")
                     continue
 
             except ValueError:
-                print("Incorrect input format. A number was expected.")
+                print("Incorrect format: A number was expected.")
+                continue
 
             selected: str = matched_entries[selection]
 
@@ -283,7 +269,6 @@ def _restore(args):
     register_removed_entries(removed)
 
 # TODO: list unindexed trash
-# TODO: unindex files that don't exist anymore
 def _list(args):
     if not os.path.exists(TRASH_INDEX):
         print("No files in trash directory.")
@@ -291,6 +276,8 @@ def _list(args):
 
     if not args.short:
         print(f"{style('INDEXED TRASH:', colour='header', bold=True)}\n")
+
+    orphaned: list[str] = []
 
     with open(TRASH_INDEX, "r") as index:
         entries = index.readlines()
@@ -305,6 +292,11 @@ def _list(args):
             trash_target_path = os.path.join(TRASH_DIR, alias)
 
             readable_size = ""
+
+            if not os.path.exists(trash_target_path):
+                orphaned.append(trash_target_path)
+                print(f"'{os.path.basename(path)}' exists in the index but was not found in $TRASH_DIR")
+                continue
 
             if not os.path.isdir(trash_target_path):
                 readable_size = get_file_size(trash_target_path)
@@ -325,6 +317,8 @@ def _list(args):
                 if not os.path.isdir(trash_target_path):
                     print("size:", style(readable_size, colour="size"))
             print()
+
+        register_removed_entries(orphaned)
 
 def _empty(_):
     open(TRASH_INDEX, "w").close()

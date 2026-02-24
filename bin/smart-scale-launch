@@ -1,0 +1,16 @@
+#!/bin/bash
+
+FOCUSED_MONITOR=$(hyprctl activeworkspace -j | jq -r '.monitor')
+
+# check 'hyprctl monitors' for the exact monitor name
+SECOND_MONITOR="HDMI-A-1" 
+
+# export QT_QPA_PLATFORM=wayland,xcb
+
+if [ "$FOCUSED_MONITOR" == "$SECOND_MONITOR" ]; then
+    export QT_SCALE_FACTOR=1
+else
+    export QT_SCALE_FACTOR=1.67
+fi
+
+exec "$@"

@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+
+from utils import fuzzy_find, choose
+
+parser = argparse.ArgumentParser(description="A helper utility for quickly fixing ui scaling issues on hyprland. This creates a .desktop file that launchs the app using `smart-scale-launch`")
+
+parser.add_argument("-s", "--source-dir", default="/usr/share/applications/", nargs="?",
+    help="directory where the existing .desktop file is located")
+
+parser.add_argument("-o", "--output-dir", default="~/.local/share/applications/", nargs="?",
+    help="directory where the generated .desktop file will be stored")
+
+parser.add_argument("pattern", metavar="DESKTOP_FILE_PATTERN",
+    help="fuzzy search pattern for the name of the .desktop file")
+
+
+def create_smart_scale_launcher(source_file: str, output_file: str):
+    lines: list[str] = open(source_file, 'r').readlines()
+
+    with open(output_file, 'w') as f:
+        for line in lines:
+            if line.startswith('Exec='):
+                line = f"Exec=smart-scale-launch {line.split('=')[-1]}"
+
+            f.write(line)
+
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+
+    search_results: list[str] = fuzzy_find(args.pattern, os.listdir(args.source_dir))
+
+    if len(search_results) == 0:
+        search_results.append(args.pattern)
+
+    choice: str = search_results[0]
+
+    if len(search_results) > 1:
+        choice = choose(search_results)
+
+    choice = choice.strip()
+
+    if choice == "":
+        exit()
+
+    output_file: str = os.path.join(args.output_dir, choice)
+    output_file = os.path.expanduser(output_file)
+
+    source_file: str = os.path.join(args.source_dir, choice)
+    source_file = os.path.expanduser(source_file)
+
+    if not os.path.exists(source_file):
+        print(f"file not found '{source_file}'")
+        exit(1)
+
+    if not source_file.endswith(".desktop"):
+        print(f"file '{source_file}' is not a .desktop file")
+        exit(1)
+
+    create_smart_scale_launcher(source_file, output_file)
+    print(f"generated {os.path.join(args.output_dir, choice)}")

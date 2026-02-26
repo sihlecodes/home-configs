@@ -118,8 +118,9 @@
          id="rect"
          style="fill:blue;"
          usecurrent="1"
-         width="57.375695751091"
-         height="53.3294360913647" />
+         width="243.856028158833"
+         height="141.446509173536"
+         ry="3.13195483891044" />
       <eventcontext
          id="3dbox"
          style="stroke:none;stroke-linejoin:round;"
@@ -154,7 +155,10 @@
          style="fill:red;"
          end="0"
          start="0"
-         usecurrent="1" />
+         usecurrent="1"
+         rx="35.6414506566806"
+         ry="35.6414506566806"
+         arc_type="0" />
       <eventcontext
          id="star"
          magnitude="5"
@@ -306,7 +310,7 @@
        id="lpetool"
        mode="drag"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;"
-       unit="px" />
+       unit="mm" />
     <eventcontext
        id="text"
        usecurrent="1"
@@ -598,11 +602,14 @@
        id="transformation"
        applyseparately="0" />
     <group
-       id="align" />
+       id="align"
+       objects-align-to="selection" />
     <group
        id="xml"
        h="500"
-       w="300" />
+       w="300"
+       layout="0"
+       panedpos="342" />
     <group
        id="find" />
     <group
@@ -616,7 +623,7 @@
     <group
        id="preferences"
        state="1"
-       page="24" />
+       page="48" />
     <group
        id="gradienteditor" />
     <group
@@ -628,7 +635,7 @@
        path="">
       <group
          id="exportarea"
-         value="page" />
+         value="selection" />
       <group
          id="defaultxdpi" />
       <group
@@ -640,8 +647,9 @@
        default="org.inkscape.output.svg.inkscape"
        append_extension="1"
        enable_preview="1"
-       path=""
-       use_current_dir="1" />
+       path="/home/sihlecodes/Documents/Art Space/illustrations"
+       use_current_dir="1"
+       enable_svgexport="0" />
     <group
        id="save_copy"
        default=""
@@ -651,7 +659,7 @@
     <group
        id="open"
        enable_preview="1"
-       path="" />
+       path="/home/sihlecodes/.cache/inkscape/" />
     <group
        id="import"
        enable_preview="1"
@@ -664,7 +672,8 @@
        id="clonetiler"
        dotrace="0" />
     <group
-       id="gridtiler" />
+       id="gridtiler"
+       SpacingType="20" />
     <group
        id="extension-error"
        show-on-startup="0" />
@@ -710,6 +719,9 @@
     <group
        id="objects"
        expand_to_layer="1" />
+    <group
+       id="attrib"
+       precision="2" />
   </group>
   <group
      id="printing">
@@ -721,7 +733,8 @@
   </group>
   <group
      id="options"
-     rotationlock="0">
+     rotationlock="0"
+     onungroup="0">
     <group
        id="renderingcache"
        size="512" />
@@ -894,7 +907,8 @@
     <group
        id="maskobject"
        topmost="1"
-       remove="1" />
+       remove="1"
+       grouping="0" />
     <group
        id="blurquality"
        value="0" />
@@ -946,7 +960,7 @@
     <group
        id="autosave"
        enable="1"
-       interval="10"
+       interval="5"
        path=""
        max="50" />
     <group
@@ -992,7 +1006,8 @@
        theme="custom">
       <group
          id="shown"
-         ver1.4.3="1" />
+         ver1.4.3="1"
+         ver1.4.4="1" />
     </group>
     <group
        id="rendering" />
@@ -1002,7 +1017,10 @@
        id="ruler" />
     <group
        id="snapping"
-       snap-global-toggle="1" />
+       snap-global-toggle="0" />
+    <group
+       id="kbshortcuts"
+       shortcutfile="adobe-illustrator-cs2.xml" />
   </group>
   <group
      id="extensions"
@@ -1015,10 +1033,10 @@
      org.inkscape.template.paper.unit="mm" />
   <group
      id="desktop"
-     style="fill:#55ff99;text-orientation:auto">
+     style="fill:#222234;text-orientation:auto;stroke-width:0;stroke-linecap:round;paint-order:markers stroke fill;stroke-linejoin:round">
     <group
-       width="1716"
-       height="934"
+       width="1920"
+       height="1018"
        x="0"
        y="0"
        maximized="1"
@@ -1136,9 +1154,9 @@
      flattening="0" />
   <group
      id="theme"
-     defaultPreferDarkTheme="0"
-     defaultIconTheme="Yaru-magenta"
-     defaultGtkTheme="Adwaita-dark"
+     defaultPreferDarkTheme="1"
+     defaultIconTheme="YAMIS"
+     defaultGtkTheme="Adwaita"
      narrowSpinButton="1"
      preferDarkTheme="0"
      darkTheme="0"

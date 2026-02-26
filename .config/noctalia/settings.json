@@ -60,7 +60,8 @@
         "middleClickCommand": "",
         "middleClickFollowMouse": false,
         "monitors": [
-            "eDP-1"
+            "eDP-1",
+            "HDMI-A-1"
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
@@ -72,8 +73,15 @@
         "rightClickFollowMouse": true,
         "screenOverrides": [
             {
+                "density": "default",
                 "enabled": true,
                 "name": "eDP-1"
+            },
+            {
+                "density": "default",
+                "enabled": true,
+                "name": "HDMI-A-1",
+                "position": "top"
             }
         ],
         "showCapsule": true,
@@ -200,6 +208,18 @@
                     "useDistroLogo": false
                 },
                 {
+                    "defaultSettings": {
+                        "colorHistory": [
+                        ],
+                        "detectedRecorder": "",
+                        "installedLangs": [
+                            "eng"
+                        ],
+                        "paletteColors": [
+                        ],
+                        "selectedOcrLang": "eng",
+                        "transAvailable": false
+                    },
                     "id": "plugin:screen-toolkit"
                 }
             ]

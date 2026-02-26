@@ -1,21 +1,13 @@
 return {
-   'numToStr/Comment.nvim',
-
+   'tpope/vim-commentary',
    config = function()
-      require('Comment').setup()
-      local api = require('Comment.api')
+      vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+      vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
 
-      vim.keymap.set('n', '<C-_>', api.toggle.linewise.current)
-      vim.keymap.set('v', '<C-_>', api.toggle.linewise.current)
+      vim.keymap.set('v', '<C-/>', 'gc', { remap = true })
+      vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
 
-      local esc = vim.api.nvim_replace_termcodes(
-            '<ESC>', true, false, true
-      )
-
-   -- Toggle selection (linewise)
-      vim.keymap.set('x', '<C-_>', function()
-         vim.api.nvim_feedkeys(esc, 'nx', false)
-         api.toggle.linewise(vim.fn.visualmode())
-      end)
+      vim.keymap.set('x', '<C-/>', 'gc', { remap = true })
+      vim.keymap.set('x', '<C-_>', 'gc', { remap = true })
    end
 }

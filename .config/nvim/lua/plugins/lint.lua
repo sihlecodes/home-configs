@@ -11,11 +11,11 @@ return {
          gdscript = {'gdlint'},
       }
 
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-         callback = function()
-            require("lint").try_lint()
-         end,
-      })
+      -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      --    callback = function()
+      --       require("lint").try_lint()
+      --    end,
+      -- })
 
       -- vim.g.linter_flake8_args = '--ignore=W302,W301'
    end

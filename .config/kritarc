@@ -1,12 +1,14 @@
+AlsoSaveAsKra=false
+AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=0
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0
+ArtColorSel.Light=0.31573753013793204
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
-ArtColorSel.SelColorH=0
-ArtColorSel.SelColorS=0
-ArtColorSel.SelColorX=0
+ArtColorSel.SelColorH=0.7326816159110443
+ArtColorSel.SelColorS=0.9236583805381923
+ArtColorSel.SelColorX=0.31573753013793204
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -17,11 +19,25 @@ ArtColorSel.lumaGamma=2.2
 ArtColorSel.lumaR=0.2126
 ArtColorSel.showBgColor=true
 ArtColorSel.showValueScale=false
+AutoSaveInterval=420
 BackgroundColorForNewImage=255,255,255
 BackgroundOpacityForNewImage=255
 BackgroundStyleForNewImage=0
 CanvasOnlyActive=false
+CanvasSize/ConstrainProportions=false
+CanvasSize/KeepAspectRatio=false
+ColorManagement/UseSystemMonitorProfile=false
+ConvertToImageColorSpaceOnImport=false
+CreateBackupFile=true
+CurrentWorkspace=Small_Vector
+ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">1</param>\n <param name="downsample" type="internal">false</param>\n <param name="forceSRGB" type="internal">true</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">true</param>\n <param name="storeMetaData" type="internal">true</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n</params>\n
+ExrDefaultColorProfile=...V2-g10.icc
 GamutMasks.viewMode=0
+KineticScrollingEnabled=true
+KineticScrollingGesture=2
+KineticScrollingHideScrollbar=false
+KineticScrollingSensitivity=75
+KisDlgPreferences/CurrentPage=shortcuts
 Krita/Ocio/DisplayDevice=sRGB
 Krita/Ocio/DisplayLook=None
 Krita/Ocio/DisplayView=Raw
@@ -31,10 +47,11 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="0" g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
-LastColorHistory=<!DOCTYPE LastColorHistory>\n<colors>\n <RGB b="0" g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</colors>\n
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0" g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
-LastPreset_-1=b) Basic-5 Size Opacity
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastColorHistory=<!DOCTYPE LastColorHistory>\n<colors>\n <RGB b="0.717647075653076" g="0.0705882385373116" r="0.474509805440903" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.0431372560560703" g="0.0431372560560703" r="0.0431372560560703" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.0470588244497776" g="0.0470588244497776" r="0.0470588244497776" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.172549024224281" g="0.172549024224281" r="0.454901963472366" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.368627458810806" g="0.368627458810806" r="0.556862771511078" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.427450984716415" g="0.427450984716415" r="0.427450984716415" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.321568638086319" g="0.321568638086319" r="0.321568638086319" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.431372553110123" g="0.431372553110123" r="0.431372553110123" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.325490206480026" g="0.325490206480026" r="0.325490206480026" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.109803922474384" g="0.109803922474384" r="0.109803922474384" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0" g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0" g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.00392156885936856" g="0.00392156885936856" r="0.00392156885936856" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.0666666701436043" g="0.0666666701436043" r="0.0666666701436043" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.274509817361832" g="0.274509817361832" r="0.321568638086319" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.266666680574417" g="0.266666680574417" r="0.313725501298904" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.400000005960464" g="0.400000005960464" r="0.439215689897537" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.388235300779343" g="0.388235300779343" r="0.427450984716415" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.266666680574417" g="0.266666680574417" r="0.313725501298904" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.341176480054855" g="0.341176480054855" r="0.388235300779343" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.282352954149246" g="0.282352954149246" r="0.325490206480026" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.345098048448563" g="0.345098048448563" r="0.384313732385635" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.466666668653488" g="0.466666668653488" r="0.498039215803146" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.282352954149246" g="0.282352954149246" r="0.329411774873734" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.447058826684952" g="0.447058826684952" r="0.47843137383461" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.494117647409439" g="0.494117647409439" r="0.521568655967712" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.411764711141586" g="0.411764711141586" r="0.450980395078659" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.364705890417099" g="0.364705890417099" r="0.407843142747879" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.333333343267441" g="0.333333343267441" r="0.380392163991928" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.454901963472366" g="0.454901963472366" r="0.490196079015732" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.403921574354172" g="0.403921574354172" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.321568638086319" g="0.321568638086319" r="0.364705890417099" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.337254911661148" g="0.337254911661148" r="0.380392163991928" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.286274522542953" g="0.286274522542953" r="0.333333343267441" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.368627458810806" g="0.368627458810806" r="0.407843142747879" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.270588248968124" g="0.270588248968124" r="0.317647069692612" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.368627458810806" g="0.368627458810806" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.376470595598221" g="0.376470595598221" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.407843142747879" g="0.407843142747879" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.458823531866074" g="0.458823531866074" r="0.494117647409439" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.380392163991928" g="0.380392163991928" r="0.427450984716415" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.419607847929001" g="0.419607847929001" r="0.458823531866074" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.290196090936661" g="0.290196090936661" r="0.337254911661148" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.274509817361832" g="0.274509817361832" r="0.321568638086319" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.26274511218071" g="0.26274511218071" r="0.309803932905197" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.321568638086319" g="0.321568638086319" r="0.368627458810806" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.388235300779343" g="0.388235300779343" r="0.431372553110123" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.360784322023392" g="0.360784322023392" r="0.403921574354172" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.356862753629684" g="0.356862753629684" r="0.396078437566757" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.317647069692612" g="0.317647069692612" r="0.360784322023392" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.372549027204514" g="0.372549027204514" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.396078437566757" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.400000005960464" g="0.400000005960464" r="0.439215689897537" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.309803932905197" g="0.309803932905197" r="0.356862753629684" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.301960796117783" g="0.301960796117783" r="0.345098048448563" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.301960796117783" g="0.301960796117783" r="0.34901961684227" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.309803932905197" g="0.309803932905197" r="0.352941185235977" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.352941185235977" g="0.352941185235977" r="0.39215686917305" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.439215689897537" g="0.439215689897537" r="0.474509805440903" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.443137258291245" g="0.443137258291245" r="0.47843137383461" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.447058826684952" g="0.447058826684952" r="0.482352942228317" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.403921574354172" g="0.403921574354172" r="0.443137258291245" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.545098066329956" g="0.545098066329956" r="0.576470613479614" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.415686279535294" g="0.415686279535294" r="0.454901963472366" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.384313732385635" g="0.384313732385635" r="0.431372553110123" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.352941185235977" g="0.352941185235977" r="0.400000005960464" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.372549027204514" g="0.372549027204514" r="0.411764711141586" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.333333343267441" g="0.333333343267441" r="0.376470595598221" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.39215686917305" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.278431385755539" g="0.278431385755539" r="0.325490206480026" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.313725501298904" g="0.313725501298904" r="0.356862753629684" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.325490206480026" g="0.325490206480026" r="0.368627458810806" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.552941203117371" g="0.552941203117371" r="0.580392181873322" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.556862771511078" g="0.556862771511078" r="0.584313750267029" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.294117659330368" g="0.294117659330368" r="0.341176480054855" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.352941185235977" g="0.352941185235977" r="0.396078437566757" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.317647069692612" g="0.317647069692612" r="0.364705890417099" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.454901963472366" g="0.454901963472366" r="0.482352942228317" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.376470595598221" g="0.376470595598221" r="0.411764711141586" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.447058826684952" g="0.447058826684952" r="0.474509805440903" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.364705890417099" g="0.364705890417099" r="0.400000005960464" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.443137258291245" g="0.443137258291245" r="0.470588237047195" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.529411792755127" g="0.529411792755127" r="0.560784339904785" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.43529412150383" g="0.43529412150383" r="0.466666668653488" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.411764711141586" g="0.411764711141586" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.341176480054855" g="0.341176480054855" r="0.384313732385635" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.39215686917305" g="0.39215686917305" r="0.43529412150383" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.415686279535294" g="0.415686279535294" r="0.450980395078659" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.52549022436142" g="0.52549022436142" r="0.556862771511078" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.560784339904785" g="0.560784339904785" r="0.588235318660736" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.380392163991928" g="0.380392163991928" r="0.423529416322708" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.494117647409439" g="0.494117647409439" r="0.52549022436142" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.474509805440903" g="0.474509805440903" r="0.501960813999176" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.423529416322708" g="0.423529416322708" r="0.458823531866074" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.450980395078659" g="0.450980395078659" r="0.486274510622025" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.376470595598221" g="0.376470595598221" r="0.419607847929001" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.388235300779343" g="0.388235300779343" r="0.423529416322708" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.462745100259781" g="0.462745100259781" r="0.494117647409439" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.521568655967712" g="0.521568655967712" r="0.552941203117371" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.533333361148834" g="0.533333361148834" r="0.560784339904785" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.47843137383461" g="0.47843137383461" r="0.509803950786591" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.513725519180298" g="0.513725519180298" r="0.541176497936249" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.356862753629684" g="0.356862753629684" r="0.400000005960464" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.466666668653488" g="0.466666668653488" r="0.501960813999176" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.47843137383461" g="0.47843137383461" r="0.517647087574005" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.490196079015732" g="0.490196079015732" r="0.521568655967712" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.384313732385635" g="0.384313732385635" r="0.423529416322708" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.313725501298904" g="0.313725501298904" r="0.360784322023392" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.396078437566757" g="0.396078437566757" r="0.439215689897537" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.850980401039124" g="0.850980401039124" r="0.850980401039124" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.517647087574005" g="0.517647087574005" r="0.545098066329956" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.52549022436142" g="0.52549022436142" r="0.552941203117371" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.505882382392883" g="0.505882382392883" r="0.533333361148834" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.737254917621613" g="0.737254917621613" r="0.760784327983856" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.909803926944733" g="0.909803926944733" r="0.909803926944733" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.862745106220245" g="0.862745106220245" r="0.882352948188782" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.831372559070587" g="0.831372559070587" r="0.847058832645416" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.470588237047195" g="0.470588237047195" r="0.498039215803146" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.517647087574005" g="0.517647087574005" r="0.549019634723663" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.450980395078659" g="0.450980395078659" r="0.474509805440903" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.43529412150383" g="0.43529412150383" r="0.462745100259781" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.384313732385635" g="0.384313732385635" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.65490198135376" g="0.65490198135376" r="0.666666686534882" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.894117653369904" g="0.894117653369904" r="0.894117653369904" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.517647087574005" g="0.517647087574005" r="0.541176497936249" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.95686274766922" g="0.95686274766922" r="0.95686274766922" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.807843148708344" g="0.807843148708344" r="0.82745099067688" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.850980401039124" g="0.850980401039124" r="0.890196084976196" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.737254917621613" g="0.737254917621613" r="0.752941191196442" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.341176480054855" g="0.341176480054855" r="0.380392163991928" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.388235300779343" g="0.388235300779343" r="0.427450984716415" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.423529416322708" g="0.423529416322708" r="0.462745100259781" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.360784322023392" g="0.360784322023392" r="0.400000005960464" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.286274522542953" g="0.286274522542953" r="0.329411774873734" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.333333343267441" g="0.333333343267441" r="0.372549027204514" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.400000005960464" g="0.400000005960464" r="0.443137258291245" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.364705890417099" g="0.364705890417099" r="0.403921574354172" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.400000005960464" g="0.400000005960464" r="0.43529412150383" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.380392163991928" g="0.380392163991928" r="0.419607847929001" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.298039227724075" g="0.298039227724075" r="0.345098048448563" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.388235300779343" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.345098048448563" g="0.345098048448563" r="0.39215686917305" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.270588248968124" g="0.270588248968124" r="0.313725501298904" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.552941203117371" g="0.552941203117371" r="0.580392181873322" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.407843142747879" g="0.407843142747879" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.560784339904785" g="0.560784339904785" r="0.588235318660736" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.411764711141586" g="0.411764711141586" r="0.450980395078659" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.556862771511078" g="0.556862771511078" r="0.584313750267029" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.26274511218071" g="0.26274511218071" r="0.309803932905197" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.517647087574005" g="0.517647087574005" r="0.552941203117371" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.337254911661148" g="0.337254911661148" r="0.380392163991928" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.39215686917305" g="0.39215686917305" r="0.43529412150383" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.403921574354172" g="0.403921574354172" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.431372553110123" g="0.431372553110123" r="0.470588237047195" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.372549027204514" g="0.372549027204514" r="0.411764711141586" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.411764711141586" g="0.411764711141586" r="0.450980395078659" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.407843142747879" g="0.407843142747879" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.556862771511078" g="0.556862771511078" r="0.584313750267029" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.376470595598221" g="0.376470595598221" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.39215686917305" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.415686279535294" g="0.415686279535294" r="0.454901963472366" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.450980395078659" g="0.450980395078659" r="0.490196079015732" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.368627458810806" g="0.368627458810806" r="0.411764711141586" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.403921574354172" g="0.403921574354172" r="0.443137258291245" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.313725501298904" g="0.313725501298904" r="0.360784322023392" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.270588248968124" g="0.270588248968124" r="0.317647069692612" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.388235300779343" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.450980395078659" g="0.450980395078659" r="0.486274510622025" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.39215686917305" g="0.39215686917305" r="0.431372553110123" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.400000005960464" g="0.400000005960464" r="0.439215689897537" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.341176480054855" g="0.341176480054855" r="0.388235300779343" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.282352954149246" g="0.282352954149246" r="0.329411774873734" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.372549027204514" g="0.372549027204514" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.333333343267441" g="0.333333343267441" r="0.380392163991928" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.364705890417099" g="0.364705890417099" r="0.407843142747879" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.458823531866074" g="0.458823531866074" r="0.494117647409439" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.419607847929001" g="0.419607847929001" r="0.458823531866074" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.34901961684227" g="0.34901961684227" r="0.396078437566757" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.352941185235977" g="0.352941185235977" r="0.396078437566757" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.298039227724075" g="0.298039227724075" r="0.345098048448563" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.30588236451149" g="0.30588236451149" r="0.352941185235977" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.388235300779343" g="0.388235300779343" r="0.427450984716415" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.345098048448563" g="0.345098048448563" r="0.388235300779343" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.407843142747879" g="0.407843142747879" r="0.450980395078659" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.301960796117783" g="0.301960796117783" r="0.34901961684227" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.294117659330368" g="0.294117659330368" r="0.341176480054855" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.454901963472366" g="0.454901963472366" r="0.490196079015732" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.423529416322708" g="0.423529416322708" r="0.462745100259781" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.376470595598221" g="0.376470595598221" r="0.419607847929001" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.380392163991928" g="0.380392163991928" r="0.423529416322708" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.431372553110123" g="0.431372553110123" r="0.466666668653488" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.294117659330368" g="0.294117659330368" r="0.337254911661148" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.286274522542953" g="0.286274522542953" r="0.329411774873734" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.411764711141586" g="0.411764711141586" r="0.447058826684952" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.486274510622025" g="0.486274510622025" r="0.521568655967712" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.368627458810806" g="0.368627458810806" r="0.415686279535294" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.447058826684952" g="0.447058826684952" r="0.486274510622025" space="sRGB-elle-V2-srgbtrc.icc"/>\n <RGB b="0.372549027204514" g="0.372549027204514" r="0.419607847929001" space="sRGB-elle-V2-srgbtrc.icc"/>\n</colors>\n
+LastEraser_0=a) Eraser Circle
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0.717647075653076" g="0.0705882385373116" r="0.474509805440903" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastPreset_-1=c) Pencil-2
 LineSmoothingDelayDistance=50
 LineSmoothingDistanceKeepAspectRatio=true
 LineSmoothingDistanceMax=50
@@ -47,15 +64,81 @@ LineSmoothingTailAggressiveness=0.15
 LineSmoothingType=1
 LineSmoothingUseDelayDistance=true
 NumberOfLayersForNewImage=2
+OpenGLFilterMode=3
+ResourceDirectory=/home/sihlecodes/.local/share/krita
+ShowEraserOutlineWhilePainting=true
+ShowOutlineWhilePainting=true
+ShowRootLayer=false
 SpecificColorSelector/HsxMode=0
 SpecificColorSelector/UseHsx=false
 SpecificColorSelector/UsePercentage=false
+ToolOptionsInDocker=true
+TrimFramesImport=false
+TrimKra=false
+UseZip64=false
+activateTransformToolAfterPaste=false
+adaptivePlaybackRange=true
+allowLCMSOptimization=true
+amdDisableVectorWorkaround=false
+animationCacheFrameSizeLimit=2500
+animationCacheRegionOfInterestMargin=0.25
+antialiascurves=true
+assistantsDrawMode=0
+autoPinLayers=true
+autoZoomTimelineToPlaybackRange=true
+autosavefileshidden=true
+backupfilelocation=0
+backupfilesuffix=~
 baseLength=60
+brushEditorSplitterSizes=272,853,264
+brushEditorWindowGeometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\n\x00\x00\x00\xff\x00\x00\x06\x8c\x00\x00\x04\x13\x00\x00\x01\x0e\x00\x00\x01\x1b\x00\x00\x06\x88\x00\x00\x04\r\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01\x0e\x00\x00\x01\x1b\x00\x00\x06\x88\x00\x00\x04\r
+calculateAnimationCacheInBackground=true
+canvasBorderColor=128,128,128
 canvasState=OPENGL_SUCCESS
+canvasizedlg_heightunit=px
+canvasizedlg_widthunit=px
+canvasizedlg_xoffsetunit=px
+canvasizedlg_yoffsetunit=px
+checkerscolor=220,220,220
+checkerscolor2=255,255,255
+checksize=32
 colorDepthDef=U8
 colorModelDef=RGBA
 colorProfileDef=sRGB-elle-V2-srgbtrc.icc
+colorSamplerPreviewCircleDiameter=180
+colorSamplerPreviewCircleExtraCirclesEnabled=true
+colorSamplerPreviewCircleOutlineEnabled=true
+colorSamplerPreviewCircleThickness=12
+colorSamplerPreviewStyle=1
+colorsettings/forcepalettecolors=false
+compressLayersInKra=false
+convertLayerColorSpaceInProperties=true
+cumulativeUndoExcludeFromMerge=10
+cumulativeUndoMaxGroupDuration=5000
+cumulativeUndoMaxGroupSeparation=1000
+cumulativeUndoMergeTimeout=5000
+currentInputProfile=Krita Default
+cursorMaincColor=255,0,255
+custom_font_size=-1
+custom_system_font=
+defaultExportMimeType=image/png
+defaultGridSpacing=200,200
 defaultPalette=Default
+enableBrushSpeedLogging=false
+enableOpenGLFramerateLogging=false
+enablePerfLog=false
+enableProgressReporting=true
+eraserCursorMaincColor=128,255,128
+eraserCursorStyle=9
+eraserOutlineStyle=2
+filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x02\x9c\x00\x00\x01\x85\x00\x00\x04\xd0\x00\x00\x03\xa2\x00\x00\x02\xa0\x00\x00\x01\xa1\x00\x00\x04\xcc\x00\x00\x03\x9c\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x02\xa0\x00\x00\x01\xa1\x00\x00\x04\xcc\x00\x00\x03\x9c
+filterdialog/rememberlastpreset=false
+forceAlwaysFullSizedEraserOutline=false
+forceAlwaysFullSizedOutline=false
+forcedDpiForQtFontBugWorkaround=-1
+fpsLimit=100
+frameRenderingClones=8
+frameRenderingTimeout=30000
 globalSnapBoundingBox=false
 globalSnapExtension=false
 globalSnapImageBounds=true
@@ -72,13 +155,47 @@ gridsubdivisioncolor=150,150,150
 gridsubdivisionstyle=1
 guidesColor=99,99,99
 guidesLineStyle=0
-imageHeightDef=3508
+hideDockersFullScreen=true
+hideMenuFullScreen=true
+hidePopups=false
+hideScrollbars=false
+hideScrollbarsFullScreen=true
+hideStatusbarFullScreen=true
+hideTitleBarFullscreen=true
+hideToolbarFullscreen=true
+ignoreHighFunctionKeys=true
+imageHeightDef=1440
 imageResolutionDef=300
-imageWidthDef=2480
+imageWidthDef=1080
+imagesizedlg_imsizeunit=px
+imagesizedlg_printSizeSeparatly=false
+imagesizedlg_ratioLock=true
+imagesizedlg_resunit=Pixels/Inch
+imagesizedlg_sizeunit=cm
 levelOfDetailEnabled=false
 logviewer_enabled=false
+longPressEnabled=false
+maxAllowedSpeedValue=30
+maxSwapSize=4096
+maximumBrushSize=1000
+mdiBackgroundColorXML=<!DOCTYPE color>\n<color channeldepth="U8">\n <RGB b="0.301960796117783" g="0.301960796117783" r="0.301960796117783" space="sRGB-elle-V2-srgbtrc.icc"/>\n</color>\n
+mdiBackgroundImage=
+mdi_rubberband=1
+mdi_viewmode=1
+memoryHardLimitPercent=50
+memoryPoolLimitPercent=0
+memorySoftLimitPercent=2
+monitorProfile=sRGB-elle-V2-srgbtrc.icc
+monitorProfile/OverrideX11=false
+monitorProfile_1=sRGB-elle-V2-srgbtrc.icc
+moveToolChangedValueX=298
+moveToolChangedValueY=496
 moveToolUnit=0
+newCursorStyle=0
+newOutlineStyle=2
+numFavoritePresets=10
 numberOfOnionSkins=10
+numberofbackupfiles=1
 oninSkinTintColorForward=0,255,0
 onionSkinOpacity_-1=173
 onionSkinOpacity_-10=22
@@ -124,16 +241,82 @@ onionSkinState_8=false
 onionSkinState_9=false
 onionSkinTintColorBackward=255,0,0
 onionSkinTintFactor=191
+pasteBehaviour=2
+pasteFormat=0
+pixelGridColor=255,255,255
+pixelGridDrawingThreshold=24
+popuppalette/colorHistorySorting=hsv
+popuppalette/selectorSize=140
+popuppalette/showColorHistory=true
+popuppalette/showRotationTrack=true
+popuppalette/size=385
+popuppalette/useDynamicSlotCount=true
+popuppalette/usevisualcolorselector=false
+preferredVectorImportResolution=100
 presetStripVisible=true
-presethistory=b) Basic-5 Size Opacity
+presethistory=b) Basic-5 Size Opacity,a) Eraser Circle,b) Basic-2 Opacity,a) Eraser Soft,b) Airbrush Soft,c) Pencil-2,c) Pencil-3 Large 4B,c) Pencil-5 Tilted,d) Ink-3 Gpen,a) Eraser Small
+recorder/captureinterval=1
+recorder/recordautomatically=true
+recorder/resolution=0
+recorder/threads=2
+recorder_export/extendresult=true
+recorder_export/firstframesec=2
+recorder_export/fps=30
+recorder_export/inputfps=15
+recorder_export/resultpreview=true
+recorder_export/videodirectory=/home/sihlecodes/Videos
+renameDuplicatedLayers=true
+renameMergedLayers=true
+renamePastedLayers=true
+renderIntent=0
+saveSessionOnQuit=false
 scratchpadVisible=true
+scrollingcheckers=false
+selectionActionBar=true
+selectionOutlineOpacity=1
+selectionOverlayMaskColor=255,0,0,128
+separateEraserCursor=false
+sessionOnStartup=0
 showAdditionalOnionSkinsSettings=true
+showDockers=true
+showFilterGallery=false
+showOnCanvasMessages=true
 showPaletteBottomBar=true
+showSingleChannelAsColor=false
+speedValueSmoothing=3
+swaplocation=/tmp
+switchSelectionCtrlAlt=false
+tabletPressureCurve=0,0;0.23547,0.39759;0.502236,0.995984;1,1;
+tiltDirectionOffset=0
 toolbarslider_1=opacity
 toolbarslider_2=size
 toolbarslider_3=flow
 toolbarslider_4=flow
 toolbarslider_5=flow
+touchPainting=0
+undoStackLimit=200
+useAnimationCacheFrameSizeLimit=true
+useAnimationCacheRegionOfInterest=true
+useBlackPointCompensation=true
+useCreamyAlphaDarken=true
+useCumulativeUndoRedo=false
+useDefaultColorSpace=false
+useOnDiskAnimationCacheSwapping=true
+useOpenGLTextureBuffer=true
+useRightMiddleTabletButtonWorkaround=false
+useSubtractiveBlendingForCmykColorSpaces=true
+useTimestampsForBrushSpeed=false
+useTouchPressureSensitivity=true
+use_custom_system_font=false
+zoomHorizontal=false
+zoomMarginSize=0
+zoomSteps=2
+
+[File Dialogs]
+DontUseNativeFileDialog=false
+ExportTimelapse=/home/sihlecodes/Videos
+OpenDocument=/mnt/shared/Art Space
+SaveAs=/home/sihlecodes/Downloads
 
 [GradientChooser]
 global/itemSize=medium
@@ -143,16 +326,52 @@ global/viewMode=icon
 [KisResourceItemChooser_paintoppresets]
 splitterState_1row=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\x01\x00\x00\x00\x01\x00
 
+[KisShortcutsDialog Settings]
+Dialog Size=714,639
+
+[KisToolPath]
+outlineType=1
+patternTransformScale=100
+
+[KisToolSelectRectangular]
+roundCornersX=0
+roundCornersY=0
+
+[KisToolTransform]
+forceLodMode=true
+useOverlayPreviewStyle=false
+
+[KritaShape/KisToolEllipse]
+outlineType=1
+patternTransformScale=100
+roundCornersX=0
+roundCornersY=0
+
+[KritaShape/KisToolMultiBrush]
+handsCount=4
+intervalX=0
+intervalY=0
+
+[KritaShape/KisToolRectangle]
+outlineType=1
+patternTransformScale=100
+roundCornersX=0
+roundCornersY=0
+
 [MainWindow]
 1725x970 screen: Height=463
 1725x970 screen: Width=850
+1920x1080 screen: Height=667
+1920x1080 screen: Width=952
+1920x1080 screen: Window-Maximized=true
+2 screens: Window-Maximized=true
 2880x1620 screen: Height=773
 2880x1620 screen: Width=1420
-State=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AAAAFABHAHIAaQBkAEQAbwBjAGsAZQByAAAAAAD/////AAABLAD////7AAAAHgBIAGkAcwB0AG8AZwByAGEAbQBEAG8AYwBrAGUAcgAAAAAA/////wAAAEYA////+wAAACoAQQBuAGkAbQBhAHQAaQBvAG4AQwB1AHIAdgBlAHMARABvAGMAawBlAHIAAAAAAP////8AAABoAP////sAAAAyAFMAdgBnAFMAeQBtAGIAbwBsAEMAbwBsAGwAZQBjAHQAaQBvAG4ARABvAGMAawBlAHIAAAAAAP////8AAAB4AP////sAAAAWAFQAbwB1AGMAaABEAG8AYwBrAGUAcgAAAAJMAAABMQAAABQA////+wAAABoAQQByAHIAYQBuAGcAZQBEAG8AYwBrAGUAcgAAAAAA/////wAAADYA////+wAAADoAYwBvAG0AaQBjAHMAXwBwAHIAbwBqAGUAYwB0AF8AbQBhAG4AYQBnAGUAcgBfAGQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAKgBxAHUAaQBjAGsAXwBzAGUAdAB0AGkAbgBnAHMAXwBkAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAA+wAAABYAUABhAGcAZQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAJgBsAGEAcwB0AGQAbwBjAHUAbQBlAG4AdABzAGQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAEgBHAGEAbQB1AHQATQBhAHMAawAAAAAA/////wAAAKcA////+wAAABAAUwBuAGEAcABzAGgAbwB0AAAAAt8AAACkAAAAdwD////7AAAAEgBMAG8AZwBEAG8AYwBrAGUAcgAAAAAA/////wAAAHgA////+wAAACAAUwB0AG8AcgB5AGIAbwBhAHIAZABEAG8AYwBrAGUAcgAAAAAA/////wAAAJoA////+wAAABwAUgBlAGMAbwByAGQAZQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAWAD////7AAAAMABwAHkAawByAGkAdABhAF8AdwBvAHIAawBmAGwAbwB3AF8AYgB1AHQAdABvAG4AcwAAAAAA/////wAAAAAAAAAA+wAAABwAQgByAHUAcwBoAEgAdQBkAEQAbwBjAGsAZQByAAAAAAD/////AAAAhwD////7AAAALABXAGkAZABlAEcAYQBtAHUAdABDAG8AbABvAHIAUwBlAGwAZQBjAHQAbwByAAAAAAD/////AAAAtAD////7AAAAHABUAGUAeAB0AFAAcgBvAHAAZQByAHQAaQBlAHMAAAAAAP////8AAAB2AP///wAAAAIAAAoAAAAAvPwBAAAAAfsAAAAaAFQAbwBvAGwAQgBhAHIARABvAGMAawBlAHIAAAAAAP////8AAAAAAAAAAAAAAAMAAAAAAAAAAPwBAAAABPsAAAAcAEYAbABpAHAAYgBvAG8AawBEAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAA+wAAAB4AQQBuAGkAbQBhAHQAaQBvAG4ARABvAGMAawBlAHIAAAAAAP////8AAAAAAAAAAPsAAAAgAE8AbgBpAG8AbgBTAGsAaQBuAHMARABvAGMAawBlAHIAAAAAAP////8AAAEsAP////sAAAAcAFQAaQBtAGUAbABpAG4AZQBEAG8AYwBrAGUAcgAAAAAA/////wAAA2cA////AAAB/gAAAXUAAAAEAAAABAAAAAgAAAAI/AAAAAMAAAACAAAAAwAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAAAAAAWAGUAZABpAHQAVABvAG8AbABCAGEAcgEAAABm/////wAAAAAAAAAAAAAAHgBCAHIAdQBzAGgAZQBzAEEAbgBkAFMAdAB1AGYAZgEAAACr/////wAAAAAAAAAAAAAAAgAAAAEAAAAcAGMAdQBzAHQAbwBtAFQAbwBvAGwAQgBhAHIAMgAAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAcAGMAdQBzAHQAbwBtAFQAbwBvAGwAQgBhAHIAMQAAAAAA/////wAAAAAAAAAA
-ko_geometry=AdnQywADAAAAAAAIAAAAHQAAA1kAAAHrAAAACAAAAB0AAANZAAAB6wAAAAAAAAAABr0AAAAIAAAAHQAAA1kAAAHr
+State=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AP////sAAAAeAEgAaQBzAHQAbwBnAHIAYQBtAEQAbwBjAGsAZQByAAAAAAD/////AAAASgD////7AAAAGgBQAHIAZQBzAGUAdABIAGkAcwB0AG8AcgB5AAAAAAD/////AAAAaQD////7AAAAHABCAHIAdQBzAGgASAB1AGQARABvAGMAawBlAHIAAAAAAP////8AAACbAP////sAAAAcAFIAZQBjAG8AcgBkAGUAcgBEAG8AYwBrAGUAcgEAAAM2AAAAnQAAAGsA////+wAAABYAVABvAHUAYwBoAEQAbwBjAGsAZQByAAAAAAD/////AAAAGAD////7AAAAEgBMAG8AZwBEAG8AYwBrAGUAcgAAAAAA/////wAAAJMA////+wAAADIAUwB2AGcAUwB5AG0AYgBvAGwAQwBvAGwAbABlAGMAdABpAG8AbgBEAG8AYwBrAGUAcgAAAAAA/////wAAAJEA////+wAAABIARwBhAG0AdQB0AE0AYQBzAGsAAAAAAP////8AAADNAP////sAAAAsAFcAaQBkAGUARwBhAG0AdQB0AEMAbwBsAG8AcgBTAGUAbABlAGMAdABvAHIAAAAAAP////8AAADAAP////sAAAAgAFMAdABvAHIAeQBiAG8AYQByAGQARABvAGMAawBlAHIAAAAAAP////8AAAC6AP////sAAAAaAEEAcgByAGEAbgBnAGUARABvAGMAawBlAHIAAAAAAP////8AAAA1AP////sAAAAcAFQAZQB4AHQAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAAHoA////AAAAAgAAB4AAAAC8/AEAAAAB+wAAABoAVABvAG8AbABCAGEAcgBEAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAAAAAAAwAAAAAAAAAA/AEAAAAF+wAAABwARgBsAGkAcABiAG8AbwBrAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAHgBBAG4AaQBtAGEAdABpAG8AbgBEAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAA+wAAACAATwBuAGkAbwBuAFMAawBpAG4AcwBEAG8AYwBrAGUAcgAAAAAA/////wAAAUYA////+wAAABwAVABpAG0AZQBsAGkAbgBlAEQAbwBjAGsAZQByAAAAAAD/////AAADwQD////7AAAAKgBBAG4AaQBtAGEAdABpAG8AbgBDAHUAcgB2AGUAcwBEAG8AYwBrAGUAcgAAAAAA/////wAABU8A////AAAFmwAAA4kAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAABQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAAAAAAD/////AAAAAAAAAAAAAAAeAEIAcgB1AHMAaABlAHMAQQBuAGQAUwB0AHUAZgBmAQAAAAD/////AAAAAAAAAAAAAAAWAGUAZABpAHQAVABvAG8AbABCAGEAcgEAAASA/////wAAAAAAAAAAAAAAHABjAHUAcwB0AG8AbQBUAG8AbwBsAEIAYQByADEAAAAAAP////8AAAAAAAAAAAAAABwAYwB1AHMAdABvAG0AVABvAG8AbABCAGEAcgAyAAAAAAD/////AAAAAAAAAAA=
+ko_geometry=AdnQywADAAAAAAeAAAAAIgAADv8AAAQ3AAANFgAAAD4AABDNAAADGAAAAAACAAAAB4AAAAeAAAAAPgAADv8AAAQ3
 
 [MainWindow][DockWidget AnimationCurvesDocker]
-DockArea=2
+DockArea=8
 Locked=false
 height=480
 width=640
@@ -194,10 +413,10 @@ yPosition=0
 [MainWindow][DockWidget ColorSelectorNg]
 DockArea=2
 Locked=false
-height=94
-width=262
+height=359
+width=422
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget CompositionDocker]
 DockArea=2
@@ -234,26 +453,26 @@ yPosition=0
 [MainWindow][DockWidget HistogramDocker]
 DockArea=2
 Locked=false
-height=462
+height=458
 width=640
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget History]
 DockArea=2
 Locked=false
-height=462
+height=458
 width=640
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget KisLayerBox]
 DockArea=2
 Locked=false
-height=167
-width=262
+height=283
+width=422
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget LogDocker]
 DockArea=2
@@ -282,7 +501,7 @@ yPosition=0
 [MainWindow][DockWidget OverviewDocker]
 DockArea=2
 Locked=false
-height=103
+height=120
 width=100
 xPosition=0
 yPosition=0
@@ -298,18 +517,18 @@ yPosition=0
 [MainWindow][DockWidget PatternDocker]
 DockArea=2
 Locked=false
-height=240
-width=136
+height=285
+width=178
 xPosition=0
 yPosition=0
 
 [MainWindow][DockWidget PresetDocker]
 DockArea=2
 Locked=false
-height=35
-width=262
+height=439
+width=544
 xPosition=0
-yPosition=18
+yPosition=0
 
 [MainWindow][DockWidget PresetHistory]
 DockArea=2
@@ -322,21 +541,21 @@ yPosition=0
 [MainWindow][DockWidget RecorderDocker]
 DockArea=2
 Locked=false
-height=369
-width=324
+height=135
+width=422
 xPosition=0
-yPosition=0
+yPosition=22
 
 [MainWindow][DockWidget SmallColorSelector]
 DockArea=2
 Locked=false
-height=462
+height=458
 width=640
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget Snapshot]
-DockArea=2
+DockArea=1
 Locked=false
 height=30
 width=100
@@ -346,10 +565,10 @@ yPosition=0
 [MainWindow][DockWidget SpecificColorSelector]
 DockArea=2
 Locked=false
-height=207
-width=268
+height=458
+width=640
 xPosition=0
-yPosition=0
+yPosition=22
 
 [MainWindow][DockWidget StoryboardDocker]
 DockArea=2
@@ -362,10 +581,10 @@ yPosition=0
 [MainWindow][DockWidget SvgSymbolCollectionDocker]
 DockArea=2
 Locked=false
-height=462
+height=458
 width=640
 xPosition=0
-yPosition=18
+yPosition=22
 
 [MainWindow][DockWidget TasksetDocker]
 DockArea=2
@@ -394,10 +613,10 @@ yPosition=0
 [MainWindow][DockWidget ToolBox]
 DockArea=1
 Locked=false
-height=355
-width=66
+height=886
+width=61
 xPosition=0
-yPosition=18
+yPosition=19
 
 [MainWindow][DockWidget TouchDocker]
 DockArea=2
@@ -418,13 +637,136 @@ yPosition=0
 [MainWindow][DockWidget sharedtooldocker]
 DockArea=2
 Locked=false
-height=462
-width=640
+height=283
+width=422
 xPosition=0
-yPosition=18
+yPosition=22
 
 [OverviewDocker]
 pinControls=true
+
+[RecentFiles]
+File1[$e]=/mnt/shared/Art Space/Off day output.kra
+File10[$e]=/mnt/shared/Art Space/for nqeh 2.kra
+File11[$e]=$HOME/Documents/Art Space/nightmare-victor.kra~
+File12[$e]=$HOME/Downloads/IMG_20260302_082047.kra
+File13[$e]=$HOME/Downloads/IMG_20260302_082047_annotated_over.kra
+File14[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/alien face sketch.kra
+File15[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Tree of Death.kra
+File16[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/That alien dude.kra
+File17[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Insta Girl.kra
+File18[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Instagirl.kra
+File19[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Quick sketches 3.kra
+File2[$e]=/mnt/shared/Art Space/for nqeh 1.kra
+File20[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Man in glasses painting.kra
+File21[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Random drawings.kra
+File22[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Random asss.kra
+File23[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Kat.kra
+File24[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Lebo and Love.kra
+File25[$e]=$HOME/Documents/Recovered/Documents/Art Space/Game Assets/Skill warrior.kra
+File26[$e]=$HOME/Documents/Recovered/Documents/Art Space/Game Assets/robot.svg
+File27[$e]=$HOME/Documents/Recovered/Documents/Art Space/AUSOC/Tree of Death.kra
+File28[$e]=$HOME/Documents/Recovered/Documents/Art Space/2024/Who diss.kra
+File29[$e]=$HOME/Documents/Recovered/Documents/Art Space/2024/Scribbles, a prayer.kra
+File3[$e]=/mnt/shared/Art Space/ranom-drawing.kra
+File30[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Illustrations/The Desciple
+File31[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/basic shapes.kra
+File32[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/The fundamentals of lines.kra
+File33[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/The desciple.kra
+File34[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/Quick sketches 2.kra
+File35[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/Quick sketches 4.kra
+File36[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/Random asss.kra
+File37[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/Robo sketches.kra
+File38[$e]=$HOME/Documents/Recovered/Documents/Art Space/2022/Sketches/Damn thas bad, But I move.kra
+File39[$e]=$HOME/Documents/Recovered/Documents/Art Space/Illustrations/Stevonie.svg.2019_11_22_10_13_06.1.svg
+File4[$e]=/mnt/shared/Art Space/Ouput/Kuhle.png
+File40[$e]=$HOME/Documents/Recovered/Documents/Art Space/Illustrations/Cute Lovers.svg
+File41[$e]=$HOME/Documents/Recovered/Documents/Art Space/Illustrations/My Giraffe.svg
+File42[$e]=$HOME/Documents/Recovered/Documents/Art Space/Projects/Ethermon/Ethermon.svg
+File43[$e]=$HOME/Documents/Recovered/Documents/Art Space/Projects/Ethermon/ethormon-resources.svg
+File44[$e]=/mnt/shared/Art Space/hornet-queen.kra
+File45[$e]=/mnt/shared/Art Space/nightmare-victor.kra
+File46[$e]=/mnt/shared/Art Space/animated-thorn.kra
+File47[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Riky Rick.kra
+File48[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Lebo and Lovoe.kra
+File49[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Friends2.kra
+File5[$e]=/mnt/shared/Art Space/Kamikaze.kra
+File50[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/They take.kra
+File51[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Who Am  I_.kra
+File52[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Sandile.kra
+File53[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Siya.kra
+File54[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Nqobani_002.kra
+File55[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Ocean Game.kra
+File56[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Contradiction.kra
+File57[$e]=$HOME/Documents/Recovered/Documents/ArtSpace/Goddess.kra
+File58[$e]=$HOME/Documents/Recovered/Documents/Game Jam Projects/Necro Masochist/plan.kra
+File59[$e]=$HOME/Documents/Recovered/Documents/Game Jam Projects/Necro Masochist/background.kra
+File6[$e]=/mnt/shared/Art Space/Scarlet Johanson 1h15.kra
+File60[$e]=$HOME/Documents/Recovered/Documents/Game Jam Projects/Necro Masochist/assets.kra
+File7[$e]=/mnt/shared/Art Space/Skyfreturns.kra
+File8[$e]=/mnt/shared/Art Space/Scarlet Johanson 1h.kra
+File9[$e]=/mnt/shared/Art Space/haunted seashell.kra
+Name1=Off day output.kra
+Name10=for nqeh 2.kra
+Name11=nightmare-victor.kra~
+Name12=IMG_20260302_082047.kra
+Name13=IMG_20260302_082047_annotated_over.kra
+Name14=alien face sketch.kra
+Name15=Tree of Death.kra
+Name16=That alien dude.kra
+Name17=Insta Girl.kra
+Name18=Instagirl.kra
+Name19=Quick sketches 3.kra
+Name2=for nqeh 1.kra
+Name20=Man in glasses painting.kra
+Name21=Random drawings.kra
+Name22=Random asss.kra
+Name23=Kat.kra
+Name24=Lebo and Love.kra
+Name25=Skill warrior.kra
+Name26=robot.svg
+Name27=Tree of Death.kra
+Name28=Who diss.kra
+Name29=Scribbles, a prayer.kra
+Name3=ranom-drawing.kra
+Name30=The Desciple
+Name31=basic shapes.kra
+Name32=The fundamentals of lines.kra
+Name33=The desciple.kra
+Name34=Quick sketches 2.kra
+Name35=Quick sketches 4.kra
+Name36=Random asss.kra
+Name37=Robo sketches.kra
+Name38=Damn thas bad, But I move.kra
+Name39=Stevonie.svg.2019_11_22_10_13_06.1.svg
+Name4=Kuhle.png
+Name40=Cute Lovers.svg
+Name41=My Giraffe.svg
+Name42=Ethermon.svg
+Name43=ethormon-resources.svg
+Name44=hornet-queen.kra
+Name45=nightmare-victor.kra
+Name46=animated-thorn.kra
+Name47=Riky Rick.kra
+Name48=Lebo and Lovoe.kra
+Name49=Friends2.kra
+Name5=Kamikaze.kra
+Name50=They take.kra
+Name51=Who Am  I_.kra
+Name52=Sandile.kra
+Name53=Siya.kra
+Name54=Nqobani_002.kra
+Name55=Ocean Game.kra
+Name56=Contradiction.kra
+Name57=Goddess.kra
+Name58=plan.kra
+Name59=background.kra
+Name6=Scarlet Johanson 1h15.kra
+Name60=assets.kra
+Name7=Skyfreturns.kra
+Name8=Scarlet Johanson 1h.kra
+Name9=haunted seashell.kra
+maxRecentFileItems=100
 
 [SelectedTags]
 brushes=All
@@ -460,3 +802,7 @@ useCustomColorForBackground=false
 
 [crashprevention]
 CreatingCanvas=false
+
+[filterdialog]
+forceLodMode=true
+showPreview=true

@@ -1,9 +1,9 @@
 # Basic Colors
 foreground = #ffffff
 background = #101010
-cursor-color = #acb1ab
-selection-background = #988049
-selection-foreground = #acb1ab
+cursor-color = #8787ff
+selection-background = #8787ff
+selection-foreground = #000000
 
 # Terminal Palette (0-15)
 

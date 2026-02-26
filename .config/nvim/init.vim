@@ -2,6 +2,7 @@
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
+" ~/.config/nvim/lua/init.lua
 " ~/.config/nvim/options.vim
 " ~/.config/nvim/keymaps.vim
 " ~/.config/nvim/lua/plugins.lua
@@ -24,7 +25,7 @@ augroup qol_hacks
    autocmd WinEnter * setlocal cursorline
    autocmd WinLeave * setlocal nocursorline
    autocmd WinResized * setlocal scroll=8
-   autocmd BufWritePre * mark ` | %s/\s\+$//e | normal! ``
+   autocmd BufWritePre * mark ` | %s/\s\+$//e | normal ``
 
    " reload files from disk
    autocmd WinEnter * silent! checktime

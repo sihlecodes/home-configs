@@ -1,3 +1,10 @@
+-- Add to init.lua
+local _make_position_params = vim.lsp.util.make_position_params
+
+vim.lsp.util.make_position_params = function(window, encoding)
+  return _make_position_params(window or 0, encoding or vim.lsp.get_clients({ bufnr = 0 })[1].offset_encoding)
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 ---@diagnostic disable-next-line: undefined-field

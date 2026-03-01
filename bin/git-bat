@@ -3,19 +3,25 @@
 import argparse
 import shutil
 
-if shutil.which("batcat") is None:
-    print("This script requires 'batcat' to be installed.")
+cmd = shutil.which("bat")
+cmd = cmd or shutil.which("batcat")
+
+if cmd is None:
+    print("This script requires 'bat' or 'batcat' to be installed.")
     exit(1)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("obj", metavar="object")
+parser.add_argument("-n", "--no-number", action="store_true")
 
 if __name__ == "__main__":
     import os
 
     args = parser.parse_args()
 
-    if ':' not in args.obj:
-        args.obj = ':' + args.obj
+    if ":" not in args.obj:
+        args.obj = ":" + args.obj
 
-    os.system(f"git show {args.obj} | batcat --plain --number --file-name {args.obj}")
+    os.system(
+        f"git show {args.obj} | {cmd} --plain {'' if args.no_number else '--number'} --file-name {args.obj}"
+    )

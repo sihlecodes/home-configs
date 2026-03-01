@@ -196,17 +196,11 @@ def print_pretty(hex_str, floats, integers, name="unamed"):
 
 if __name__ == "__main__":
     script_name = argv.pop(0)
-    nargs = len(argv) 
+    nargs = len(argv)
 
     if nargs == 0:
         raise SyntaxError("No arguments provided.")
 
-    elif nargs < 3:
-        raise SyntaxError("Too few arguments provided.")
-    
-    elif nargs > 8:
-        raise SyntaxError("Too many arguments provided.")
-    
     elif nargs == 1:
         arg = argv[0]
 
@@ -262,10 +256,16 @@ if __name__ == "__main__":
                 i = [ int(x) for x in argv ]
                 f = [ x/255. for x in i ]
                 h = floats_to_hex(f)
-                
+
             complete = True
 
         if not complete:
             raise SyntaxError("Array must consist of all 'float's or all 'int's")
 
         print_pretty(h, f, i)
+
+    elif nargs < 3:
+        raise SyntaxError("Too few arguments provided.")
+
+    elif nargs > 8:
+        raise SyntaxError("Too many arguments provided.")

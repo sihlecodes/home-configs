@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-c", "--create", action="store_true",
     help="create a gitignore file, automatically, if one does not exist already.")
 
-parser.add_argument("-e", "--edit", action="store_true", 
+parser.add_argument("-e", "--edit", action="store_true",
     help="edit the gitignore file using your default editor.")
 
 parser.add_argument("-s", "--show", action="store_true",
@@ -24,10 +24,11 @@ parser.add_argument("patterns", metavar="PATTERNS", nargs="*",
 
 def write_lines(patterns: list[str], file_mode: str, gitignore_path: str):
     gitignore_ends_with_newline: bool = False
-    
+
     if os.path.exists(gitignore_path):
         with open(gitignore_path, "r") as f:
-            gitignore_ends_with_newline = f.read().endswith("\n")
+            contents = f.read()
+            gitignore_ends_with_newline = len(contents) == 0 or contents.endswith("\n")
 
     with open(gitignore_path, file_mode) as f:
         if not gitignore_ends_with_newline:
@@ -45,7 +46,7 @@ def main(args, gitignore_path: str) -> int:
     if args.create and not gitignore_exists:
         os.mknod(gitignore_path)
         gitignore_exists = True
-    
+
     if args.edit:
         os.system(f'$EDITOR "{gitignore_path}"')
 
@@ -60,12 +61,12 @@ def main(args, gitignore_path: str) -> int:
     if args.show:
         if not gitignore_exists:
             return error('".gitignore" file was not found.')
-            
+
         with open(gitignore_path, "r") as f:
             print(f.read().strip())
 
     return 0
-    
+
 def decode(text: bytes) -> str:
     return text.strip().decode()
 
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     import subprocess
 
     args = parser.parse_args()
-    
+
     result = subprocess.run(["git", "rev-parse", "--show-toplevel"],
                             stderr=subprocess.PIPE,
                             stdout=subprocess.PIPE)

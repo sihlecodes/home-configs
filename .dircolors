@@ -5,6 +5,7 @@
 
 TERM Eterm
 TERM ansi
+TERM alacritty
 TERM color-xterm
 TERM con132x25
 TERM con132x30
@@ -23,6 +24,7 @@ TERM gnome
 TERM gnome-256color
 TERM jfbterm
 TERM konsole
+TERM kitty
 TERM kterm
 TERM linux
 TERM linux-c
@@ -52,6 +54,7 @@ TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM xterm-ghostty
 
 NORMAL 38;5;251
 #FILE 00

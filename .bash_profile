@@ -1,15 +1,13 @@
 # Personal bash configuration file
 
-[ -z $TMUX ] && tmux
+[ -f ~/.bash/options.sh ] && . ~/.bash/options.sh
+[ -f ~/.bash/aliases.sh ] && . ~/.bash/aliases.sh
 
 if [ -f /usr/share/bash-completion/bash_completion ]; then
    source /usr/share/bash-completion/bash_completion
 elif [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
 fi
-
-[ -f ~/.bash/aliases.sh ] && . ~/.bash/aliases.sh
-[ -f ~/.bash/options.sh ] && . ~/.bash/options.sh
 
 # generate dircolors for coloring completion and commmands like ls
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
@@ -31,15 +29,3 @@ source_folder_in_path() {
 
 source_folder_in_path completions
 source_folder_in_path plugins
-
-export NVM_DIR="$HOME/.nvm"
-
-[ -x "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -x "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-export EMSDK_DIR="$HOME/emsdk"
-
-if [ -x "$EMSDK_DIR/emsdk_env.sh" ]; then
-	export EMSDK_QUIET=1
-	\. "$EMSDK_DIR/emsdk_env.sh"
-fi

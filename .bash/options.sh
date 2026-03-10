@@ -1,5 +1,9 @@
 # created: 18 Jan 2024
 
+export CXX="clang++ -Wall -pedantic -lprofiler -fno-omit-frame-pointer -g -O3"
+export EDITOR=nvim
+export SUDO_EDITOR="$EDITOR"
+export BROWSER=chromium
 export ANDROID_SDK=$HOME/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_SDK
 export DOTNET_ROOT=/snap/dotnet-sdk/current
@@ -13,6 +17,7 @@ ADDITIONAL_PATHS=(
    $ANDROID_SDK/emulator
    $DOTNET_ROOT
    $TEXLIVE_PATH
+   $HOME/go/bin
    $(ruby -r rubygems -e 'puts Gem.user_dir' 2>/dev/null)/bin
 )
 
@@ -22,20 +27,17 @@ for extra in ${ADDITIONAL_PATHS[*]}; do
    fi
 done
 
-set completion-ignore-case On
-
 shopt -s autocd
 shopt -s direxpand
 shopt -s globasciiranges globstar dotglob
 shopt -s interactive_comments
 shopt -s lithist
 
-export EDITOR=nvim
 export PAGER=less
 export LESS='-r'
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export HISTCONTROL=erasedups:ignoredups
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+export HISTCONTROL=erasedups:ignoreboth:ignoredups
 
 two_part_path() { pwd | awk 'BEGIN{FS="/"; OFS="/"} { print $(NF - 1), $NF }'; }
 

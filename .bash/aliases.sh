@@ -1,6 +1,9 @@
 # General
 # enable color support of ls and also add handy aliases
 
+alias pacman='pacman --color=auto'
+alias yay='yay --color=auto'
+alias sudo='sudo '
 alias ls='ls -a --color=auto'
 alias la='ls -hs'
 alias ll='ls -l'

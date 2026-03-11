@@ -33,6 +33,9 @@
    unstage  = reset HEAD --
    release  = !git archive master --format=zip > release-$(git describe master).zip
    recommit = commit --amend
+   diffs    = diff --staged
+   cp       = cherry-pick
+   fixup    = commit -a --amend --no-edit
 
 ; Steampunklights Git theme
 [color "advice"]
@@ -87,3 +90,7 @@
 
 [color "transport"]
    rejected = black 105
+
+[rerere]
+   enabled = true           # Record and reuse conflict resolutions
+   autoupdate = true        # Apply stored conflict resolutions automatically
